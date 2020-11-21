@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="medicine">
+<!-- 모든 약품 목록 -->
+  <select id="selectAll" resultType="medicineVo">
+    select medi_no,medi_name,medi_detail,medi_fname,caution from (select rownum n,medi_no,medi_name,medi_detail,medi_fname,caution from 
+    (select * from medicine  where medi_name like '${search}' order by medi_no desc)) where n between #{start} and #{end}
+  </select>
+  <!--  where medi_name like '%${search}%' -->
+  
+  <!-- 검색어에 따른 약품의 수 -->
+  <select id="getTotalRecord" resultType="java.lang.Integer">
+  	select count(*) from medicine where medi_name like '%${search}%'
+  </select>
+  <!--  where medi_name like '%${search}%' -->
+ 
+  <!-- 약품 번호를 통한 약품 정보 조회 -->
+  <select id="selectByNo" resultType="medicineVo">
+  	select * from medicine where medi_no=#{medi_no}
+  </select>
+		
+  
+  <!-- (관리자) 약품의 추가, 수정, 삭제 -->
+   <insert id="insert">
+  	insert into medicine values(#{medi_no},#{medi_name},#{medi_detail},#{medi_fname},#{caution})
+  </insert>
+  <select id="getNextNo" resultType="java.lang.Integer">
+  	select nvl(max(medi_no),0)+1 from notice
+  </select>
+</mapper>
