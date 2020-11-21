@@ -21,7 +21,7 @@
   </select>
   
   <select id="selectByNo" resultType="doctorVo">
-  	select * from department where dept_no=#{dept_no}
+  	select * from doctor where dept_no=#{dept_no}
   </select>
   
   <!-- 일단은 목록조회만 구현중. -->
