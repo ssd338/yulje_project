@@ -11,6 +11,14 @@ import com.example.demo.vo.MemberVo;
 
 @Repository
 public class MemberDao {
+	
+	public MemberVo findId(HashMap map) {
+		return MemberManager.findId(map);
+	}
+	
+	public MemberVo findPwd(HashMap map) {
+		return MemberManager.findPwd(map);
+	}
 
 	public int insert(MemberVo m) {
 		return MemberManager.insert(m);

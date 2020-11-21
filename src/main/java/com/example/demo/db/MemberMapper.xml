@@ -4,6 +4,20 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member">
 
+  <select id="selectMember" resultType="memberVo">
+  	select * from member where id=#{username}
+  </select>
+  
+    <!-- 아이디 찾기 -->
+  <select id="findId" resultType="memberVo">
+  	select id from member where rr_no=#{rr_no} 
+  </select>
+  
+  <!-- 비밀번호 찾기 -->
+  <select id="findPwd" resultType="memberVo">
+  	select id from member where rr_no=#{rr_no} 
+  </select>	
+
   <select id="selectByRR" resultType="memberVo">
   	select * from member where rr_no=#{rr_no}
   </select>

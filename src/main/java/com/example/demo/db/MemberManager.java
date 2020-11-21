@@ -28,6 +28,35 @@ public class MemberManager {
 			System.out.println("manager:"+e.getMessage());
 		}
 	}
+	//로그인
+	public static MemberVo selectMember(String username) {
+		MemberVo m = null;
+		SqlSession session = sqlSessionFactory.openSession();
+		m = session.selectOne("member.selectMember",username);
+		session.close();
+		System.out.println(m);
+		return m;
+	}
+	
+
+	//아이디 찾기
+	public static MemberVo findId(HashMap map) {
+		MemberVo findId = null;
+		SqlSession session = sqlSessionFactory.openSession();
+		findId = session.selectOne("member.findId", map);
+		session.close();
+		return findId;
+	}
+	
+	//비밀번호 찾기
+	public static MemberVo findPwd(HashMap map) {
+		MemberVo findPwd = null;
+		SqlSession session = sqlSessionFactory.openSession();
+		findPwd = session.selectOne("member.findPwd", map);
+		session.close();
+		return findPwd;
+	}
+	
 	
 	//회원가입
 	public static int insert(MemberVo m) {

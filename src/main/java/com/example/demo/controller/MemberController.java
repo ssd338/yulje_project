@@ -3,15 +3,23 @@ package com.example.demo.controller;
 import java.util.HashMap;
 import java.util.Random;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.dao.MemberDao;
+import com.example.demo.db.MemberManager;
 import com.example.demo.sms.BitSms;
 import com.example.demo.util.CheckRR;
 import com.example.demo.vo.MemberVo;
@@ -21,6 +29,30 @@ public class MemberController {
 
 	@Autowired
 	private MemberDao dao;
+	
+	@RequestMapping(value = "/main", method = RequestMethod.GET)
+	public void main() {	
+	}
+	
+
+	@RequestMapping(value = "/login", method = {RequestMethod.GET, RequestMethod.POST})
+	public void login() {	
+		System.out.println("로그인 컨트롤러 동작함!");
+	}
+	
+	
+
+	@RequestMapping("/")
+	public String memberStart(HttpSession session) {
+		Authentication authentication
+		= SecurityContextHolder.getContext().getAuthentication();
+		
+		User user = (User)authentication.getPrincipal();
+		String id = user.getUsername();
+		MemberVo m = MemberManager.selectMember(id);
+		session.setAttribute("m", m);
+		return "main";
+	}
 	
 	//회원가입 페이지로 보내기
 	@GetMapping("/insertMember")
