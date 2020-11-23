@@ -58,6 +58,7 @@ public class AdviceBoardController {
 	@RequestMapping("/detailA_Board.do")
 	public void detial(int no, Model model) {
 		model.addAttribute("ab", dao.findByNo(no));
+		dao.updateHit(no);
 		
 		String dept_name=dao.findByNo(no).getDept_name();
 		

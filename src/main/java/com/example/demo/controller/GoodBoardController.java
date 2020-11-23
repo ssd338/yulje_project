@@ -50,6 +50,7 @@ public class GoodBoardController {
 	@RequestMapping("/detailG_Board.do")
 	public void detial(int no, Model model) {
 		model.addAttribute("gb", dao.findByNo(no));
+		dao.updateHit(no);
 	}
 	
 	

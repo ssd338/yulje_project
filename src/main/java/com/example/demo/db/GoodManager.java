@@ -122,6 +122,14 @@ public class GoodManager {
 
 		return re;
 	}
+	
+	public static int updateHit(int no) {
+		int re = -1;
+		SqlSession session = sqlSessionFactory.openSession(true);
+		re = session.update("good.updateHit", no);
+		session.close();
+		return re;
+	}
 
 //		public static boolean isMember(String id, String pwd) {
 //	
