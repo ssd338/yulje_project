@@ -29,11 +29,13 @@
   <select id="selectByRRGuest" resultType="memberVo">
   	select * from member where rr_no=#{rr_no} and roles=#{roles} and name=#{name}
   </select>
+
 <!--   비회원 회원전환 -->
 	<update id="updateGuest">
 	update member set id=#{id},pwd=#{pwd},tel=#{tel},email=#{email},addr=#{addr},roles='USER',emailReceive=#{emailReceive},smsReceive=#{smsReceive} where member_no=#{member_no}
 	</update>
   
+
 <!--   kkk end -->
   
   <!-- 회원번호로 받아온 아이디 -->

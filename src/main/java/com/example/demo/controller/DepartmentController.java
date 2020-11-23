@@ -3,16 +3,18 @@ package com.example.demo.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dao.DepartmentDao;
 import com.example.demo.vo.DepartmentVo;
 //import com.google.gson.Gson;
 
-@RestController
+@Controller
 public class DepartmentController {
 	@Autowired
 	private DepartmentDao dao;
@@ -36,12 +38,14 @@ public class DepartmentController {
 //	}
 	
 	@RequestMapping("/listDept1")
+	@ResponseBody
 	public List<DepartmentVo> listDept() {
 		System.out.println("진료과컨트롤러_기본 동작함");
 		List<DepartmentVo> list  = dao.findAll();		
 		return list;
 	}
 	@RequestMapping("/listDept2")
+	@ResponseBody
 	public List<DepartmentVo> listDeptSort(){
 		System.out.println("진료과컨트롤러_정렬 동작함");
 		List<DepartmentVo> list = dao.findAllSort();
@@ -50,4 +54,7 @@ public class DepartmentController {
 	
 	@RequestMapping("/listDept7")
 	public void list22() {}
+	
+	@RequestMapping("/listDept8")
+	public void list() {}
 }

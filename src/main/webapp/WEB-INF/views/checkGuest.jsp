@@ -275,8 +275,10 @@ $(function(){
 		    data: {rr_no:rr, name:$("#name").val(), tel:tel},
 		    success: function(data) {
 // 				data = JSON.parse(data);
+
 // 				console.log(data);
 // 				console.log(data.guest);
+
 				if (data.guest != null){
 					checkG = false;
 				}

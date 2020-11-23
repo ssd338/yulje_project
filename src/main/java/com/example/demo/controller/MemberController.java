@@ -110,6 +110,7 @@ public class MemberController {
 	@PostMapping("/checkGuest")
 	public ModelAndView guestSubmit() {
 		ModelAndView mav = new ModelAndView("/joinOk");
+
 		mav.addObject("msg", "비회원인증");
 		return mav;
 	}
@@ -125,6 +126,7 @@ public class MemberController {
 		if(already <= 0) {
 			int ig = dao.insertGuest(map);
 		}
+
 		
 		//등록된 비회원 정보를 가져와 session에 담아 로그인처리
 		MemberVo guest = dao.getGuest(map);
@@ -156,6 +158,8 @@ public class MemberController {
 //		System.out.println(guest);
 		HashMap data = new HashMap<>();
 		data.put("already", already);
+
+
 		data.put("guest", guest);
 		return data;
 	}
