@@ -263,6 +263,30 @@ $(function(){
 			alert("이미 가입된 주민등록번호입니다.");
 			return false;
 		}
+
+		
+		var checkG = true;
+		$.ajax({
+		    url: "/guestRR",
+		    method: "POST",
+		    dataType: "json",
+		    async: false,
+		    data: {rr_no:rr, name:$("#name").val(), tel:tel},
+		    success: function(data) {
+// 				data = JSON.parse(data);
+				console.log(data);
+				console.log(data.guest);
+				if (data.guest != null){
+					checkG = false;
+				}
+		    }
+		});
+
+		if (checkG){
+			alert("비회원 인증에 실패하였습니다. 이름 또는 주민등록번호를 확인해주세요.");
+			return false;
+		}
+		alert("비회원 인증에 성공하였습니다.");
 		
 	});
 

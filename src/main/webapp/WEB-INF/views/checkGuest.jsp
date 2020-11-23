@@ -217,21 +217,23 @@ $(function(){
 		var tel1 = $("#tel1").val();
 		var tel2 = $("#tel2").val();
 		var tel3 = $("#tel3").val();
-		$("#tel").val(tel1+"-"+tel2+"-"+tel3);
+		var tel = (tel1+"-"+tel2+"-"+tel3);
+		$("#tel").val(tel);
 		
 		var rr_no1 = $("#rr_no1").val();
 		var rr_no2 = $("#rr_no2").val();
 		var rr = rr_no1+"-"+rr_no2;
 
+		//주민번호가 이미 회원으로 등록되어있는지, 잘못된 주민번호인지 확인하기 위한 ajax
 		$.ajax({
-		    url: "/guestRR",
+		    url: "/checkRR",
 		    method: "POST",
 		    dataType: "text",
 		    async: false,
 		    data: {rr_no:rr, rr_check:rr_no1+rr_no2},
 		    success: function(data) {
 				data = JSON.parse(data);
-				console.log(data);
+// 				console.log(data);
 			    if(data.already == 0){
 			    	checkAlready = false;
 				}
@@ -260,10 +262,31 @@ $(function(){
 		}
 
 		if(checkAlready){
-			alert("이미 가입된 주민등록번호입니다.");
+			alert("이미 회원가입된 주민등록번호입니다.");
 			return false;
 		}
+		
+		var checkG = true;
+		$.ajax({
+		    url: "/guestRR",
+		    method: "POST",
+		    dataType: "json",
+		    async: false,
+		    data: {rr_no:rr, name:$("#name").val(), tel:tel},
+		    success: function(data) {
+// 				data = JSON.parse(data);
+				console.log(data);
+				console.log(data.guest);
+				if (data.guest != null){
+					checkG = false;
+				}
+		    }
+		});
 
+		if (checkG){
+			alert("비회원 인증에 실패하였습니다. 이름 또는 주민등록번호를 확인해주세요.");
+			return false;
+		}
 		alert("비회원 인증에 성공하였습니다.");
 	});
 
@@ -314,8 +337,8 @@ $(function(){
 		  			<h2>비회원 인증</h2>
 		  		</div>
 		  	<div class="mypage_detail_under">
-		  			<h3>회원님의 개인정보보호와 더욱 안정된 서비스를 위해 최선을 다하겠습니다.</h3>
-				<form action="/insertGuest" method="post">
+		  			<h3>고객님의 개인정보보호와 더욱 안정된 서비스를 위해 최선을 다하겠습니다.</h3>
+				<form action="/checkGuest" method="post">
 		  		<div id="mypage_title_sub">
 		  			<div class="tr">
 		  			<strong>이름</strong>
