@@ -38,12 +38,14 @@ public class MemberDao {
 		return MemberManager.getGuest(map);
 	}
 	
+
 	//비회원 회원전환
 	public int updateGuest(MemberVo m) {
 		// TODO Auto-generated method stub
 		return MemberManager.updateGuest(m);
 	}
 	
+
 //	kkk end
 	
 	// 비밀번호확인
