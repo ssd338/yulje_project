@@ -85,6 +85,16 @@ public class MemberManager {
 		return m;
 	}
 	
+	//비회원 회원전환
+	public static int updateGuest(MemberVo m) {
+		// TODO Auto-generated method stub
+		int re = -1;
+		SqlSession session = sqlSessionFactory.openSession(true);
+		re = session.insert("member.updateGuest", m);
+		session.close();
+		return re;
+	}
+	
 	
 //	kkk end
 	

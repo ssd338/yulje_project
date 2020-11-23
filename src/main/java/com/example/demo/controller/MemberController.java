@@ -110,15 +110,7 @@ public class MemberController {
 	@PostMapping("/checkGuest")
 	public ModelAndView guestSubmit() {
 		ModelAndView mav = new ModelAndView("/joinOk");
-//		HashMap map = new HashMap<>();
-//		map.put("roles", "GUEST");
-//		map.put("name", m.getName());
-//		map.put("rr_no", m.getRr_no());
-//		MemberVo guest = dao.getGuest(map);
-//
-//		if (guest != null) {
-//			session.setAttribute("m", guest);
-//		}
+
 		mav.addObject("msg", "비회원인증");
 		return mav;
 	}
@@ -134,6 +126,7 @@ public class MemberController {
 		if(already <= 0) {
 			int ig = dao.insertGuest(map);
 		}
+
 		
 		//등록된 비회원 정보를 가져와 session에 담아 로그인처리
 		MemberVo guest = dao.getGuest(map);
@@ -146,7 +139,48 @@ public class MemberController {
 		return data;
 	}
 	
+	@PostMapping("/guestRRtoMem")
+	@ResponseBody
+	public HashMap guestRRtoMem(@RequestParam HashMap map, HttpSession session) {
+		map.put("roles", "GUEST");
+//		System.out.println(map);
+		
+		//비회원 등록되어있는 주민번호인지 확인
+		int already = dao.checkRR(map);
+		
+		//등록된 비회원 정보를 가져와 request에 담아 로그인처리
+		MemberVo guest = dao.getGuest(map);
+		String tel = (String)map.get("tel");
+		guest.setTel(tel);
+		if (guest != null) {
+			session.setAttribute("m", guest);
+		}
+//		System.out.println(guest);
+		HashMap data = new HashMap<>();
+		data.put("already", already);
+
+
+		data.put("guest", guest);
+		return data;
+	}
 	
+	@GetMapping("/updateGuest")
+//	@ResponseBody
+	public ModelAndView updateGuest() {
+		ModelAndView mav = new ModelAndView();
+		return mav;
+	}
+	
+	@PostMapping("/updateGuest")
+//	@ResponseBody
+	public ModelAndView updateGuestSubmit(MemberVo m) {
+		ModelAndView mav = new ModelAndView("joinOk");
+		int re = dao.updateGuest(m);
+		mav.addObject("m", m);
+		mav.addObject("re", re);
+		mav.addObject("msg", "회원가입");
+		return mav;
+	}
 	
 	
 	

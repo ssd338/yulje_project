@@ -211,13 +211,12 @@
 	var checkRR = true;
 $(function(){
 
-// 	var telcheck;
-	
 	$("#btnSubmit").click(function(){
 		var tel1 = $("#tel1").val();
 		var tel2 = $("#tel2").val();
 		var tel3 = $("#tel3").val();
-		$("#tel").val(tel1+"-"+tel2+"-"+tel3);
+		var tel = (tel1+"-"+tel2+"-"+tel3);
+		$("#tel").val(tel);
 		
 		var rr_no1 = $("#rr_no1").val();
 		var rr_no2 = $("#rr_no2").val();
@@ -265,29 +264,43 @@ $(function(){
 		}
 
 		
-		var checkG = true;
+		var checkG = false;
+		var checkGC = false;
 		$.ajax({
-		    url: "/guestRR",
+		    url: "/guestRRtoMem",
 		    method: "POST",
 		    dataType: "json",
 		    async: false,
 		    data: {rr_no:rr, name:$("#name").val(), tel:tel},
 		    success: function(data) {
 // 				data = JSON.parse(data);
-				console.log(data);
-				console.log(data.guest);
+// 				console.log(data);
+// 				console.log(data.guest);
+// 				console.log(data.already);
+				if(data.already > 0){
+					checkGC = true;
+				}
 				if (data.guest != null){
-					checkG = false;
+					checkG = true;
 				}
 		    }
 		});
-
-		if (checkG){
-			alert("비회원 인증에 실패하였습니다. 이름 또는 주민등록번호를 확인해주세요.");
+		var checkGCF = false;
+		if (checkGC){
+			if (checkG){
+				alert("인증에 성공하였습니다. 회원 전환페이지로 이동합니다.");
+				location.href='/updateGuest';
+				return false;
+			} else {
+				checkGCF = true;
+			}
+		}
+		if(checkGCF){
+			alert("인증에 실패하였습니다. 이름 또는 주민등록번호를 확인해주세요.");
 			return false;
 		}
-		alert("비회원 인증에 성공하였습니다.");
-		
+		alert("고객 인증에 성공하였습니다.");
+// 		return false;
 	});
 
 	var checkT;

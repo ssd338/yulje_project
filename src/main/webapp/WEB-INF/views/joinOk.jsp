@@ -70,6 +70,7 @@
 	  transition-duration: 0.4s;
 	  cursor: pointer;
 	  width: 70px;
+	  outline: 0;
 }
 
 .btnBot:hover {
