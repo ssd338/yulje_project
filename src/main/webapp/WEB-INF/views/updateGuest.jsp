@@ -330,7 +330,7 @@ $(function(){
   			<h2 class="mtitle">개인정보입력</h2>
   		</div>
   		
-  		<form id="form" action="/insertMember" method="post">
+  		<form id="form" action="/updateGuest" method="post">
   		<div class="essential">
   			<h3 class="ptitle">필수입력사항</h3>
   			<div>
@@ -419,6 +419,7 @@ $(function(){
   			</div>
   		</div>
   		<input type="hidden" name="roles" value="USER">
+  		<input type="hidden" name="member_no" value="${m.member_no }">
   		<div id="bot">
   			<button id="btnJoin" class="btn">가입하기</button>
   			<button id="cancel" class="btn" type="reset">취소</button>

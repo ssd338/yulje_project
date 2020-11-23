@@ -3,6 +3,8 @@ package com.example.demo.controller;
 import java.util.HashMap;
 import java.util.Random;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,20 +39,20 @@ public class MemberController {
 		int re = dao.insert(m);
 		mav.addObject("m", m);
 		mav.addObject("re", re);
-		mav.addObject("msg", "회원");
+		mav.addObject("msg", "회원가입");
 		return mav;
 	}
-	
-	//회원등록을 위한 메소드
-	@PostMapping("/insertGuest")
-	public ModelAndView insertGuest(MemberVo m) {
-		ModelAndView mav = new ModelAndView("/joinOk");
-		int re = dao.insert(m);
-		mav.addObject("m", m);
-		mav.addObject("re", re);
-		mav.addObject("msg", "비회원");
-		return mav;
-	}
+//	
+//	//비회원등록을 위한 메소드
+//	@PostMapping("/insertGuest")
+//	public ModelAndView insertGuest(MemberVo m) {
+//		ModelAndView mav = new ModelAndView("/joinOk");
+//		int re = dao.insert(m);
+//		mav.addObject("m", m);
+//		mav.addObject("re", re);
+//		mav.addObject("msg", "비회원");
+//		return mav;
+//	}
 	
 	//회원 아이디 중복확인
 	@PostMapping("/checkId")
@@ -76,7 +78,7 @@ public class MemberController {
 	@PostMapping("/checkRR")
 	@ResponseBody
 	public HashMap checkRR(@RequestParam HashMap map) {
-		System.out.println(map);
+//		System.out.println(map);
 		map.put("roles", "USER");
 		String rr_check = (String)map.get("rr_check");
 		int already = dao.checkRR(map);
@@ -106,33 +108,75 @@ public class MemberController {
 	public void guestForm() {}
 	
 	@PostMapping("/checkGuest")
-	public ModelAndView guestSubmit(MemberVo m) {
+	public ModelAndView guestSubmit() {
 		ModelAndView mav = new ModelAndView("/joinOk");
-		mav.addObject("m", m);
+		mav.addObject("msg", "비회원인증");
 		return mav;
 	}
 	
 	@PostMapping("/guestRR")
 	@ResponseBody
-	public HashMap guestRR(@RequestParam HashMap map) {
+	public HashMap guestRR(@RequestParam HashMap map, HttpSession session) {
 		map.put("roles", "GUEST");
-		String rr_check = (String)map.get("rr_check");
+		System.out.println(map);
 		int already = dao.checkRR(map);
 		
-//		System.out.println(already);
+		//비회원에 없는 주민번호라면 비회원등록
+		if(already <= 0) {
+			int ig = dao.insertGuest(map);
+		}
 		
-		String re = CheckRR.check(rr_check);
-		MemberVo mem = dao.getName(map);
-		System.out.println(mem);
-		
+		//등록된 비회원 정보를 가져와 session에 담아 로그인처리
+		MemberVo guest = dao.getGuest(map);
+		if (guest != null) {
+			session.setAttribute("m", guest);
+		}
+		System.out.println(guest);
 		HashMap data = new HashMap<>();
-		data.put("already",	already);
-		data.put("re", re);
-		data.put("mem", mem);
+		data.put("guest", guest);
 		return data;
 	}
 	
+	@PostMapping("/guestRRtoMem")
+	@ResponseBody
+	public HashMap guestRRtoMem(@RequestParam HashMap map, HttpSession session) {
+		map.put("roles", "GUEST");
+//		System.out.println(map);
+		
+		//비회원 등록되어있는 주민번호인지 확인
+		int already = dao.checkRR(map);
+		
+		//등록된 비회원 정보를 가져와 request에 담아 로그인처리
+		MemberVo guest = dao.getGuest(map);
+		String tel = (String)map.get("tel");
+		guest.setTel(tel);
+		if (guest != null) {
+			session.setAttribute("m", guest);
+		}
+//		System.out.println(guest);
+		HashMap data = new HashMap<>();
+		data.put("already", already);
+		data.put("guest", guest);
+		return data;
+	}
 	
+	@GetMapping("/updateGuest")
+//	@ResponseBody
+	public ModelAndView updateGuest() {
+		ModelAndView mav = new ModelAndView();
+		return mav;
+	}
+	
+	@PostMapping("/updateGuest")
+//	@ResponseBody
+	public ModelAndView updateGuestSubmit(MemberVo m) {
+		ModelAndView mav = new ModelAndView("joinOk");
+		int re = dao.updateGuest(m);
+		mav.addObject("m", m);
+		mav.addObject("re", re);
+		mav.addObject("msg", "회원가입");
+		return mav;
+	}
 	
 	
 	

@@ -29,6 +29,7 @@ public class MemberManager {
 		}
 	}
 	
+//	kkk
 	//회원가입
 	public static int insert(MemberVo m) {
 		int re = -1;
@@ -39,10 +40,10 @@ public class MemberManager {
 	}
 	
 	//비회원가입
-	public static int insertGuest(MemberVo m) {
+	public static int insertGuest(HashMap map) {
 		int re = -1;
 		SqlSession session = sqlSessionFactory.openSession(true);
-		re = session.insert("member.insertGuest", m);
+		re = session.insert("member.insertGuest", map);
 		session.close();
 		return re;
 	}
@@ -74,6 +75,28 @@ public class MemberManager {
 		session.close();
 		return m;
 	}
+	
+	//비회원 정보를 가져오기
+	public static MemberVo getGuest(HashMap map) {
+		MemberVo m = null;
+		SqlSession session = sqlSessionFactory.openSession();
+		m = session.selectOne("member.selectByRRGuest", map);
+		session.close();
+		return m;
+	}
+	
+	//비회원 회원전환
+	public static int updateGuest(MemberVo m) {
+		// TODO Auto-generated method stub
+		int re = -1;
+		SqlSession session = sqlSessionFactory.openSession(true);
+		re = session.insert("member.updateGuest", m);
+		session.close();
+		return re;
+	}
+	
+	
+//	kkk end
 	
 	//회원번호를 통해 아이디 찾기
     public static MemberVo findById(int member_no) {
