@@ -54,6 +54,40 @@ public class MemberController {
 		return "main";
 	}
 	
+	//아이디찾기
+	@GetMapping("/findId")
+	public void findId() {
+		
+	}
+	
+	@PostMapping("/findId")
+	@ResponseBody
+	public HashMap findId(@RequestParam HashMap map) {
+		System.out.println(map);
+		MemberVo id = dao.findId(map);
+		System.out.println(id.getId());
+		HashMap data = new HashMap<>();
+		data.put("id", id.getId());
+		return data;
+	}
+
+	//비밀번호 찾기
+	@RequestMapping("/findPwd")
+	public void findPwd() {
+		
+	}
+	
+	@PostMapping("/findPwd")
+	@ResponseBody
+	public HashMap findPwd(@RequestParam HashMap map) {
+		System.out.println(map);
+		MemberVo pwd = dao.findPwd(map);
+		System.out.println(pwd.getPwd());
+		HashMap data = new HashMap<>();
+		data.put("pwd", pwd.getPwd());
+		return data;
+	}
+	
 	//회원가입 페이지로 보내기
 	@GetMapping("/insertMember")
 	public ModelAndView insertForm() {

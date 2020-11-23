@@ -4,6 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<%-- <meta name="_csrf" th:content="${_csrf.token}">
+<meta name="_csrf_header" th:content="${_csrf.headerName}"> --%>
 <title>Insert title here</title>
 <style>
 	* {
@@ -207,7 +209,37 @@
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
+/* $(function () {
+    var token = $("meta[name='_csrf']").attr('content');
+    var header = $("meta[name='_csrf_header']").attr('content');
+    if(token && header) {
+        $(document).ajaxSend(function(event, xhr, options) {
+            xhr.setRequestHeader(header, token);
+        });
+    }
+});
+
+ $(function () {
+    var token = $("meta[name='_csrf']").attr('content');
+    var header = $("meta[name='_csrf_header']").attr('content');
+    if(token && header) {
+        $(document).ajaxSend(function(event, xhr, options) {
+            xhr.setRequestHeader(header, token);
+        });
+    }
+}); */
+
 $(function(){
+
+/* 	$(function () {
+	    var token = $("meta[name='_csrf']").attr('content');
+	    var header = $("meta[name='_csrf_header']").attr('content');
+	    if(token && header) {
+	        $(document).ajaxSend(function(event, xhr, options) {
+	            xhr.setRequestHeader(header, token);
+	        });
+	    }
+	}); */
 
 	var checkAlready = true;
 	var checkR = true;

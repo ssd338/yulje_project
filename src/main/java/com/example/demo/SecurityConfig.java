@@ -29,6 +29,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		// TODO Auto-generated method stub
 //		super.configure(http);
 		
+		http.csrf().disable();
+		
 		http.authorizeRequests()
 		.mvcMatchers("/","/all/**").permitAll()
 		//.mvcMatchers("/","/**").permitAll()
@@ -48,6 +50,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.invalidateHttpSession(true);
 		
 		http.httpBasic();
+		
+		
 	}
 
 
