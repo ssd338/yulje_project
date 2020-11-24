@@ -731,7 +731,7 @@ $(function(){
 		
 		<div class="m2_2">
 			<h3>예약하실 정보</h3>
-			<p>환자명 : 김영대</p>
+			<p>환자명 : ${m.name }</p>
 			<div class="m2_2btn">
 			<button class="m2_2btn_1">환자정보확인</button>
 			<button>최근예약</button>

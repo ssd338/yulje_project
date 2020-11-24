@@ -84,4 +84,5 @@ public class ReservationController {
 			mav.addObject("reser_time", r.getReser_time());
 			return mav;
 		}
+		
 }

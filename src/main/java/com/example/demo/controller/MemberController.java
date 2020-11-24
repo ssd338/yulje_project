@@ -182,18 +182,6 @@ public class MemberController {
 		return mav;
 	}
 	
-	
-	
-	
-	
-	
-	@GetMapping("/list")
-	public void list() {
-	}
-	@GetMapping("/test")
-	public void test(String ir1) {
-		System.out.println(ir1);
-	}
 	@GetMapping("/join-allow")
 	public void join() {
 	}
