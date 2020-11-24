@@ -85,6 +85,4 @@ public class ReservationController {
 			return mav;
 		}
 		
-		@GetMapping("hahaha")
-		public void haha() {}
 }
