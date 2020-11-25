@@ -57,6 +57,22 @@ public class ReservationController {
 		return list;
 	}
 	
+	@PostMapping("/insertRes")
+	@ResponseBody
+	public HashMap insertRes(@RequestParam HashMap map, HttpSession session) {
+		System.out.println(map);
+		int re = -1;
+		HashMap data = new HashMap<>();
+		if (session.getAttribute("m") != null) {
+			MemberVo m = (MemberVo)session.getAttribute("m");
+			int member_no = m.getMember_no();
+			map.put("member_no", member_no);
+			re = reservationDao.insertRes(map);
+		}
+		data.put("re", re);
+		return data;
+	}
+	
 	//해당예약번호의 예약상세내역 보여주기
 		@GetMapping("/reserconfirm")
 		public ModelAndView reserconfirm(HttpSession session, int reser_no) {

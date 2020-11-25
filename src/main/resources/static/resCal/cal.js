@@ -1,90 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script type="text/javascript">
-$(function(){
-	$(document).on("click",".today",function(){
-		var day = $(this).html();
-		alert(day);
-	});
-	
-	$(".thursday").removeClass("day");
-	$(".thursday").addClass("today");
-});
-</script>
-</head>
-<style>        
-        .calendar {
-            width: 100%;
-            overflow: visible;
-            text-align: center;
-            display: table;
-            border-collapse: separate;
-            border-spacing: 2px;
-            border-color: grey;
-        }
-        .calendar .week {
-            background: #f1f0f0;
-            color: #515151;
-            font-size: 16px;
-            font-weight: bold;
-            border-bottom: 1px solid #d6d6d6;
-            height: 40px;
-        }        
-        .calendar .saturday {
-            background: white;
-            color: #3a87ad;
-            font-size: 16px;
-            font-weight: bold;
-            height: 55px;
-            border: 2px solid #f1f0f0;
-        }        
-        .calendar .sunday {
-            background: white;
-            color: crimson;
-            font-size: 16px;
-            font-weight: bold;
-            height: 55px;
-            border: 2px solid #f1f0f0;
-        }
-        .calendar .today {
-            background: white;
-            color: darkblue;
-            font-size: 16px;
-            font-weight: bold;
-            height: 55px;
-            border: 2px solid darkblue;
-        }
-        .calendar .blank {
-            background: white;
-            color: brown;
-            font-size: 16px;
-            font-weight: bold;
-            height: 55px;
-            border: 2px solid #f1f0f0;
-        }        
-        .calendar .day {
-            background: white;
-            color: #515151;
-            font-size: 16px;
-            font-weight: bold;
-            height: 55px;
-            border: 2px solid #f1f0f0;
-        }
-    </style>
-<body>
-<div id="calendarDiv">
-</div>
-<h2>tetx</h2>
-<div id="2">
-</div>
-</body>
-<script type="text/javascript">
+function getCal(){
 // Calendar date 객체 생성하기!
 var Calendar = new Date();
 
@@ -124,7 +38,7 @@ var TD_saturday_start = "<td class='saturday'>";     // 토요일
 var TD_end    = "</td>";    // 테이블 만들기
 
 str =  "<table  width = 500px border=1 cellspacing=0 cellpadding=0 bordercolor=bbbbbb><tr><td style='text-align: center'>";
-str +=  "<strong>"+ year +". " + month_of_year[month] + "</strong>";
+str +=  "<strong>"+ "<span id='year'>"+year+"</span>" +". " + "<span id='month'>"+month_of_year[month]+"</span>" + "</strong>";
 str += "<table  class = 'calendar' border = 0 cellspacing=0 cellpadding=2>";
 
 // 본격적인 tr 시작!
@@ -199,13 +113,12 @@ for (var i = 0; i < DAYS_OF_MONTH; ++i) {
 str += "</table></td></tr></table>";
 
 // document.write(str);
-$("#calendarDiv").html(str);
+//$("#calendarDiv").html(str);
+document.getElementById('calendarDiv').innerHTML=str;
 
 //요일별 클래스를 지정
 //ajax으로 의사의 진료일을 가져와
 //요일에만 클릭 가능하게 변경
 //클릭시 날짜를 가져온다.
 // 오전, 오후 선택가능
-
-</script>
-</html>
+}
