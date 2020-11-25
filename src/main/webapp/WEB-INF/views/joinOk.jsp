@@ -157,18 +157,22 @@ $(function(){
 							<th>이름</th>
 							<td>${m.name }</td>
 						</tr>
+						<c:if test="${m.roles eq 'USER' }">
 						<tr>
 							<th>아이디</th>
 							<td>${m.id }</td>
 						</tr>
+						</c:if>
 						<tr>
 							<th>연락처</th>
 							<td>${m.tel }</td>
 						</tr>
+						<c:if test="${m.roles eq 'USER' }">
 						<tr>
 							<th>이메일</th>
 							<td>${m.email }</td>
 						</tr>
+						</c:if>
 					</table>
 				</div>
 				

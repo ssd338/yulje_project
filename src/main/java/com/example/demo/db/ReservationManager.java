@@ -30,6 +30,7 @@ public class ReservationManager {
 		}
 	}
 	
+//	kkk
 	//부서목록 불러오기
 	public static List<DepartmentVo> findAllDept() {
 		List<DepartmentVo> list = null;
@@ -56,6 +57,18 @@ public class ReservationManager {
 		session.close();
 		return list;
 	}
+	//예약 등록
+	public static int insertRes(HashMap map) {
+		// TODO Auto-generated method stub
+		int re = -1;
+		SqlSession session = sqlSessionFactory.openSession(true);
+		re = session.insert("reservation.insertRes", map);
+		session.close();
+		return re;
+	}
+	
+//	kkk end
+	
 	//회원번호로 예약현황횟수 조회
 	public static int cntByNo(int member_no) {
 		int n = 0;
