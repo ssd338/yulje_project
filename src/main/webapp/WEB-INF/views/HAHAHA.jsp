@@ -110,72 +110,26 @@
 
 $(function() {
 
-	$("#btn_cancel").click(function(){
-		var pwdcheck = $(".board_input_info").val();
-		alert(pwdcheck);
+	$(document).on("click",".bbb", function(){
+		alert("안녕");
 
-		$.ajax({
-			url : "/delete_pwd.do",
-			method : "POST",
-			dataType : "json",
-			data : {
-				pwd : pwd
-				},
-			success : function(data){
-				if(pwdcheck != data.pwd){
 
-					$("#testtt").html("비밀번호가 일치하지 않습니다");
-				return false;
-				}
-				}
-			};	
-		
+	var faq_div = $("<div></div>").addClass("faq_menu");
+
+	var faq_btn1= $("<button></button>").attr({"name":"category", "value":"%"}).html("전체").addClass("faq_bottom_menu");
+	var faq_btn2= $("<button></button>").attr({"name":"category", "value":"외래"}).html("외래").addClass("faq_bottom_menu");
+	var faq_btn3= $("<button></button>").attr({"name":"category", "value":"입원"}).html("입원").addClass("faq_bottom_menu");
+	var faq_btn4= $("<button></button>").attr({"name":"category", "value":"제증명"}).html("제증명").addClass("faq_bottom_menu");
+	var faq_btn5= $("<button></button>").attr({"name":"category", "value":"기타"}).html("기타").addClass("faq_bottom_menu");
+
+	$(faq_div).append(faq_btn1);
+	$(faq_div).append(faq_btn2);
+	$(faq_div).append(faq_btn3);
+	$(faq_div).append(faq_btn4);
+	$(faq_div).append(faq_btn5);
+	$(".aaa").append(faq_div);
 	})
-});
-	
-// 		$('div.modal').omniWindow() // create modal
-// 		.trigger('show'); // and show it
-// 	});
-
-// 	$('.close-button').click(function(e) {
-// 		e.preventDefault();
-// 		$modal.trigger('hide');
-
-// 	$.ajax({
-// 		url:"/deleteG_Board.do",
-		
-// 			}
-
-// 		})
-		
-// 	var g_div = $("<div></div>").html("게시물을 삭제 하시겠습니까?").addClass("main_input_menu");
-// 	var g_div1 = $("<div></div>").html("하기 정보를 확인 후 비밀번호를 입력해주세요.").addClass("main_input_detail")
-// 	var br = $("<br>");
-// 	$(".container").append(g_div);
-// 	$(".container").append(g_div1);
-// 	$(".container").append(br);
-// 	$(".modal ow-closed").append(".container");
-
-// 	var form = $("<form></form>").attr({"action":"deleteG_Board.do","method":"post"})
-// 	var input = $("<input>").attr({"type":"hidden","name":"no","value":"${no}"})
-// 	var g_div2 = $("<div></div>");
-
-// 	$(g_div2).append(form);
-// 	$(g_div2).append(input);
-// 	$(".main_input_info").append(g_div2);
-
-	
-// 	var g_div3 = $("<div></div>").addClass("main_btn");
-// 	var g_button = $("<button></button>").html("삭제").addClass("btn_delete");
-// 	var g_button1 = $("<button></button>").html("취소").addClass("btn_list");
-// 	var g_a = $("<a></a>").attr("href","listG_Board.do");
-
-	
-// 	$(g_div3).append(g_button);
-// 	$(g_a).append(g_button1);
-// 	$(g_div3).append(g_button1);
-// 	$(".modal ow-closed").append(g_div3);
-	
+	});
 	
 	
 	
@@ -185,35 +139,8 @@ $(function() {
 </script>
 </head>
 <body>
+<button class="bbb">클리쿠</button>
+	<div class="aaa"></div>
 
-	<!-- Container for an overlay: -->
-	<div class="ow-overlay ow-closed"></div>
-
-	<div class="modal ow-closed">
-		<div class="container">
-			<div id="main_input_menu">게시물을 삭제 하시겠습니까?</div>
-			<div id="main_input_detail">하기 정보를 확인 후 비밀번호를 입력해주세요.</div>
-			<br>
-
-			<div id="main_input_info">
-				<form action="deleteG_Board.do" method="post">
-					<input type="hidden" name="no" value="${no }">
-					<div>
-						비밀번호 <input type="password" name="pwd" class="board_input_info">
-						<%-- 						<c:if test="${ pw != pw}"> --%>
-
-						<%-- 						</c:if> --%>
-						<div id="testtt"></div>
-					</div>
-			</div>
-			<div class="main_btn">
-				<button class="btn_delete">삭제</button>
-				<a href="listG_Board.do"><button class="btn_list" type="button"
-						id="btn_cancel">취소</button></a>
-			</form>
-		</div>
-
-	</div>
-	</div>
 </body>
 </html>

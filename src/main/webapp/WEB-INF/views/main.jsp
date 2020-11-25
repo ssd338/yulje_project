@@ -456,6 +456,141 @@ body {
 	clear: both;
 }
 
+
+
+
+/*ajax 게시판*/
+
+/*faq 게시판*/
+.faq_menu {
+	display: flex;
+	text-align: center;
+	width: 950px;
+	padding-left: 21px;
+}
+
+.faq_bottom_menu {
+	border: 1px solid #D5D5D5;
+	width: 180px;
+	height: 50px;
+	line-height: 50px;
+	background-color: white;
+	outline: 0;
+}
+
+.faq_bottom_menu:hover {
+	color: #ffffff;
+	background-color: #94CCC4;
+}
+
+#search_form {
+	text-align: right;
+	width: 920px;
+}
+
+.search_btn {
+	border-radius: 5px;
+	width: 60px;
+	height: 30px;
+	border: 1px solid #94CCC4;
+	background-color: #94CCC4;
+	color: white;
+	font-weight: bold;
+	outline: 0;
+}
+
+.insert_btn {
+	border-radius: 5px;
+	width: 60px;
+	height: 30px;
+	border: 1px solid #D5D5D5;
+	background-color: white;
+	color: black;
+}
+
+#search_input_form {
+	width: 200px;
+	height: 30px;
+	border: 1px solid #D5D5D5;
+
+}
+
+.main_under_menu{
+	margin-left: 228px;
+}
+
+
+.main_under_board {
+	margin: 10px;
+	border-top: 1.5px solid #94CCC4;
+	border-bottom: 1.5px solid #94CCC4;
+	padding: 10px;
+	width: 900px;
+	margin-left: 250px;
+}
+.main_under_board label {
+	width: 900px;
+	line-height: 50px;
+	/* 	padding: 10px; */
+	height: 70px;
+}
+
+input[id*="answer"] {
+	display: none;
+}
+
+input[id*="answer"]+label {
+	display: block;
+	/* 	margin: 5px; */
+	height: 50px;
+	/* 	border: 1px solid cadetblue; */
+	border-bottom: 0;
+	color: black;
+	background-color: white;
+	cursor: pointer;
+	position: relative;
+	border-bottom: 1px solid #D5D5D5;
+	/* 	border-top: 1px solid #94CCC4; */
+}
+
+/*    input[id*="answer"] + label em { */
+/*       position: absolute; */
+/*       top: 50%; */
+/*       right: 10px; */
+/*       width: 30px; */
+/*       height: 30px; */
+/*       margin-top: -15px; */
+/*       display: inline-block;  */
+/*    } */
+input[id*="answer"]+label+div {
+	max-height: 0;
+	transition: all .35s;
+	overflow: hidden;
+	color: #5D5D5D;
+	background: #EAEAEA;
+	font-size: 11px;
+	line-height: 50%;
+	font-weight: bold;
+}
+
+input[id*="answer"]+label+div p {
+	display: inline-block;
+	/* 	padding: 20px; */
+	font-size: 14px;
+	line-height: 23px;
+}
+
+input[id*="answer"]:checked+label+div {
+	max-height: 100px;
+	background-position: 0 -30px;
+	width: 900px;
+
+	/* 	margin-left: 5px; */
+}
+
+
+/*ajax 끝!!!!!!*/
+
 /* Style the footer */
 /*
 	.footer {
@@ -471,13 +606,78 @@ body {
 		width: 100%;
 	}
 }
+
+
+
 </style>
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script type="text/javascript" src="jquery-ui-1.12.1/jquery-ui.min.js"></script>
 <script type="text/javascript">
 
 $(function(){
+	var category = "%";
+// 	alert(category);
+	getFaq(category);
+		
+	$(document).on("click", "#notice4",function(){
+// 		alert("안녕?");
+		$(".main_under_menu").clear();
+		getFaq(category);
+		})
+		
+	$(document).on("click",".faq_bottom_menu", function(){
+		category = $(this).attr("value");
+// 				$(faq_div).empty();
+		getFaq(category);
+		
+		})
+		
+
+
+
+	function getFaq(category){
+
+		$.ajax({
+
+			url : "/listFaq.do",
+			dateType : "json",
+			data : {
+				category : category
+
+				},
+			success : function(data){
+				var faq_div = $("<div></div>").addClass("faq_menu");
+				var faq_btn1= $("<button></button>").attr({"name":"category", "value":"%"}).html("전체").addClass("faq_bottom_menu");
+				var faq_btn2= $("<button></button>").attr({"name":"category", "value":"외래"}).html("외래").addClass("faq_bottom_menu");
+				var faq_btn3= $("<button></button>").attr({"name":"category", "value":"입원"}).html("입원").addClass("faq_bottom_menu");
+				var faq_btn4= $("<button></button>").attr({"name":"category", "value":"제증명"}).html("제증명").addClass("faq_bottom_menu");
+				var faq_btn5= $("<button></button>").attr({"name":"category", "value":"기타"}).html("기타").addClass("faq_bottom_menu");
+				
+				$(faq_div).append(faq_btn1);
+				$(faq_div).append(faq_btn2);
+				$(faq_div).append(faq_btn3);
+				$(faq_div).append(faq_btn4);
+				$(faq_div).append(faq_btn5);
+				$(".main_under_menu").html(""); //클릭시 main_under_menu를 리셋 empty,clear둘다 안먹음
+				$(".main_under_menu").append(faq_div);
+				
+				
+// 				alert(data);
+				let content = "";
+				for (var j = 0; j < data.length; j++) {
+					content += '<input type="radio" name="accordion" id="answer'+j+'">\<label for="answer'+j+'">'
+					+ data[j].title
+					+ '</label><div><p>'
+					+ data[j].content + '</p></div>';
+
+		}
+				
+				document.getElementById("underboard").innerHTML = content;
+				
+
+				}
+			})
+		}
 		
 })
 
@@ -586,7 +786,10 @@ $(function(){
 
 				<h2>병원 소식</h2>
 				<br> 율제 병원의 최신 소식을 전해 드립니다.
-
+				<br>
+				<br>
+				<br>
+				<hr>
 
 
 				<div class="main_under1">
@@ -600,9 +803,10 @@ $(function(){
 							<div id="notice4">FAQ</div>
 						</div>
 					</div>
-					<hr>
+					
 				</div>
-				<div class="main_under_board">
+				<div class="main_under_menu"></div>
+				<div class="main_under_board" id="underboard">
 				
 				
 				</div>
