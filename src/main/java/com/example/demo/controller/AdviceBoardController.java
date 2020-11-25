@@ -396,4 +396,16 @@ public class AdviceBoardController {
 		return mav;
 
 	}
+	
+	//동의서 다운받는 코드
+	@RequestMapping("/Patient_down.do")
+	public File downFile(HttpServletRequest request, String fname) {
+		// file download controller
+		// 실경로를 알아오기 위해 request씀
+		String path = request.getRealPath("upload");
+		File file = new File(path + "/" + fname);
+
+		return file;
+
+	}
 }

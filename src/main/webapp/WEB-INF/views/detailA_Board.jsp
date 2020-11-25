@@ -157,7 +157,7 @@ a:visited {
 		<div id="detail_menu_writer">작성자 : ${ab.writer }</div>
 		<div id="detail_menu_regdate">등록일 : ${ab.regdate }</div>
 		<div id="detail_menu_hit">조회수 : ${ab.hit }</div>
-		<div id="detail_menu_file">첨부파일 : <a href="../upload/${ab.fname }">${ab.fname }</a></div>
+		<div id="detail_menu_file">첨부파일 : <a href="A_down.do?fname=${ab.fname }">${ab.fname }</a></div>
 	</div>
 	<br>
 	<div id="detail_menu_content">
