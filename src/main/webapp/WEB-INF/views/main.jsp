@@ -403,33 +403,30 @@
 		transform: translateY(-50%);
 		padding: 50px;
 		cursor: pointer;
-		z-index: 100px;
+		
 	}
 	
 	.section .slidelist .left {
 		left: 30px;
-		background: url('./mainimege/left.png') center center/100% no-repeat;
+		background: url('./main_img/left.png') center center/100% no-repeat;
 	}
 	
 	.section .slidelist .right {
 		right: 30px;
-		background: url('./mainimege/right.png') center center/100% no-repeat;
+		background: url('./main_img/right.png') center center/100% no-repeat;
 	}
 	
 	
 	.section input[id="slide01"]:checked ~ .slidewrap .slidelist>li {
 		transform: translateX(0%);
-		z-index: 100px;
 	}
 	
 	.section input[id="slide02"]:checked ~ .slidewrap .slidelist>li {
 		transform: translateX(-100%);
-		z-index: 100px;
 	}
 	
 	.section input[id="slide03"]:checked ~ .slidewrap .slidelist>li {
 		transform: translateX(-200%);
-		z-index: 100px;
 	}
 		
 
@@ -513,7 +510,7 @@
 	  		<span><img src="./img/reserve.png" width="60" height="60"></span>
 	  		<span id="top1_span"><h2>진료 예약</h2></span>
 	  			<div id="main_top1_btn">
-	  				<button id="top1_btn_1"><a href="Reservation.jsp">예약 하기</a></button>
+	  				<button id="top1_btn_1">예약 하기</button>
 	  			</div>
 	  		
 	  		</div>
@@ -555,9 +552,9 @@
 	  		</div>
 	  		<div id="main_under2">
 	  			<div id="main_notice">
-	  				<div id="notice1"><a href="listNotice.jsp">공지사항</a></div>
+	  				<div id="notice1">공지사항</div>
 	  				<div id="notice2">건의게시판</div>
-	  				<div id="notice3"><a href="detailCompliment.jsp">칭찬게시판</a></div>
+	  				<div id="notice3">칭찬게시판</div>
 	  				<div id="notice4">상담게시판</div>
 	  			</div>
 	  			<div id="main_notice_detail">
@@ -571,7 +568,7 @@
 	  	
 	</div>
 	
-	<jsp:include page="footer.jsp"></jsp:include>
+	<jsp:include page="footer1.jsp"></jsp:include>
 
 </body>
 </html>

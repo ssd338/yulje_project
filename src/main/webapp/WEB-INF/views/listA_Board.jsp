@@ -12,14 +12,62 @@
 <script type="text/javascript">
 	$(function() {
 
+		var dept_name="호흡기내과";
+		getDeptname(dept_name);
+
+		function getDeptname(dept_name){
+			$.ajax({ // deptname를 받아와서 cotroller로 보내주는 ajax
+				url : "/listA_Board.do",
+				method : "POST",
+				dataType : "json",
+				data : {
+					dept_name : dept_name
+				},
+				success : function(data) {
+					for( var a in data){
+
+						console.log(dept_name);
+
+						var level = eval(data[a].b_level); // b_level을 int로 타입캐스팅
+						var title  = "";
+						//alert(level);
+
+						if(level > 0){
+							for(var i = 0; i < level; i++){
+								title +="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
+								}
+							}
+						title += data[a].title;
+						var table_a = $("<a></a>");
+						$(table_a).html(title).attr("href","detailA_Board.do?no="+data[a].no);
+
+						var table_tr = $("<tr></tr>");
+						var table_td1 = $("<td></td>").html(data[a].no);
+						var table_td2 = $("<td></td>").html(data[a].dept_name);
+						var table_td3 = $("<td></td>").html(table_a);
+						var table_td4 = $("<td></td>").html(data[a].writer);
+						var table_td5 = $("<td></td>").html(data[a].regdate);
+						
+						$(table_tr).append(table_td1,table_td2,table_td3,table_td4,table_td5);
+						$("tbody").append(table_tr);
+						
+						
+						
+						}
+					
+
+				}
+			})
+		}
+
 		// dept_button를 클릭시 강제적으로 클릭이벤트를 발생시킴
-		$(document).on(
-				"click",
-				".dept_button",
-				function() {
+		$(document).on(	"click",".dept_button",	function() { // 버튼을 누르면 ajax이 작동
 					var deptno = $(this).attr("deptno"); // btn의 속성("deptno")을 불러옴
-					var deptname = $(this).attr("deptname");// btn의 속성("deptname")을 불러옴
+					dept_name = $(this).attr("deptname");// btn의 속성("deptname")을 불러옴
 					//alert(deptno);
+					
+					getDeptname(dept_name);
+					
 					$("#doc_detail_menu").empty();
 					
 					$.ajax({ // dept_no를 매개변수로 받아서 doctor의 detail을 출력
@@ -49,46 +97,8 @@
 					
 					$("tbody").empty();
 					
-					$.ajax({ // deptname를 받아와서 cotroller로 보내주는 ajax
-						url : "/listA_Board.do",
-						method : "POST",
-						dataType : "json",
-						data : {
-							dept_name : deptname
-						},
-						success : function(data) {
-							for( var a in data){
-
-								var level = eval(data[a].b_level); // b_level을 int로 타입캐스팅
-								var title  = "";
-								//alert(level);
-
-								if(level > 0){
-									for(var i = 0; i < level; i++){
-										title +="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
-										}
-									}
-								title += data[a].title;
-								var table_a = $("<a></a>");
-								$(table_a).html(title).attr("href","detailA_Board.do?no="+data[a].no);
-
-								var table_tr = $("<tr></tr>");
-								var table_td1 = $("<td></td>").html(data[a].no);
-								var table_td2 = $("<td></td>").html(data[a].dept_name);
-								var table_td3 = $("<td></td>").html(table_a);
-								var table_td4 = $("<td></td>").html(data[a].writer);
-								var table_td5 = $("<td></td>").html(data[a].regdate);
-								
-								$(table_tr).append(table_td1,table_td2,table_td3,table_td4,table_td5);
-								$("tbody").append(table_tr);
-								
-								
-								
-								}
-							
-
-						}
-					})
+					
+				
 
 				});
 

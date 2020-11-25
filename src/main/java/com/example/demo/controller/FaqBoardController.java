@@ -34,16 +34,16 @@ public class FaqBoardController {
 		this.dao = dao;
 	}
 
-	@RequestMapping("/F_down.do")
-	public ModelAndView down(HttpServletRequest request, String fname) {
-		// file download controller
-		// 실경로를 알아오기 위해 request씀
-		String path = request.getRealPath("upload");
-		File file = new File(path + "/" + fname);
-
-		return new ModelAndView("down", "file", file);
-
-	}
+//	@RequestMapping("/F_down.do")
+//	public ModelAndView down(HttpServletRequest request, String fname) {
+//		// file download controller
+//		// 실경로를 알아오기 위해 request씀
+//		String path = request.getRealPath("upload");
+//		File file = new File(path + "/" + fname);
+//
+//		return new ModelAndView("down", "file", file);
+//
+//	}
 
 //	@RequestMapping("/detailS_Board.do")
 //	public void detial(int no, Model model) {
@@ -73,14 +73,15 @@ public class FaqBoardController {
 //	}
 //	
 	
-	@GetMapping("/listFaq.do")
+	// 뷰페이지 실행을 위한 controller
+	@GetMapping("/listFaq")
 	public void listFaq(Model model) {
 		
 		model.addAttribute("title", "FAQ");
 	}
 	
 	
-	@GetMapping("/listFaq")
+	@GetMapping("/listFaq.do")
 	@ResponseBody
 	public List<Faq_BoardVo> list(Model model, @RequestParam(value = "pageNUM", defaultValue = "1") int pageNUM, @RequestParam HashMap map) {
 
@@ -93,8 +94,12 @@ public class FaqBoardController {
 		}
 
 //		HashMap map = new HashMap();
+		System.out.println(map);
 		map.put("start", start);
 		map.put("end", end);
+//		model.addAttribute("category", category);
+//		System.out.println(category);
+		
 		List<Faq_BoardVo> list = dao.findAll(map);
 
 		model.addAttribute("title", "게시물 목록");
@@ -107,18 +112,23 @@ public class FaqBoardController {
 	}
 
 	@GetMapping("/insertFaq.do")
-	public void insert_form(@RequestParam(value = "no", defaultValue = "0") int no, Model model) {
+	public void insert_form(@RequestParam(value = "no", defaultValue = "0") int no, Model model,@RequestParam(value = "no", defaultValue = "0") String category) {
 		// 전달되는 것이 no, 전달되는 int no값이 없으면 기본 값이 0
 		model.addAttribute("no", no);
+		model.addAttribute("category", category);
+
+//		System.out.println("번호"+no);
+//		System.out.println("카테고리"+category);
 	}
 
 	@PostMapping("/insertFaq.do")
 	public ModelAndView insert_submit(HttpServletRequest request, Faq_BoardVo fb) {
 
-		ModelAndView mav = new ModelAndView("redirect:/listFaq.do");
+		ModelAndView mav = new ModelAndView("redirect:/listFaq");
 		int no = dao.getNextNo();
 		
 		fb.setNo(no);
+//		fb.setCategory(category);
 		
 		int re = dao.insert(fb);
 

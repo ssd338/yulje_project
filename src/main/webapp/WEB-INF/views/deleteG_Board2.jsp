@@ -11,33 +11,33 @@
 	font-family: "맑은 고딕";
 }
 
-/* /*modal*/ */
-/* .ow-overlay { */
-/* 	position: fixed; */
-/* 	z-index: 10; */
-/* 	top: 0; */
-/* 	left: 0; */
-/* 	height: 100%; */
-/* 	width: 100%; */
-/* 	background: #424242; */
-/* 	opacity: 0.8; */
-/* } */
+/*modal*/
+.ow-overlay {
+	position: fixed;
+	z-index: 10;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background: #424242;
+	opacity: 0.8;
+}
 
-/* /* Default class for both hidden overlay and modal window */ */
-/* .ow-closed { */
-/* 	display: none; */
-/* } */
+/* Default class for both hidden overlay and modal window */
+.ow-closed {
+	display: none;
+}
 
-/* /* Default class for modal window */ */
-/* .modal { */
-/* 	position: fixed; */
-/* 	z-index: 20; */
-/* 	height: 450px; */
-/* 	left: 50%; */
-/* 	top: 225px; */
-/* 	width: 450px; */
-/* 	background-color: #fff */
-/* } */
+/* Default class for modal window */
+.modal {
+	position: fixed;
+	z-index: 20;
+	height: 450px;
+	left: 50%;
+	top: 225px;
+	width: 450px;
+	background-color: #fff
+}
 
 .container {
 	width: 450px;
@@ -131,15 +131,14 @@ $(function() {
 			};	
 		
 	})
-});
 	
-// 		$('div.modal').omniWindow() // create modal
-// 		.trigger('show'); // and show it
-// 	});
+		$('div.modal').omniWindow() // create modal
+		.trigger('show'); // and show it
+	});
 
-// 	$('.close-button').click(function(e) {
-// 		e.preventDefault();
-// 		$modal.trigger('hide');
+	$('.close-button').click(function(e) {
+		e.preventDefault();
+		$modal.trigger('hide');
 
 // 	$.ajax({
 // 		url:"/deleteG_Board.do",
@@ -179,7 +178,8 @@ $(function() {
 	
 	
 	
-	
+	});
+
 
 
 </script>

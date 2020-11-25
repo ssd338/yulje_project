@@ -44,7 +44,7 @@ public class AdviceBoardController {
 	
 	
 
-	@RequestMapping("/A_down.do")
+	@RequestMapping("/a_down.do")
 	public ModelAndView down(HttpServletRequest request, String fname) {
 		// file download controller
 		// 실경로를 알아오기 위해 request씀
@@ -174,7 +174,7 @@ public class AdviceBoardController {
 	public ModelAndView insert_submit(HttpServletRequest request, Advice_BoardVo ab) {
 
 		String path = request.getRealPath("upload");
-		path = request.getServletContext().getRealPath("upload");
+//		path = request.getServletContext().getRealPath("upload");
 		System.out.println("path" + path);
 
 		int pno = ab.getNo();

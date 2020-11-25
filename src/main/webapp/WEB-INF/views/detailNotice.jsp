@@ -167,7 +167,7 @@ a:visited {
 	<div id="btn_div">
 	<a href="updateNotice?no=${n.no }"><button id="btn_update">수정</button></a>
 	<a href="deleteNotice?no=${n.no }"><button id="btn_delete">삭제</button></a>
-	<a href="listNotice.do"><button id="btn_list">목록</button></a>
+	<a href="listNotice"><button id="btn_list">목록</button></a>
 	
 	</div>
 	</div>
