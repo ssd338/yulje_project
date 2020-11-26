@@ -460,7 +460,7 @@ $(function(){
 						 $(this).append("<span><h3>"+deptdata.dept_name+"</h3></span>");
 						 $(this).append("<span><img src='./image/doc22.jpg' class='icon2'></span>");
 						 $(this).append("<span><img src='./image/r.jpg' class='icon2'></span>");
-						 $(this).append("<span><h4><a href='listDoctor?deptno='"+deptdata.dept_no+">의료진</a></h4></span>");
+						 $(this).append("<span><h4><a href='listDoctor?dept_no=2'>의료진</a></h4></span>");
 						 $(this).append("<span><h4>예약</h4></span>");
 					});
 					$(document).on("mouseleave",".main_hover",function(){
@@ -489,7 +489,7 @@ $(function(){
 						 $(this).append("<span><h3>"+deptdata.dept_name+"</h3></span>");
 						 $(this).append("<span><img src='./image/doc22.jpg' class='icon2'></span>");
 						 $(this).append("<span><img src='./image/r.jpg' class='icon2'></span>");
-						 $(this).append("<span><h4><a href='listDoctor'>의료진</a></h4></span>");
+						 $(this).append("<span><h4><a href='listDoctor?dept_no=2'>의료진</a></h4></span>");
 						 $(this).append("<span><h4>예약</h4></span>");
 					});
 					$(document).on("mouseleave",".main_hover",function(){
@@ -517,7 +517,7 @@ $(function(){
 						 $(this).append("<span><h3>"+deptdata.dept_name+"</h3></span>");
 						 $(this).append("<span><img src='./image/doc22.jpg' class='icon2'></span>");
 						 $(this).append("<span><img src='./image/r.jpg' class='icon2'></span>");
-						 $(this).append("<span><h4><a href='listDoctor'>의료진</a></h4></span>");
+						 $(this).append("<span><h4><a href='listDoctor?dept_no=2'>의료진</a></h4></span>");
 						 $(this).append("<span><h4>예약</h4></span>");
 					});
 					$(document).on("mouseleave",".main_hover",function(){
