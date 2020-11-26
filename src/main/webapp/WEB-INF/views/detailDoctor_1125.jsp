@@ -362,6 +362,7 @@
   			<a href="/listDoctor?dept_no=${d.dept_no }">
   				<button>의료진 목록</button>
   			</a>
+  			
   		</div>
   	</div> <!-- id="main" 끝 -->
  </div> <!-- class="column middle" 끝 -->
