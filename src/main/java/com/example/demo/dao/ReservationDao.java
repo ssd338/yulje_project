@@ -30,6 +30,17 @@ public class ReservationDao {
 		// TODO Auto-generated method stub
 		return ReservationManager.insertRes(map);
 	}
+
+	public int cntRes(HashMap map) {
+		// TODO Auto-generated method stub
+		return ReservationManager.cntRes(map);
+	}
+	
+	public List<ReservationVo> findRes(int member_no){
+		return ReservationManager.findRes(member_no);
+	}
+	
+	
 //	kkk end
 	
 	public int cntByNo(int member_no) {

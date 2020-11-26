@@ -29,6 +29,8 @@ public class ReservationController {
 	@Autowired
 	private MemberDao memberDao;
 	
+	
+//	kkk
 	@GetMapping("/reservation")
 	public void resForm() {
 		
@@ -63,15 +65,35 @@ public class ReservationController {
 		System.out.println(map);
 		int re = -1;
 		HashMap data = new HashMap<>();
-		if (session.getAttribute("m") != null) {
-			MemberVo m = (MemberVo)session.getAttribute("m");
-			int member_no = m.getMember_no();
-			map.put("member_no", member_no);
-			re = reservationDao.insertRes(map);
+		int no = reservationDao.cntRes(map);
+		if(no<4) {
+			if (session.getAttribute("m") != null) {
+				MemberVo m = (MemberVo)session.getAttribute("m");
+				int member_no = m.getMember_no();
+				map.put("member_no", member_no);
+				re = reservationDao.insertRes(map);
+			}
 		}
+		data.put("no", no);
 		data.put("re", re);
 		return data;
 	}
+	
+	@GetMapping("/resOk")
+	public ModelAndView findRes(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		int member_no = -1;
+		if(session.getAttribute("m") != null) {
+			MemberVo m = (MemberVo)session.getAttribute("m");
+			member_no = m.getMember_no();
+		}
+		List<ReservationVo> list = reservationDao.findRes(member_no);
+		ReservationVo rv = list.get(0);
+		mav.addObject("rv", rv);
+		return mav;
+	}
+	
+//	kkk end
 	
 	//해당예약번호의 예약상세내역 보여주기
 		@GetMapping("/reserconfirm")
