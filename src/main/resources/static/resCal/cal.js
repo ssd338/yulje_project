@@ -37,7 +37,7 @@ var TD_friday_start = "<td class='friday day'>";          // 금요일
 var TD_saturday_start = "<td class='saturday'>";     // 토요일
 var TD_end    = "</td>";    // 테이블 만들기
 
-str =  "<table  width = 500px border=1 cellspacing=0 cellpadding=0 bordercolor=bbbbbb><tr><td style='text-align: center'>";
+str =  "<table  width = 100% border=0.1 cellspacing=0 cellpadding=0 bordercolor=5d5d5d><tr><td style='text-align: center'>";
 str +=  "<strong>"+ "<span id='year'>"+year+"</span>" +". " + "<span id='month'>"+month_of_year[month]+"</span>" + "</strong>";
 str += "<table  class = 'calendar' border = 0 cellspacing=0 cellpadding=2>";
 

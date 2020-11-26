@@ -67,6 +67,24 @@ public class ReservationManager {
 		return re;
 	}
 	
+	//예약 횟수 조회
+	public static int cntRes(HashMap map) {
+		int no = 0;
+		SqlSession session = sqlSessionFactory.openSession();
+		no = session.selectOne("reservation.cntRes", map);
+		session.close();
+		return no;
+	}
+	
+	//예약 목록 조회
+	public static List<ReservationVo> findRes(int member_no){
+		List<ReservationVo> list = null;
+		SqlSession session = sqlSessionFactory.openSession();
+		list = session.selectList("reservation.findRes", member_no);
+		session.close();
+		return list;
+	}
+	
 //	kkk end
 	
 	//회원번호로 예약현황횟수 조회

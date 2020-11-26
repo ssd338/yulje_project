@@ -172,15 +172,18 @@ float:left;
 .m3_2 >h3{
 	padding-left: 20px;
 	padding-top: 25px;
+	padding-bottom: 25px;
 }
 .calendar{
 	text-align: center;
-    padding-top: 100px;
-    padding-left: 36px;
+/*     padding-top: 50px; */
+/*     height: 460px; */
+/*     padding-left: 36px; */
+	height: 370px;
 
 }
 .confirmation_btn{
-    margin-top: 260px;
+   margin-top: 15px; 
     border: 1px solid #94ccc4;
     text-align: center;
     background: #94ccc4;
@@ -201,8 +204,35 @@ float:left;
 
 #confirm_btn{
 	text-align: center;
+	height: 150px;
+/* 	position: fixed; */
+	}
+
+#cal_btn{
+	text-align: center;
+	padding-top: 30px;
 }
 
+.ampm_btn{
+	background-color: #94ccc4; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+/*   margin: 4px 2px; */
+margin-left: 5px;
+margin-right: 5px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.ampm_btn:hover {
+  background-color: white;
+  color: #94ccc4;
+}
 
 
 /* Style the tab */
@@ -537,10 +567,22 @@ function doctor(evt, cityName) {
 <script type="text/javascript">
 
 $(function(){
+	show();
+	function show(){
+	        if(ampm != null){
+	            $('#confirm_btn').show();
+	        }else{
+	            $('#confirm_btn').hide();
+	        }
+	}
 
+	
 	//진료과 선택
 	$(document).on("click",".res_dept",function(){
+		$("#cal_btn").empty();
+		$("#calendarDiv").empty();
 		ampm = null;
+		show();
 		var dept_no = $(this).val();
 		dept_num = $(this).val();
 		var dname = $(this).attr("dname");
@@ -599,7 +641,9 @@ $(function(){
 
 	//의사 선택
 	$(document).on("click",".r_btn",function(){
+		$("#cal_btn").empty();
 		ampm = null;
+		show();
 		var doc_no = $(this).attr("doc_no");
 		doctor_num = $(this).attr("doc_no");
 		var doc_name = $(this).attr("doc_name");
@@ -713,17 +757,18 @@ $(function(){
 	//날짜 선택
 	$(document).on("click",".today",function(){
 		ampm = null;
+		show();
 		day = $(this).html();
 		$("#cal_btn").html("");
 		var am = $(this).attr("am");
 		var pm = $(this).attr("pm");
 
 		if (am != null){
-			var resbtn = $("<button></button>").html("오전예약").addClass("res_am");
+			var resbtn = $("<button></button>").html("오전예약").addClass("res_am ampm_btn");
 			$("#cal_btn").append(resbtn);
 		}
 		if (pm != null){
-			var resbtn = $("<button></button>").html("오후예약").addClass("res_pm");
+			var resbtn = $("<button></button>").html("오후예약").addClass("res_pm ampm_btn");
 			$("#cal_btn").append(resbtn);
 		}
 	});
@@ -741,6 +786,7 @@ $(function(){
 // 		resdate = new Date(year+"/"+month+"/"+day);
 // 		var aa = confirm("gg");
 // 		alert(aa)
+		show();
 	});
 	
 	//오후예약 선택
@@ -750,6 +796,7 @@ $(function(){
 		month = month.substring(0,month.length-1);
 		ampm = "오후";
 		resdate = (year+"/"+month+"/"+day);
+		show();
 	});
 
 	//예약확정버튼
@@ -766,8 +813,11 @@ $(function(){
 		    async: false,
 		    data: {reser_date:resdate, reser_time:ampm, doc_no:doctor_num, dept_no:dept_num},
 		    success: function(data) {
-			   alert(data.re)
-			   if (data.re >0){
+			    if(data.no > 3){
+					alert("예약이 종료되었습니다. 다른날짜를 선택해주세요.");
+					return false;
+				}
+				if (data.re >0){
 					alert("예약에 성공하였습니다.");
 				} else {
 					alert("예약에 실패하였습니다. 다시 예약해주세요.");
@@ -857,81 +907,18 @@ $(function(){
 		<div class="m3_1">
 			<h3>의료진 선택</h3>
 			<div class="doc_box">
-				<ul id="res_doc">
-<!-- 					<li> -->
-<!-- 						<div class="doc_img"><img src="./image/doctor.png"></div> -->
-<!-- 						<div class="doc_info"> -->
-<!-- 							<h3>김형규 교수</h3> -->
-<!-- 							<p>내과</p> -->
-<!-- 							<p><span>오전</span> 월,수,금,토</p> -->
-<!-- 							<p><span>오후</span> 화,수,금</p> -->
-<!-- 							<button class="r_btn">진료예약</button> -->
-<!-- 						</div> -->
-<!-- 					</li> -->
-<!-- 					<li> -->
-<!-- 						<div class="doc_img"><img src="doctor.png"></div> -->
-<!-- 						<div class="doc_info"> -->
-<!-- 							<h3>장미연 교수</h3> -->
-<!-- 							<p>외과</p> -->
-<!-- 							<p><span>오전</span> 수,토</p> -->
-<!-- 							<p><span>오후</span> 월,수,금</p> -->
-<!-- 							<button class="r_btn">진료예약</button> -->
-<!-- 						</div> -->
-<!-- 					</li> -->
-<!-- 					<li> -->
-<!-- 						<div class="doc_img"><img src="doctor.png"></div> -->
-<!-- 						<div class="doc_info"> -->
-<!-- 							<h3>이국영 교수</h3> -->
-<!-- 							<p>피부과</p> -->
-<!-- 							<p><span>오전</span> 토,일</p> -->
-<!-- 							<p><span>오후</span> 월,화</p> -->
-<!-- 							<button class="r_btn">진료예약</button> -->
-<!-- 						</div> -->
-<!-- 					</li> -->
-<!-- 					<li> -->
-<!-- 						<div class="doc_img"><img src="doctor.png"></div> -->
-<!-- 						<div class="doc_info"> -->
-<!-- 							<h3>은지원 교수</h3> -->
-<!-- 							<p>치과</p> -->
-<!-- 							<p><span>오전</span> 화,수</p> -->
-<!-- 							<p><span>오후</span> 금,토</p> -->
-<!-- 							<button class="r_btn">진료예약</button> -->
-<!-- 						</div> -->
-<!-- 					</li> -->
-<!-- 					<li> -->
-<!-- 						<div class="doc_img"><img src="doctor.png"></div> -->
-<!-- 						<div class="doc_info"> -->
-<!-- 							<h3>추승연 교수</h3> -->
-<!-- 							<p>이비인후과</p> -->
-<!-- 							<p><span>오전</span> 수,목</p> -->
-<!-- 							<p><span>오후</span> 월,화,목</p> -->
-<!-- 							<button class="r_btn">진료예약</button> -->
-<!-- 						</div> -->
-<!-- 					</li> -->
-<!-- 					<li> -->
-<!-- 						<div class="doc_img"><img src="doctor.png"></div> -->
-<!-- 						<div class="doc_info"> -->
-<!-- 							<h3>김영대 교수</h3> -->
-<!-- 							<p>소아과</p> -->
-<!-- 							<p><span>오전</span> 월,수,금,토</p> -->
-<!-- 							<p><span>오후</span> 월,수</p> -->
-<!-- 							<button class="r_btn">진료예약</button> -->
-<!-- 						</div> -->
-<!-- 					</li> -->
-				
+				<ul id="res_doc">				
 				</ul>
 			</div>
 		</div>
 		<div class="m3_2">
 			<h3>진료일정</h3>
 			<div class="calendar">
-<!-- 				<body onload="calenderAppend"> -->
 				<div id="calendarDiv" style= "font-weight:bold;font-size:15pt;"></div>
 			</div>
 			<div id="cal_btn"></div>
 			<div id="confirm_btn">
 			<button class="confirmation_btn" id="confirm_btn2">
-<!-- 				<p>예약확정하기<p> -->
 				예약확정하기
 			</button>
 			</div>

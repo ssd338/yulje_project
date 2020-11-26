@@ -20,6 +20,14 @@
   	insert into reservation values(seq_res.nextval, #{reser_date}, #{reser_time}, #{member_no}, #{doc_no}, #{dept_no})
   </insert>
   
+  <select id="cntRes" resultType="java.lang.Integer">
+  	select count(*) from reservation where reser_date=#{reser_date} and reser_time=#{reser_time} and doc_no=#{doc_no}
+  </select>
+  
+  <select id="findRes" resultType="reservationVo">
+  	select * from reservation where member_no=#{member_no} order by reser_date desc, reser_time 
+  </select>
+  
 <!--   kkk end -->
   
   <!-- 회원번호로 예약 현황 횟수 조회 -->
