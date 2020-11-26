@@ -6,14 +6,20 @@ import java.util.Random;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.dao.MemberDao;
+import com.example.demo.db.MemberManager;
 import com.example.demo.sms.BitSms;
 import com.example.demo.util.CheckRR;
 import com.example.demo.vo.MemberVo;
@@ -23,6 +29,79 @@ public class MemberController {
 
 	@Autowired
 	private MemberDao dao;
+	
+	//yd
+	@RequestMapping(value = "/main", method = RequestMethod.GET)
+	public void main(HttpSession session) {	
+
+	}
+	
+
+	@RequestMapping(value = "/login", method = {RequestMethod.GET, RequestMethod.POST})
+	public void login() {	
+		
+	}
+	
+	
+
+	@RequestMapping("/")
+	public String memberStart(HttpSession session) {
+		Authentication authentication
+		= SecurityContextHolder.getContext().getAuthentication();
+		
+		User user = (User)authentication.getPrincipal();
+		String id = user.getUsername();
+		MemberVo m = MemberManager.selectMember(id);
+		session.setAttribute("m", m);
+		return "main";
+	}
+	
+	//아이디찾기
+	@GetMapping("/findId")
+	public void findId() {
+		
+	}
+	
+	@PostMapping("/findId")
+	@ResponseBody
+	public HashMap findId(@RequestParam HashMap map) {
+		System.out.println(map);
+		MemberVo id = dao.findId(map);
+		System.out.println(id.getId());
+		HashMap data = new HashMap<>();
+		data.put("id", id.getId());
+		return data;
+	}
+
+	//비밀번호 찾기
+	@RequestMapping("/findPwd")
+	public void findPwd() {
+		
+	}
+	
+	@PostMapping("/findPwd")
+	public ModelAndView findPwd(MemberVo m) {
+		ModelAndView mav = new ModelAndView("/changePwd");
+		mav.addObject("m", m);
+		return mav;
+	}
+	
+	//비밀번호 변경 페이지로 보내기
+	@GetMapping("/changePwd")
+	public ModelAndView changePwd() {
+		ModelAndView mav = new ModelAndView();
+		
+		return mav;
+	}
+	
+	//비밀번호 변경을 위한 메소드
+	@PostMapping("/changePwd")
+	public ModelAndView changePwd(MemberVo m) {
+		ModelAndView mav = new ModelAndView("redirect:/list");
+		dao.changePwd(m);
+		return mav;
+	}
+	//yd end
 	
 	//회원가입 페이지로 보내기
 	@GetMapping("/insertMember")
