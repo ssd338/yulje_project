@@ -125,9 +125,11 @@ public class AdviceBoardController {
 	
 	@RequestMapping("/listDept.do")
 	@ResponseBody
-	public List<DepartmentVo> listDept() {
-		
-		List<DepartmentVo> list = dept_dao.findAll();
+	public List<DepartmentVo> listDept(@RequestParam(value = "search", defaultValue = "") String search) {		
+		search = search.trim();					 	//검색어의 공백을 제거
+		String search2 = "%";						//검색어가 없으면 모두,있으면 검색어를 포함한 모든 글자가 나오도록 설정하기 위함
+		search2 +=search + "%";
+		List<DepartmentVo> list = dept_dao.findAll(search2);
 		return list;
 	}
 	

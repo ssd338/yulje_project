@@ -65,6 +65,7 @@ public class ReservationController {
 		return list;
 	}
 	
+
 	@PostMapping("/insertRes")
 	@ResponseBody
 	public HashMap insertRes(@RequestParam HashMap map, HttpSession session) {
@@ -111,6 +112,7 @@ public class ReservationController {
 	
 	//해당예약번호의 예약상세내역 보여주기
 		@GetMapping("/reserconfirm")
+		
 		public ModelAndView reserconfirm(HttpSession session, int reser_no) {
 			ModelAndView mav = new ModelAndView();
 			int member_no = -1;
