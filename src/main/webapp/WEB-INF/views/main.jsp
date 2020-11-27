@@ -10,6 +10,26 @@
 	crossorigin="anonymous"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
+
+
+.main_top A:LINK{
+
+	text-decoration: none;
+	color: #ffffff;
+	
+}
+
+.main_top A:VISITED{
+
+	text-decoration: none;
+	color: #ffffff;
+	
+}
+
+.main_top A:HOVER{
+	color: #94CCC4;
+}
+
 * {
 	box-sizing: border-box;
 	font-family: "맑은 고딕";
@@ -1046,10 +1066,10 @@ $(function(){
 					<span><img src="./img/covid.png" width="57" height="57"></span>
 					<br>
 					<span id="top5_span">율제병원</span><br>
-					<span id="top5_span">코로나-19 대응시스템</span><br>
+					<span id="top5_span">코로나-19</span><br>
 					<span id="top5_span">대응시스템</span>
 					<div id="main_top5_btn">
-						<button id="top5_btn_1">홈페이지<br> 바로가기>></button>
+						<button id="top5_btn_1"><a href="http://ncov.mohw.go.kr/" target="_blank">홈페이지<br> 바로가기>></a></button>
 					</div>
 
 				</div>

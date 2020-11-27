@@ -327,7 +327,7 @@ public class NoticeController {
 		return mav;
 	}
 	
-	
+	//회원 여부 판별
 	@GetMapping("/isMember")
 	@ResponseBody
 	public String isMember(HttpSession session) {

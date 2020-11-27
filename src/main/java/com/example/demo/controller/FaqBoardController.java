@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -173,5 +174,14 @@ public class FaqBoardController {
 
 		return mav;
 
+	}
+	
+	// 회원 여부 판별
+	@GetMapping("/isMember")
+	@ResponseBody
+	public String isMember(HttpSession session) {
+//			String r = (String)session.getAttribute("roles");
+		String r = "ADMIN";
+		return r;
 	}
 }
