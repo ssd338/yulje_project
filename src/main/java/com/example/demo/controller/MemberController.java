@@ -198,7 +198,7 @@ public class MemberController {
 	@ResponseBody
 	public HashMap guestRR(@RequestParam HashMap map, HttpSession session) {
 		map.put("roles", "GUEST");
-		System.out.println(map);
+//		System.out.println(map);
 		int already = dao.checkRR(map);
 		
 		//비회원에 없는 주민번호라면 비회원등록
@@ -209,6 +209,7 @@ public class MemberController {
 		
 		//등록된 비회원 정보를 가져와 session에 담아 로그인처리
 		MemberVo guest = dao.getGuest(map);
+		System.out.println(guest);
 		if (guest != null) {
 			session.setAttribute("m", guest);
 		}

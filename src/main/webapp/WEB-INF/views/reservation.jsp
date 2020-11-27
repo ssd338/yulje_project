@@ -819,6 +819,7 @@ $(function(){
 				}
 				if (data.re >0){
 					alert("예약에 성공하였습니다.");
+					location.href="/resOk";
 				} else {
 					alert("예약에 실패하였습니다. 다시 예약해주세요.");
 					return false;

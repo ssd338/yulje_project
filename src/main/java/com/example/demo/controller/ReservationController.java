@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.dao.DepartmentDao;
+import com.example.demo.dao.DoctorDao;
 import com.example.demo.dao.MemberDao;
 import com.example.demo.dao.ReservationDao;
 import com.example.demo.vo.DepartmentVo;
@@ -28,6 +30,10 @@ public class ReservationController {
 	private ReservationDao reservationDao;
 	@Autowired
 	private MemberDao memberDao;
+	@Autowired
+	private DoctorDao doctorDao;
+	@Autowired
+	private DepartmentDao deptDao;
 	
 	
 //	kkk
@@ -87,8 +93,16 @@ public class ReservationController {
 			MemberVo m = (MemberVo)session.getAttribute("m");
 			member_no = m.getMember_no();
 		}
+		System.out.println("!!!"+member_no);
 		List<ReservationVo> list = reservationDao.findRes(member_no);
+		System.out.println(list);
 		ReservationVo rv = list.get(0);
+		int dept_no = rv.getDept_no();
+		int doc_no = rv.getDoc_no();
+		String dept_name = deptDao.findByNo(dept_no).getDept_name();
+		String doc_name = doctorDao.findByNo(doc_no).getDoc_name();
+		mav.addObject("dept_name", dept_name);
+		mav.addObject("doc_name", doc_name);
 		mav.addObject("rv", rv);
 		return mav;
 	}
