@@ -108,6 +108,11 @@ $(function(){
 		var sp = $("<span></span>").html(text);
 		$("#mimg").append(sp);
 	}
+// 	if($("#re").val() < 1){
+// 		alert("회원등록 또는 인증에 실패하였습니다. 메인페이지로 이동합니다.");
+// 		location.href="/main";
+// 	}
+	
 });
 </script>
 </head>
@@ -140,6 +145,7 @@ $(function(){
 			<div id="title">
 				<h1>${msg }</h1>
 			</div>
+			<input type="hidden" id="re" value="${re }">
 			
 			
 			<div id="main">
@@ -157,18 +163,22 @@ $(function(){
 							<th>이름</th>
 							<td>${m.name }</td>
 						</tr>
+						<c:if test="${m.roles eq 'USER' }">
 						<tr>
 							<th>아이디</th>
 							<td>${m.id }</td>
 						</tr>
+						</c:if>
 						<tr>
 							<th>연락처</th>
 							<td>${m.tel }</td>
 						</tr>
+						<c:if test="${m.roles eq 'USER' }">
 						<tr>
 							<th>이메일</th>
 							<td>${m.email }</td>
 						</tr>
+						</c:if>
 					</table>
 				</div>
 				

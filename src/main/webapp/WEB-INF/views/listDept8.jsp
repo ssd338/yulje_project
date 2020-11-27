@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <!-- 호버를 사용할때 과이름과 클래스이름을 배열에 넣어서 처리하고 싶으나 
-    	 할줄 몰라서 일일이 15개의 호버를 만들어주는 버전
-     -->
+
 <!DOCTYPE html>
 <html>
 <head>

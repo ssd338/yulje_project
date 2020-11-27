@@ -5,6 +5,18 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$(document).on("click",".today",function(){
+		var day = $(this).html();
+		alert(day);
+	});
+	
+	$(".thursday").removeClass("day");
+	$(".thursday").addClass("today");
+});
+</script>
 </head>
 <style>        
         .calendar {
@@ -66,7 +78,11 @@
         }
     </style>
 <body>
-
+<div id="calendarDiv">
+</div>
+<h2>tetx</h2>
+<div id="2">
+</div>
 </body>
 <script type="text/javascript">
 // Calendar date 객체 생성하기!
@@ -98,8 +114,13 @@ var TD_week_start = "<td class='week'>";            // 일요일 ~ 토요일 을
 var TD_blank_start = "<td class='blank'>";          // blank (1일 이전의 날짜)
 var TD_today_start = "<td class='today'>";          // 오늘 날짜
 var TD_day_start = "<td class='day'>";              // 평일
-var TD_saturday_start = "<td class='saturday'>";     // 토요일
 var TD_sunday_start = "<td class='sunday'>";          // 일요일
+var TD_monday_start = "<td class='monday day'>";          // 월요일
+var TD_tuesday_start = "<td class='tuesday day'>";          // 화요일
+var TD_wednesday_start = "<td class='wednesday day'>";          // 수요일
+var TD_thursday_start = "<td class='thursday day'>";          // 목요일
+var TD_friday_start = "<td class='friday day'>";          // 금요일
+var TD_saturday_start = "<td class='saturday'>";     // 토요일
 var TD_end    = "</td>";    // 테이블 만들기
 
 str =  "<table  width = 500px border=1 cellspacing=0 cellpadding=0 bordercolor=bbbbbb><tr><td style='text-align: center'>";
@@ -137,13 +158,28 @@ for (var i = 0; i < DAYS_OF_MONTH; ++i) {
         }
 
         // 오늘 날짜라면
-        if(day == today) {
-            str += TD_today_start + day + TD_end;
-        }
-        else {
+//         if(day == today) {
+//             str += TD_today_start + day + TD_end;
+//         }
+//         else {
             switch(week_day) {
                 case 0 : // 일요일
                     str += TD_sunday_start + day + TD_end;
+                    break;
+                case 1 : // 월요일
+                    str += TD_monday_start + day + TD_end;
+                    break;
+                case 2 : // 화요일
+                    str += TD_tuesday_start + day + TD_end;
+                    break;
+                case 3 : // 수요일
+                    str += TD_wednesday_start + day + TD_end;
+                    break;
+                case 4 : // 목요일
+                    str += TD_thursday_start + day + TD_end;
+                    break;
+                case 5 : // 금요일
+                    str += TD_friday_start + day + TD_end;
                     break;
                 case 6 : // 토요일
                     str += TD_saturday_start + day + TD_end;
@@ -153,7 +189,7 @@ for (var i = 0; i < DAYS_OF_MONTH; ++i) {
                     str += TD_day_start + day + TD_end;
                     break;
             }
-        }
+//         }
     }// if end
 
     // 다음 날짜로 넘어간다.
@@ -162,7 +198,8 @@ for (var i = 0; i < DAYS_OF_MONTH; ++i) {
 
 str += "</table></td></tr></table>";
 
-document.write(str);
+// document.write(str);
+$("#calendarDiv").html(str);
 
 //요일별 클래스를 지정
 //ajax으로 의사의 진료일을 가져와
