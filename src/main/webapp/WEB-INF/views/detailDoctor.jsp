@@ -22,8 +22,8 @@
 }
 
 #title img {
-	width: 250px;
-	height: 350px;
+	width: 240px;
+	height: 300px;
 	margin-right: 30px;
 /* 	margin-bottom: 30px; */
 }
@@ -147,11 +147,7 @@
 	
 }
 </style>
-<!-- <script type="text/javascript"> -->
-<!-- $(function(){ -->
-	
-<!-- }) -->
-<!-- </script> -->
+
 </head>
 <body>
 <!-- Header Start -->
@@ -175,291 +171,202 @@
   <div class="column middle">
   	<div id="title">
   	
-  	
-  	
-  	<!-- ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ -->
-  	<!-- 여기에 실험. 1프로필 2스케줄 3경력 4학력 -->
-  	<div id="test1">
-  	사진출력 <img src="./image/${d.doc_fname }" width="50" height="50">
-  	이름 : ${d.doc_name }<br>
-  	진료과 : ${d.major }<br>
-  	직급 : ${d.position }<br>
-  	세부전공 : ${d.specialization }
-  	</div>
-  	
-  	
-  	
-  	
-  	<div id="test2"><br> <!-- 스케줄 -->
-  	스케줄 일단 출력해봄<br>
-  	<c:forEach var="sch" items="${dsche }"> <!-- 컨트롤러에서 의사의 스케줄정보가 담긴 모델을 받아와 sch라는 이름으로 써먹을예정 -->
-  	<!-- 반복문 내의 각 스크립트마다 $(function)이 있는건 테이블 생성 후 스케줄이 기입되어야해서 순서를 뒤로 밀어내기위함 -->
-	  	<script type="text/javascript">
-	  	$(function(){
-	  		var apm = ""; //오전 오후 근무를 담을 변수
-			var day = ""; //요일 근무를 담을 변수
-	  	})	
-	  	</script>
- 	<c:if test="${sch.am_pm == '오전' }"> <!-- db에 am_pm컬럼에 들어있는 값이 오전일때 -->
- 		<script type="text/javascript">
- 		$(function(){
-			apm = "a";
-// 			console.log(apm)
- 	 	})
- 		</script>
- 	</c:if>
- 	<c:if test="${sch.am_pm == '오후' }">
- 		<script type="text/javascript">
- 		$(function(){
- 			apm = "p";
-// 			console.log(apm)
- 	 	})	
- 		</script>
-	</c:if>
-	<c:if test="${sch.workday =='월' }"> <!-- db에 workday컬럼의 값이 월 일때. -->
- 		<script type="text/javascript">
- 		$(function(){
- 			day = "m"
-//  	 		console.log(day)
- 	 	})	
- 	 	</script>
- 	</c:if>
- 	<c:if test="${sch.workday =='화' }">
- 		<script type="text/javascript">
- 		$(function(){
- 			day = "t"
-//  	 	 	console.log(day)
- 	 	})	
- 	 	</script>
- 	</c:if>
-	<c:if test="${sch.workday =='수' }">
- 		<script type="text/javascript">
- 		$(function(){
- 			day = "w"
-//  	 	 	console.log(day)
- 	 	})	
- 	 	</script>
- 	</c:if>
- 	<c:if test="${sch.workday =='목' }">
- 		<script type="text/javascript">
- 		$(function(){
- 			day = "th"
-//  	 		console.log(day)
- 	 	})	
- 	 	</script>
- 	</c:if>
- 	<c:if test="${sch.workday =='금' }">
- 		<script type="text/javascript">
- 		$(function(){
- 			day = "f"
-//  	 		console.log(day)
- 	 	})	
- 	 	</script>
- 	</c:if>
- 	<c:if test="${sch.workday =='토' }">
- 		<script type="text/javascript">
- 		$(function(){
- 			day = "s"
-//  	 		console.log(day)
- 	 	})	
- 	 	</script>
- 	</c:if>
- 	
- 	<script type="text/javascript">
- 		$(function(){
- 			var str = day+apm; //월요일 오전이면 wa, 금요일 오후면 fp
-//  	 		console.log(str)
-//  	 		console.log(typeof str)
- 	 		var schedule = document.getElementById(str) //근무표에 맞는 테이블 칸을 찾아 바라보게한다
- 	 		$(schedule).html("O") //표시
- 	 	})
-	 </script>
-  	</c:forEach> <!-- 반복문 내의 각 스크립트마다 $(function)이 있는건 테이블 생성 후 스케줄이 기입되어야해서 순서를 뒤로 밀어내기위함 -->
-  	
-  	<table id="scheduletest" border='1'>
-  		<thead>
-  		<tr>
-  			<td>ㅇ</td>
-  			<td>월</td>
-  			<td>화</td>
-  			<td>수</td>
-  			<td>목</td>
-  			<td>금</td>
-  			<td>토</td>
-  		</tr>
-  		</thead>
-  		<tbody>
-  		<tr>
-  			<td>오전</td>
-  			<td id="ma"></td>
-  			<td id="ta"></td>
-  			<td id="wa"></td>
-  			<td id="tha"></td>
-  			<td id="fa"></td>
-  			<td id="sa"></td>
-  		</tr>
-  		<tr>
-  			<td>오후</td>
-  			<td id="mp"></td>
-  			<td id="tp"></td>
-  			<td id="wp"></td>
-  			<td id="thp"></td>
-  			<td id="fp"></td>
-  			<td id="sp"></td>
-  		</tr>
-  		</tbody>
-  	</table>
-  	</div>
-  	
-  	
-  	
-  	
-  	<div id="test3"><br> <!-- 경력 -->
-  	<table border='1'>
-  		<tr>
-  			<td>기간</td>
-  			<td>내용</td>
-  		</tr>
-  	<c:forEach var="c" items="${dcar }">
-  		<tr>
-  			<td>${c.car_sdate } ~ ${c.car_edate }</td>
-  			<td>${c.car_content }</td>
-  		</tr>
-  	</c:forEach>
-  	</table>
-  	</div>
-  	
-  	
-  	
-  	
-  	<div id="test4"><br> <!-- 학력 -->
-  		<table border='1'>
-  		<tr>
-  			<td>기간</td>
-  			<td>내용</td>
-  		</tr>
-  		<c:forEach var="e" items="${dedu }">
-  		<tr>
-  			<td>${e.edu_sdate } ~ ${e.edu_edate }</td>
-  			<td>${e.edu_content }</td>
-  		</tr>
-  	</c:forEach>
-  	</table>
-  	</div>
-  	<!-- ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ -->
-  	
   		<div id="img">
-	  		<img alt="" src="./image/yu.jpg">
+  			<img src="./docimage/${d.doc_fname }">
   		</div>
+  		
   		<div id="content">
-  			<h2>의사소개_<span id="dept">호흡기내과</span></h2>
-<!--   			<p> -->
-  				<div class="info">
-	  				<strong>유철규</strong><span> 교수</span>
-	  				<table>
-	  					<tr>
-	  						<th>진료과</th>
-	  						<td>호흡기 내과</td>
-	  					</tr>
-	  					<tr>
-	  						<th>직급</th>
-	  						<td>과장</td>
-	  					</tr>
-	  					<tr>
-	  						<th>세부전공</th>
-	  						<td>폐렴, 기관지염</td>
-	  					</tr>
-	  				</table>
-  				</div>
-  				<div class="sche">
-  					<h3>진료일정</h3>
-  					<table>
-  						<tr>
-  							<th>구분</th>
-  							<th>월</th>
-  							<th>화</th>
-  							<th>수</th>
-  							<th>목</th>
-  							<th>금</th>
-  							<th>토</th>
-  						</tr>
-  						<tr>
-  							<th>오전</th>
-  							<td></td>
-  							<td></td>
-  							<td>O</td>
-  							<td>O</td>
-  							<td></td>
-  							<td></td>
- 						</tr>
- 						<tr> 
- 							<th>오후</th>
-  							<td></td>
-  							<td></td>
-  							<td>O</td>
-  							<td>O</td>
-  							<td></td>
-  							<td></td>
-  						</tr>
-  					</table>					
-  				</div>
-  				<div class="cbot">
-  					<button>진료예약</button>
-  				</div>
-<!--   			</p> -->
-  		</div>
-  	</div>
+  			<h2>의사소개_<span id="dept">${d.major }</span></h2>
+  			
+  			<div class="info">
+  				<strong>${d.doc_name }</strong><span> 교수</span>
+  				<table>
+  					<tr>
+  						<th>진료과</th>
+  						<td>${d.major }</td>
+  					</tr>
+  					<tr>
+  						<th>직급</th>
+  						<td>${d.position }</td>
+  					</tr>
+  					<tr>
+  						<th>세부전공</th>
+  						<td>${d.specialization }</td>
+  					</tr>
+  				</table>
+  			</div>
+  			
+  			
+  			<div class="sche">
+		  	<c:forEach var="sch" items="${dsche }">
+		  	<!-- 반복문 내의 각 스크립트마다 $(function)이 있는건 테이블 생성 후 스케줄이 기입되어야해서 순서를 뒤로 밀어내기위함 -->
+			  	<script type="text/javascript">
+			  	$(function(){
+			  		var apm = ""; //오전 오후 근무를 담을 변수
+					var day = ""; //요일 근무를 담을 변수
+			  	})	
+			  	</script>
+		 	<c:if test="${sch.am_pm == '오전' }"> <!-- db에 am_pm컬럼에 들어있는 값이 오전일때 -->
+		 		<script type="text/javascript">
+		 		$(function(){
+					apm = "a";
+// 					console.log(apm)
+		 	 	})
+		 		</script>
+		 	</c:if>
+		 	<c:if test="${sch.am_pm == '오후' }">
+		 		<script type="text/javascript">
+		 		$(function(){
+		 			apm = "p";
+// 					console.log(apm)
+		 	 	})	
+		 		</script>
+			</c:if>
+			<c:if test="${sch.workday =='월' }"> <!-- db에 workday컬럼의 값이 월 일때. -->
+		 		<script type="text/javascript">
+		 		$(function(){
+		 			day = "m"
+// 		 	 		console.log(day)
+		 	 	})	
+		 	 	</script>
+		 	</c:if>
+		 	<c:if test="${sch.workday =='화' }">
+		 		<script type="text/javascript">
+		 		$(function(){
+		 			day = "t"
+// 		 	 	 	console.log(day)
+		 	 	})	
+		 	 	</script>
+		 	</c:if>
+			<c:if test="${sch.workday =='수' }">
+		 		<script type="text/javascript">
+		 		$(function(){
+		 			day = "w"
+// 		 	 	 	console.log(day)
+		 	 	})	
+		 	 	</script>
+		 	</c:if>
+		 	<c:if test="${sch.workday =='목' }">
+		 		<script type="text/javascript">
+		 		$(function(){
+		 			day = "th"
+// 		 	 		console.log(day)
+		 	 	})	
+		 	 	</script>
+		 	</c:if>
+		 	<c:if test="${sch.workday =='금' }">
+		 		<script type="text/javascript">
+		 		$(function(){
+		 			day = "f"
+// 		 	 		console.log(day)
+		 	 	})	
+		 	 	</script>
+		 	</c:if>
+		 	<c:if test="${sch.workday =='토' }">
+		 		<script type="text/javascript">
+		 		$(function(){
+		 			day = "s"
+// 		 	 		console.log(day)
+		 	 	})	
+		 	 	</script>
+		 	</c:if>
+		 	
+		 	<script type="text/javascript">
+		 		$(function(){
+		 			var str = day+apm; //월요일 오전이면 wa, 금요일 오후면 fp
+// 		 	 		console.log(str)
+// 		 	 		console.log(typeof str)
+		 	 		var schedule = document.getElementById(str) //근무표에 맞는 테이블 칸을 찾아 바라보게한다
+		 	 		$(schedule).html("O") //표시
+		 	 	})
+			 </script>
+		  	</c:forEach> <!-- 반복문 내의 각 스크립트마다 $(function)이 있는건 테이블 생성 후 스케줄이 기입되어야해서 순서를 뒤로 밀어내기위함 -->
+		  	
+		  	<table id="scheduletest" border='1'>
+		  		<thead>
+		  		<tr>
+		  			<td>구분</td>
+		  			<td>월</td>
+		  			<td>화</td>
+		  			<td>수</td>
+		  			<td>목</td>
+		  			<td>금</td>
+		  			<td>토</td>
+		  		</tr>
+		  		</thead>
+		  		<tbody>
+		  		<tr>
+		  			<td>오전</td>
+		  			<td id="ma"></td>
+		  			<td id="ta"></td>
+		  			<td id="wa"></td>
+		  			<td id="tha"></td>
+		  			<td id="fa"></td>
+		  			<td id="sa"></td>
+		  		</tr>
+		  		<tr>
+		  			<td>오후</td>
+		  			<td id="mp"></td>
+		  			<td id="tp"></td>
+		  			<td id="wp"></td>
+		  			<td id="thp"></td>
+		  			<td id="fp"></td>
+		  			<td id="sp"></td>
+		  		</tr>
+		  		</tbody>
+		  	</table>
+  			</div>
+  		
+  			<div class="cbot">
+  				<button>진료예약</button>
+  			</div>
+ 
+  		</div> <!-- id="content" 끝 -->
+  		
+  	</div> <!-- id="title" 끝 -->
   	
   	<div id="main">
   		<div class="car">
 	  		<h3>경력사항</h3>
 	  		<table>
-	  			<tr>
-	  				<th class="period">기간</th>
-	  				<th>내용</th>
-	  			</tr>
-	  			<tr>
-	  				<td class="period">2018/02 ~ 현재</td>
-	  				<td>서울대학교 의과대학 내과 주임교수</td>
-	  			</tr>
-	  			<tr>
-	  				<td class="period">2014-08-08 ~ 2018-02-02</td>
-	  				<td>호흡기내과 과장</td>
-	  			</tr>
-	  			<tr>
-	  				<td class="period">2012-08-08 ~ 2015-02-02</td>
-	  				<td>호흡기내과 폐기능실장</td>
-	  			</tr>
-	  		</table>
+		  		<tr>
+		  			<th class="period">기간</th>
+		  			<th>내용</th>
+		  		</tr>
+		  	<c:forEach var="c" items="${dcar }">
+		  		<tr>
+		  			<td class="period">${c.car_sdate } ~ ${c.car_edate }</td>
+		  			<td class="period">${c.car_content }</td>
+		  		</tr>
+		  	</c:forEach>
+		  	</table>
   		</div>
+  		
   		<div class="edu">
-	  		<h3>학력사항</h3>
-	  		<table>
-	  			<tr>
-	  				<th class="period">기간</th>
-	  				<th>내용</th>
-	  			</tr>
-	  			<tr>
-	  				<td class="period">2018/02 ~ 현재</td>
-	  				<td>서울대학교 의과대학 내과학 의학박사</td>
-	  			</tr>
-	  			<tr>
-	  				<td class="period">2014-08-08 ~ 2018-02-02</td>
-	  				<td>서울대학교 의과대학 내과학 의학석사</td>
-	  			</tr>
-	  			<tr>
-	  				<td class="period">2012-08-08 ~ 2015-02-02</td>
-	  				<td>서울대학교 의과대학 의학사</td>
-	  			</tr>
-	  		</table>
+  			<h3>학력사항</h3>
+  			<table>
+	  		<tr>
+	  			<th class="period">기간</th>
+	  			<th>내용</th>
+	  		</tr>
+	  		<c:forEach var="e" items="${dedu }">
+	  		<tr>
+	  			<td class="period">${e.edu_sdate } ~ ${e.edu_edate }</td>
+	  			<td class="period">${e.edu_content }</td>
+	  		</tr>
+	  		</c:forEach>
+ 			</table>
   		</div>
+  		
   		<div id="bot">
-  		<a href="/listDoctor">
-  			<button>의료진 목록</button>
+  			<a href="/listDoctor?dept_no=${d.dept_no }">
+  				<button>의료진 목록</button>
   			</a>
   		</div>
-  	</div>
-  </div>
+  	</div> <!-- id="main" 끝 -->
+ </div> <!-- class="column middle" 끝 -->
+  	
+  	
   <div class="column side"></div>
 </div>
 

@@ -70,6 +70,7 @@
 	  transition-duration: 0.4s;
 	  cursor: pointer;
 	  width: 70px;
+	  outline: 0;
 }
 
 .btnBot:hover {
@@ -107,6 +108,11 @@ $(function(){
 		var sp = $("<span></span>").html(text);
 		$("#mimg").append(sp);
 	}
+// 	if($("#re").val() < 1){
+// 		alert("회원등록 또는 인증에 실패하였습니다. 메인페이지로 이동합니다.");
+// 		location.href="/main";
+// 	}
+	
 });
 </script>
 </head>
@@ -137,18 +143,19 @@ $(function(){
      	<!-- 메인부분 -->
   		<div class="column middle">
 			<div id="title">
-				<h1>${msg }가입</h1>
+				<h1>${msg }</h1>
 			</div>
+			<input type="hidden" id="re" value="${re }">
 			
 			
 			<div id="main">
 				<div id="mimg">
 					<img alt="" src="./image/select.jpg" width="100" height="100">
-					<p>${msg }가입이 완료되었습니다.</p>
+					<p>${msg }이 완료되었습니다.</p>
 					<input type="hidden" id="sp" value="${msg }">
 				</div>
 				<div class="mtitle">
-					<h2>${msg }정보</h2>
+					<h2>${msg } 정보</h2>
 				</div>
 				<div class="mmain">
 					<table>
@@ -156,18 +163,22 @@ $(function(){
 							<th>이름</th>
 							<td>${m.name }</td>
 						</tr>
+						<c:if test="${m.roles eq 'USER' }">
 						<tr>
 							<th>아이디</th>
 							<td>${m.id }</td>
 						</tr>
+						</c:if>
 						<tr>
 							<th>연락처</th>
 							<td>${m.tel }</td>
 						</tr>
+						<c:if test="${m.roles eq 'USER' }">
 						<tr>
 							<th>이메일</th>
 							<td>${m.email }</td>
 						</tr>
+						</c:if>
 					</table>
 				</div>
 				

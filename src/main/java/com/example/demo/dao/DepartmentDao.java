@@ -27,8 +27,8 @@ public class DepartmentDao {
 //	}
 	
 	//전체목록
-	public List<DepartmentVo> findAll(){
-		return DepartmentManager.findAll();
+	public List<DepartmentVo> findAll(String search){
+		return DepartmentManager.findAll(search);
 	}
 	
 	//가나다순 정렬
@@ -45,5 +45,4 @@ public class DepartmentDao {
 	public List<DoctorVo> findByDept(HashMap map) {
 		return DepartmentManager.findByDept(map);
 	}
-	//목록조회만 구현하는중.
 }

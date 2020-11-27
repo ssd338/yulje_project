@@ -58,10 +58,10 @@ public class DepartmentManager {
 	//위에꺼 필요없어짐. 근데그냥냅둠.
 	
 	//모든목록 출력
-	public static List<DepartmentVo> findAll(){
+	public static List<DepartmentVo> findAll(String search){
 		List<DepartmentVo> list = null;
 		SqlSession session = sqlSessionFactory.openSession();
-		list = session.selectList("department.selectAll");
+		list = session.selectList("department.selectAll",search);
 		session.close();
 		return list;
 	}

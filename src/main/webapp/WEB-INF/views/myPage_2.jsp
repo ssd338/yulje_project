@@ -386,7 +386,7 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
 $(function(){
-	
+
 	//확인 버튼을 누르면
 	$("#mypage_title_btn1").click(function(){
 		var id = $("#id").val()
@@ -450,7 +450,7 @@ $(function(){
 		  		<div id="mypage_title_sub">
 
 		  			<h3>개인정보를 안전하게 보호하기 위해 비밀번호를 재확인 합니다.</h3>
-		  			<input type="hidden" name="member_no" value="${m.member_no }">
+		  			<input type="hidden" id="member_no" name="member_no" value="${m.member_no }">
 		  			<span id="mypage_title_sub_span1">아이디</span>
 		  			<input type="hidden" id="id" name="id" value="${m.id }">
 		  			<span id="mypage_title_sub_span2"> ${m.id } </span><br><br>
@@ -474,7 +474,7 @@ $(function(){
 	  
 	
 	
-	<jsp:include page="footer1.jsp"></jsp:include>
+	<jsp:include page="/footer.jsp"></jsp:include>
 	
 
 	

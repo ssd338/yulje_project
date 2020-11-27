@@ -4,25 +4,59 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member">
 
+	 <select id="selectMember" resultType="memberVo">
+  	select * from member where id=#{username}
+  </select>
+  
+    <!-- 아이디 찾기 -->
+  <select id="findId" resultType="memberVo">
+  	select id from member where rr_no=#{rr_no} 
+  </select>
+  
+  <!-- 비밀번호 찾기 -->
+  <select id="findPwd" resultType="memberVo">
+  	select pwd from member where rr_no=#{rr_no} 
+  </select>	
+  
+  <!-- 비밀번호 변경 -->
+<update id="updatePwd">
+update member set pwd=#{pwd} where rr_no=#{rr_no}
+</update>
+  
+
   <select id="selectByRR" resultType="memberVo">
   	select * from member where rr_no=#{rr_no}
   </select>
   
+<!--   kkk -->
+<!--   아이디 중복확인. 이미 있는 아이디라면 반환값이 1이상 -->
   <select id="checkId" resultType="java.lang.Integer">
   	select count(*) from member where id=#{id}
   </select>
-  
+<!--   비회원,회원 구분 후에 이미 등록되어있는 주민번호인지 확인 -->
   <select id="checkRR" resultType="java.lang.Integer">
   	select count(*) from member where rr_no=#{rr_no} and roles=#{roles}
   </select>
-  
+<!--   회원등록 -->
   <insert id="insert">
   	insert into member values(seq_mem.nextval,#{id},#{pwd},#{name},#{rr_no},#{tel},#{email},#{addr},#{roles},#{emailReceive},#{smsReceive})
   </insert>
-  
+<!--   비회원등록 -->
   <insert id="insertGuest">  
   	insert into member values(seq_mem.nextval,null,null,#{name},#{rr_no},#{tel},null,null,#{roles},null,null)
   </insert>
+<!--   비회원이라면 이름,주민번호로 그 정보를 받아오기 -->
+  <select id="selectByRRGuest" resultType="memberVo">
+  	select * from member where rr_no=#{rr_no} and roles=#{roles} and name=#{name}
+  </select>
+
+<!--   비회원 회원전환 -->
+	<update id="updateGuest">
+	update member set id=#{id},pwd=#{pwd},tel=#{tel},email=#{email},addr=#{addr},roles='USER',emailReceive=#{emailReceive},smsReceive=#{smsReceive} where member_no=#{member_no}
+	</update>
+  
+
+<!--   kkk end -->
   
   <!-- 회원번호로 받아온 아이디 -->
  <select id="findById">

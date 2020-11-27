@@ -308,7 +308,7 @@ $(function(){
 
 	var rr_show = $("#rr_no").val();
 	rr_show = rr_show.substring(0,8)+"******";
-	console.log(rr_show);
+// 	console.log(rr_show);
 	$("#rr_show").html(rr_show);
 });
 </script>

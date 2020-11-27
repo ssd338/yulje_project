@@ -372,6 +372,7 @@ footer{
 <script type="text/javascript">
 $(function(){
 function pagingAjax(dataPerPage,currentPage,search){   //매개변수로 한페이지에 나타낼데이터 수, 현재 선택된 페이지,검색어
+	alert("search1:"+search)
     $.ajax({
         url: "/listMedicine.ajax",
         method: "POST",
