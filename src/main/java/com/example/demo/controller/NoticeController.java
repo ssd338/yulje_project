@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -52,6 +53,10 @@ public class NoticeController {
 
 	}
 	
+//	public List<Notice_BoardVo> ajaxNotice(){
+//		List<Notice_BoardVo> nb = dao.findAllNotice(map)
+//	}
+//	
 	
 	
 	@RequestMapping("/listNotice")
@@ -87,6 +92,30 @@ public class NoticeController {
 		
 		return mav;
 	}
+	
+	// 메인 ajax용 controller
+		@GetMapping("/listNotice.do")
+		@ResponseBody
+		public List<Notice_BoardVo> ajax_list(Model model, @RequestParam(value = "pageNUM", defaultValue = "1") int pageNUM, @RequestParam HashMap map){
+			totalCount = dao.getTotalCount();
+			totalPage = (int) Math.ceil((double) totalCount / pageSIZE);
+			int start = (pageNUM - 1) * pageSIZE + 1;
+			int end = start + pageSIZE;
+			if (end > totalCount) {
+				end = totalCount;
+			}
+
+//			HashMap map = new HashMap();
+			map.put("start", start);
+			map.put("end", end);
+			List<Notice_BoardVo> list = dao.findAllNotice(map);
+					
+			model.addAttribute("list",list);
+			model.addAttribute("totalPage", totalPage);
+			
+			return list;
+			
+		}
 	
 	@RequestMapping("/detailNotice")
 	public ModelAndView detailNotice(int no) {

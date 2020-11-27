@@ -302,30 +302,30 @@ span {
 	display: inline-block;
 }
 
-#notice1 {
+#board1 {
 	padding-left: 100px; padding-right : 100px;
 	border-right: 3px solid gray;
 	padding-right: 100px;
 }
 
-#notice2 {
+#board2 {
 	border-right: 3px solid gray; padding-left : 100px;
 	padding-right: 100px;
 	padding-left: 100px;
 }
 
-#notice3 {
+#board3 {
 	padding-left: 100px; padding-right : 100px;
 	border-right: 3px solid gray;
 	padding-right: 100px;
 }
 
-#notice4 {
+#board4 {
 	padding-left: 100px;
 	padding-right: 100px;
 }
 
-#notice1:hover, #notice2:hover, #notice3:hover, #notice4:hover {
+#board1:hover, #board2:hover, #board3:hover, #board4:hover {
 	color: #94CCC4;
 }
 
@@ -384,6 +384,10 @@ body {
 	margin-top: 120px;
 }
 
+.section{
+	margin-left: -20px;
+}
+
 /* 슬라이드 이미지 */
 .section input[id*="slide"] {
 	display: none;
@@ -392,9 +396,11 @@ body {
 /* 슬라이드 영역 - max-width 크기를 조절해주면 됩니다*/
 .section .slidewrap {
 	max-width: 1200px;
-	margin: 0 auto;
+/* 	margin: 0 auto; */
 	overflow: hidden;
 	z-index: 5;
+	width: 105%;
+/* 	margin-right: 100px; */
 }
 
 .section .slidelist {
@@ -589,6 +595,75 @@ input[id*="answer"]:checked+label+div {
 }
 
 
+/*advice, good 게시판*/
+
+
+.main_under_board table {
+	border-collapse: collapse;
+	width: 850px;
+}
+
+.main_under_board th {
+	font-weight: bold;
+	border-bottom: 1.4px solid #747474;
+	padding-bottom: 5px;
+	font-size: 14px;
+}
+
+.main_under_board td {
+	padding: 8px;
+	text-align: center;
+	border-bottom: 1px solid #94ccc4;
+	font-size: 14px;
+}
+
+#td_no {
+	width: 65px;
+}
+
+#td_dept {
+	width: 110px;
+}
+
+#td_title {
+	width: 400px;
+}
+
+#td_writer {
+	width: 110px;
+}
+
+#td_regdate {
+	width: 110px;
+}
+
+
+/*notice 게시판*/
+
+#tdn_no{
+	width: 65px;
+}
+
+#tdn_dept{
+	width: 110px;
+}
+
+
+#tdn_title{
+	width: 400px;
+}
+
+
+#tdn_hit{
+	width: 110px;
+}
+
+
+#tdn_regdate{
+	width: 110px;
+}
+
+
 /*ajax 끝!!!!!!*/
 
 /* Style the footer */
@@ -616,14 +691,48 @@ input[id*="answer"]:checked+label+div {
 
 $(function(){
 	var category = "%";
+	var dept_name = "%";
 // 	alert(category);
-	getFaq(category);
-		
-	$(document).on("click", "#notice4",function(){
-// 		alert("안녕?");
-		$(".main_under_menu").clear();
+// 	getFaq(category);
+// 	getAdvice(dept_name);
+// 	getGood();
+	getNotice();
+	
+	//FAQ게시판 ajax	
+	$(document).on("click", "#board4",function(){
+// 		alert("FAQ");
+		$(".main_under_menu").empty();
+		$(".main_under_board").empty();
 		getFaq(category);
 		})
+		
+	//공지사항
+	$(document).on("click", "#board1", function(){
+		$(".main_under_menu").empty();
+		$(".main_under_board").empty();
+// 		alert("공지사항");
+		getNotice();
+
+		});
+
+	//칭찬게시판	
+	$(document).on("click", "#board2", function(){
+// 		alert("칭찬게시판");
+		$(".main_under_menu").empty();
+		$(".main_under_board").empty();
+		getGood();
+		});
+	
+	//상담게시판 	
+	$(document).on("click", "#board3", function(){
+		$(".main_under_menu").empty();
+		$(".main_under_board").empty();
+// 		alert("상담게시판");
+		getAdvice(dept_name);
+		
+		
+		});
+		
 		
 	$(document).on("click",".faq_bottom_menu", function(){
 		category = $(this).attr("value");
@@ -632,6 +741,173 @@ $(function(){
 		
 		})
 		
+	function getAdvice(dept_name){
+		$.ajax({
+			url : "/listA_Board.do",
+			method : "POST",
+			dateType : "json",
+			data : {
+				dept_name : dept_name
+				},
+			success : function(data){
+// 				alert(data);
+// 				alert(dept_name);
+					
+					
+					var table_advice = $("<table></table>");
+
+					var table_menu_thead = $("<thead></thead>");
+					var table_menu_tr = $("<tr></tr>");
+					var table_menu_th1 = $("<th></th>").html("글번호").attr("id","td_no");
+					var table_menu_th2 = $("<th></th>").html("진료과").attr("id","td_dept");
+					var table_menu_th3 = $("<th></th>").html("글제목").attr("id","td_title");
+					var table_menu_th5 = $("<th></th>").html("등록일").attr("id","td_regdate");
+					var table_menu_th4 = $("<th></th>").html("작성자").attr("id","td_writer");
+
+					$(table_menu_tr).append(table_menu_th1,table_menu_th2,table_menu_th3,table_menu_th4,table_menu_th5);
+					$(table_menu_thead).append(table_menu_tr);
+					$(table_advice).append(table_menu_thead);
+					
+				for( var a in data){
+
+// 					alert(data[a].no);
+
+					// level 코드
+// 					var level = eval(data[a].b_level); // b_level을 int로 타입캐스팅
+// 					var title  = "";
+					//alert(level);
+
+// 					if(level > 0){
+// 						for(var i = 0; i < level; i++){
+// 							title +="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
+// 							}
+// 						}
+// 					title += data[a].title;
+					
+					// level 코드 끝
+
+					
+					var table_tbody = $("<tbody></tbody>");
+					var table_tr = $("<tr></tr>");
+					var table_td1 = $("<td></td>").html(data[a].no);
+					var table_td2 = $("<td></td>").html(data[a].dept_name);
+					var table_td3_a = $("<a></a>").html(data[a].title).attr("href","detailA_Board.do?no="+data[a].no);
+					var table_td3 = $("<td></td>");
+					var table_td4 = $("<td></td>").html(data[a].writer);
+					var table_td5 = $("<td></td>").html(data[a].regdate);
+					
+					$(table_td3).append(table_td3_a);
+					$(table_tr).append(table_td1,table_td2,table_td3,table_td4,table_td5);
+					$(table_tbody).append(table_tr);
+					$(table_advice).append(table_tbody);
+	
+					
+					$(".main_under_board").append(table_advice);
+
+
+			
+			}
+		}
+	})
+	}
+		
+	
+	function getGood(){
+		$.ajax({
+			url : "/listGood.do",
+			dateType : "json",
+			success : function(data){
+// 				alert(data);
+
+				var table_good = $("<table></table>");
+
+				var table_menu_thead = $("<thead></thead>");
+				var table_menu_tr = $("<tr></tr>");
+				var table_menu_th1 = $("<th></th>").html("글번호").attr("id","td_no");
+				var table_menu_th2 = $("<th></th>").html("진료과").attr("id","td_dept");
+				var table_menu_th3 = $("<th></th>").html("글제목").attr("id","td_title");
+				var table_menu_th5 = $("<th></th>").html("작성자").attr("id","td_writer");
+				var table_menu_th4 = $("<th></th>").html("등록일").attr("id","td_regdate");
+
+				$(table_menu_tr).append(table_menu_th1,table_menu_th2,table_menu_th3,table_menu_th4,table_menu_th5);
+				$(table_menu_thead).append(table_menu_tr);
+				$(table_good).append(table_menu_thead);
+
+				for( var g in data){
+
+					var table_tbody = $("<tbody></tbody>");
+					var table_tr = $("<tr></tr>");
+					var table_td1 = $("<td></td>").html(data[g].no);
+					var table_td2 = $("<td></td>").html(data[g].dept_name);
+					var table_td3_g = $("<a></a>").html(data[g].title).attr("href","detailG_Board.do?no="+data[g].no);
+					var table_td3 = $("<td></td>");
+					var table_td4 = $("<td></td>").html(data[g].writer);
+					var table_td5 = $("<td></td>").html(data[g].regdate);
+					
+					$(table_td3).append(table_td3_g);
+					$(table_tr).append(table_td1,table_td2,table_td3,table_td4,table_td5);
+					$(table_tbody).append(table_tr);
+					$(table_good).append(table_tbody);
+	
+					
+					$(".main_under_board").append(table_good);
+					
+					}
+
+				}
+
+			})
+
+		}
+	
+	function getNotice(){
+		$.ajax({
+			url : "/listNotice.do",
+			dateType: "json",
+			success : function(data){
+// 				alert(data);
+
+
+				var table_notice = $("<table></table>");
+
+				var table_menu_thead = $("<thead></thead>");
+				var table_menu_tr = $("<tr></tr>");
+				var table_menu_th1 = $("<th></th>").html("글번호").attr("id","tdn_no");
+				var table_menu_th2 = $("<th></th>").html("글제목").attr("id","tdn_title");
+				var table_menu_th3 = $("<th></th>").html("조회수").attr("id","tdn_hit");
+				var table_menu_th4 = $("<th></th>").html("등록일").attr("id","tdn_regdate");
+
+				$(table_menu_tr).append(table_menu_th1,table_menu_th2,table_menu_th3,table_menu_th4);
+				$(table_menu_thead).append(table_menu_tr);
+				$(table_notice).append(table_menu_thead);
+
+				for( var n in data){
+
+					var table_tbody = $("<tbody></tbody>");
+					var table_tr = $("<tr></tr>");
+					var table_td1 = $("<td></td>").html(data[n].no);
+					var table_td2_a = $("<a></a>").html(data[n].title).attr("href","detailNotice?no="+data[n].no);
+					var table_td2 = $("<td></td>");
+					var table_td3 = $("<td></td>").html(data[n].hit);
+					var table_td4 = $("<td></td>").html(data[n].regdate);
+					
+					$(table_td2).append(table_td2_a);
+					$(table_tr).append(table_td1,table_td2,table_td3,table_td4);
+					$(table_tbody).append(table_tr);
+					$(table_notice).append(table_tbody);
+	
+					
+					$(".main_under_board").append(table_notice);
+					
+					}
+				
+
+				}
+
+
+			})
+
+		}
 
 
 
@@ -703,15 +979,15 @@ $(function(){
 					<div class="slidewrap" style="text-align: center;">
 						<ul class="slidelist">
 							<li><a> <label for="slide03" class="left"></label> <img
-									src="./main_img/doctor01.png" height="400" width="350"> <label
+									src="./main_img/doctor01.png" height="590"> <label
 									for="slide02" class="right"></label>
 							</a></li>
 							<li><a> <label for="slide01" class="left"></label> <img
-									src="./main_img/doctor02.png" height="400" width="350"> <label
+									src="./main_img/doctor02.png" height="590"> <label
 									for="slide03" class="right"></label>
 							</a></li>
 							<li><a> <label for="slide02" class="left"></label> <img
-									src="./main_img/doctor03.png" height="400" width="350"> <label
+									src="./main_img/doctor03.png" height="590" > <label
 									for="slide01" class="right"></label>
 							</a></li>
 						</ul>
@@ -797,10 +1073,10 @@ $(function(){
 					<div class="main_under1_1">
 
 						<div id="main_notice">
-							<div id="notice1">공지사항</div>
-							<div id="notice2">칭찬게시판</div>
-							<div id="notice3">상담게시판</div>
-							<div id="notice4">FAQ</div>
+							<div id="board1">공지사항</div>
+							<div id="board2">칭찬게시판</div>
+							<div id="board3">상담게시판</div>
+							<div id="board4">FAQ</div>
 						</div>
 					</div>
 					
@@ -810,8 +1086,45 @@ $(function(){
 				
 				
 				</div>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<h2>오시는 길</h2>
+				<br>
+				 <div class="map">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3163.
+      1103800594706!2d126.93563751468302!3d37.552463132692885!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.
+      1!3m3!1m2!1s0x357c98be0a2cf6e3%3A0x4d8963de2196f6dc!
+      2z7ISc7Jq47Yq567OE7IucIOuniO2PrOq1rCDrjIDtnaXrj5kg67Cx67KU66GcIDIz!5e0!3m2!1sko!2skr!4v1601211189306!5m2!1sko!2skr" 
+      width="1200" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"
+      width="500" height="400"></iframe>
+      <table class="floor">
+         <tr>
+            <th style="border-top: dotted 1px #5d5d5d;">주소</th>
+            <td style="border-top: dotted 1px #5d5d5d;">서울특별시 마포구 백범로 23 구프라자</td>
+         </tr>
+         <tr>
+            <th>대표전화</th>
+            <td>02-707-1480</td>
+         </tr>
+         <tr>
+            <th>지하철</th>
+            <td>(신촌역) 2호선 6번출구 도보 8분</td>
+         </tr>   
+         <tr>
+            <th>버스</th>
+            <td>(하차)신촌로터리, 서강대학교</td>
+         </tr>
+         </table>                                    
+      </div>
+				
 
-
+			</div>
+			<div>
+			
+			
 			</div>
 
 			<jsp:include page="footer1.jsp"></jsp:include>

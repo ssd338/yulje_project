@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.dao.GoodDao;
+import com.example.demo.vo.Advice_BoardVo;
 import com.example.demo.vo.Good_BoardVo;
 
 
@@ -79,6 +80,32 @@ public class GoodBoardController {
 		model.addAttribute("totalPage", totalPage);
 
 	}
+	
+	// 메인 ajax용 controller
+	@GetMapping("/listGood.do")
+	@ResponseBody
+	public List<Good_BoardVo> ajax_list(Model model, @RequestParam(value = "pageNUM", defaultValue = "1") int pageNUM, @RequestParam HashMap map){
+		totalCount = dao.getTotalCount();
+		totalPage = (int) Math.ceil((double) totalCount / pageSIZE);
+		int start = (pageNUM - 1) * pageSIZE + 1;
+		int end = start + pageSIZE;
+		if (end > totalCount) {
+			end = totalCount;
+		}
+
+//		HashMap map = new HashMap();
+		map.put("start", start);
+		map.put("end", end);
+		List<Good_BoardVo> list = dao.findAll(map);
+				
+		model.addAttribute("list",list);
+		model.addAttribute("totalPage", totalPage);
+		
+		return list;
+		
+	}
+	
+	
 	
 	// 등록~
 
