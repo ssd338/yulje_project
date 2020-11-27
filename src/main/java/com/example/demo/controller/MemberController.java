@@ -269,9 +269,9 @@ public class MemberController {
 	public void joinOk() {
 	}
 	
-	@GetMapping("/main")
-	public void main() {
-
-	}
+//	@GetMapping("/main")
+//	public void main() {
+//
+//	}
 	
 }
