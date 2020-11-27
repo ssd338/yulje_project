@@ -318,7 +318,7 @@
   			</div>
   		
   			<div class="cbot">
-  				<button>진료예약</button>
+  				<a href="/reservation"><button>진료예약</button></a>
   			</div>
  
   		</div> <!-- id="content" 끝 -->
