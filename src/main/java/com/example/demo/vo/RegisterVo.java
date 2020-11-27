@@ -9,13 +9,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ReservationVo {
+public class RegisterVo {
+	private int regi_no;
 	private int reser_no;
-	private Date reser_date;
-	private String reser_time;
-	private int member_no;
-	private int doc_no;
-	private int dept_no;
-	private int sche_no;
+	private Date regi_date;
 	
 }
