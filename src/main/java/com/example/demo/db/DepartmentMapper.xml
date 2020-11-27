@@ -20,7 +20,7 @@
   	select * from department order by dept_name
   </select>
   
-  <select id="selectByNo" resultType="doctorVo">
+  <select id="selectByNo" resultType="deptVo">
   	select * from department where dept_no=#{dept_no}
   </select>
   

@@ -108,10 +108,10 @@ $(function(){
 		var sp = $("<span></span>").html(text);
 		$("#mimg").append(sp);
 	}
-	if($("#re").val() < 1){
-		alert("회원등록 또는 인증에 실패하였습니다. 메인페이지로 이동합니다.");
-		location.href="/main";
-	}
+// 	if($("#re").val() < 1){
+// 		alert("회원등록 또는 인증에 실패하였습니다. 메인페이지로 이동합니다.");
+// 		location.href="/main";
+// 	}
 	
 });
 </script>
