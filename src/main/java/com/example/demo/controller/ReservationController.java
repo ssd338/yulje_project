@@ -64,7 +64,7 @@ public class ReservationController {
 		List<Doc_ScheduleVo> list = reservationDao.findByNoSche(map);
 		return list;
 	}
-	
+
 	@PostMapping("/insertRes")
 	@ResponseBody
 	public HashMap insertRes(@RequestParam HashMap map, HttpSession session) {

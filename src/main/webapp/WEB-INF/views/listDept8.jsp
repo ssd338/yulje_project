@@ -454,7 +454,6 @@ $(function(){
 	  });
 	 
 
-<<<<<<< HEAD
 	function listDeptfunction(search){				// 모든 부서의 목록을 띄워주는 ajax
 		$.ajax({
 	        url: "/listDept.ajax",
@@ -475,6 +474,7 @@ $(function(){
 					}
 					var no = item.dept_no
 					deptname[no] = item.dept_name
+<<<<<<< HEAD
 =======
 					$(document).on("mouseenter",".main_block",function(){
 						 $(this).empty();
@@ -493,16 +493,18 @@ $(function(){
 						$(this).removeClass("main_hover");
 					});
 >>>>>>> refs/remotes/origin/master
+=======
+>>>>>>> branch '추승연' of https://github.com/ssd338/project_total.git
 					
 					var dname = $("<h2></h2>").html(deptname[no])
 					var deptimg = $("<img>").attr("src","./image/"+item.icon).addClass("icon")
 					span1[no] = $("<span></span>").append(dname)
 					span2[no] = $("<span></span>").append(deptimg)
 					var div = $("<div></div>").addClass("main_block")
-<<<<<<< HEAD
 					div.append(span1[no], span2[no])
 					$(div).attr("dept_no",no);			// 부서번호-마우스 호버와 의료진목록,예약을 연결하기 위해 담음 
 					$(where).append(div);
+<<<<<<< HEAD
 =======
 					div.append(span1, span2)
 					$(".main_middle").append(div);
@@ -605,6 +607,8 @@ $(function(){
 // 		$(this).removeClass("main_hover");
 // 	});
 >>>>>>> refs/remotes/origin/master
+=======
+>>>>>>> branch '추승연' of https://github.com/ssd338/project_total.git
 	
 				}) //반복문끝
 	        }
