@@ -13,7 +13,11 @@
   <select id="selectAllByDeptNo" resultType="doctorVo"> 
     select * from doctor where dept_no=#{dept_no}
   </select>
-  <select id="selectDocDept" resultType="doctorVo">
+  <select id="searchDoc" resultType="doctorVo">
+<!-- select * from (select * from doctor where dept_no=#{dept_no}) where doc_name like '%#{str}%'; -->
+	select * from doctor where doc_name like '%${str}%'
+  </select>
+  <select id="selectDocDept" resultType="doctorVo"> 
     select * from (select major from doctor where dept_no=#{dept_no}) where rownum=1
   </select>
 </mapper>
