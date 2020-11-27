@@ -389,14 +389,6 @@ $(function(){
   						</td>
   						<input type="hidden" id="email" name="email" class="input">
   					</tr>
-  				</table>
-  			</div>
-  		</div>
-  		
-  		<div class="choice">
-  			<h3 class="ptitle">선택정보 입력</h3>
-  			<div>
-  				<table class="table">
   					<tr>
   						<th>주소</th>
   						<td><input type="text" name="addr1" id="addr1" readonly="readonly"><button type="button" id="btnAddr">우편번호 검색</button><br>
@@ -405,6 +397,14 @@ $(function(){
   							<input type="hidden" name="addr" id="addr">
   						</td>
   					</tr>
+  				</table>
+  			</div>
+  		</div>
+  		
+  		<div class="choice">
+  			<h3 class="ptitle">선택정보 입력</h3>
+  			<div>
+  				<table class="table">
   					<tr>
   						<th>메일수신여부</th>
   						<td><input type="radio" name="emailReceive" value="o" checked="checked">동의 
