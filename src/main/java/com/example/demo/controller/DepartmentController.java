@@ -48,7 +48,7 @@ public class DepartmentController {
 	    search = search.trim();					 							  //검색어의 공백을 제거
 		String search2 = "%";												  //검색어가 없으면 모두,있으면 검색어를 포함한 모든 글자가 나오도록 설정하기 위함
 		search2 +=search + "%";
-		List<DepartmentVo> list  = dao.findAll(search2);		
+		List<DepartmentVo> list  = dao.findAll2(search2);		
 		return list;
 	}
 	
