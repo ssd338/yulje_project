@@ -20,8 +20,8 @@
   	select * from department order by dept_name
   </select>
   
-  <select id="selectByNo" resultType="deptVo">
-  	select * from department where dept_no=#{dept_no}
+  <select id="selectByNo" resultType="doctorVo">
+  	select * from doctor where dept_no=#{dept_no}
   </select>
   
   <!-- 일단은 목록조회만 구현중. -->

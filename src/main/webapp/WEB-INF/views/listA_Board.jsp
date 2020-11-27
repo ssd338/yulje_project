@@ -12,14 +12,64 @@
 <script type="text/javascript">
 	$(function() {
 
+		var dept_name="호흡기내과";
+		getDeptname(dept_name);
+
+		function getDeptname(dept_name){
+			$.ajax({ // deptname를 받아와서 cotroller로 보내주는 ajax
+				url : "/listA_Board.do",
+				method : "POST",
+				dataType : "json",
+				data : {
+					dept_name : dept_name
+				},
+				success : function(data) {
+					for( var a in data){
+
+						console.log(dept_name);
+
+						var level = eval(data[a].b_level); // b_level을 int로 타입캐스팅
+						var title  = "";
+						//alert(level);
+
+						if(level > 0){
+							for(var i = 0; i < level; i++){
+								title +="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
+								}
+							}
+						title += data[a].title;
+						var table_a = $("<a></a>");
+						$(table_a).html(title).attr("href","detailA_Board.do?no="+data[a].no);
+
+						var table_tr = $("<tr></tr>");
+						var table_td1 = $("<td></td>").html(data[a].no);
+						var table_td2 = $("<td></td>").html(data[a].dept_name);
+						var table_td3 = $("<td></td>").html(table_a);
+						var table_td4 = $("<td></td>").html(data[a].writer);
+						var table_td5 = $("<td></td>").html(data[a].regdate);
+						
+						$(table_tr).append(table_td1,table_td2,table_td3,table_td4,table_td5);
+						$("tbody").append(table_tr);
+						
+						
+						
+						}
+					
+
+				}
+			})
+		}
+		
+
+		// doctor의 detail을 불러오는 ajax
 		// dept_button를 클릭시 강제적으로 클릭이벤트를 발생시킴
-		$(document).on(
-				"click",
-				".dept_button",
-				function() {
+		$(document).on(	"click",".dept_button",	function() { // 버튼을 누르면 ajax이 작동
 					var deptno = $(this).attr("deptno"); // btn의 속성("deptno")을 불러옴
-					var deptname = $(this).attr("deptname");// btn의 속성("deptname")을 불러옴
+					dept_name = $(this).attr("deptname");// btn의 속성("deptname")을 불러옴
 					//alert(deptno);
+					
+					getDeptname(dept_name);
+					
 					$("#doc_detail_menu").empty();
 					
 					$.ajax({ // dept_no를 매개변수로 받아서 doctor의 detail을 출력
@@ -35,12 +85,25 @@
 
 								//alert(data[j].doc_name);
 								//alert(data[j].specialization);
-
+								
+								var doc_div = $("<div></div>").attr("id","doc_div"+j).addClass("doc_div");
+								var doc_detail_div = $("<div></div>").addClass("doc_detail_div");
 								var name_div = $("<div></div>").html(data[j].doc_name).addClass("doc_name_div");
 								var specialization_div = $("<div></div>").html(data[j].specialization).addClass("doc_specialization_div");
+								var spec_div = $("<div></div>").addClass("spec_div");
+								var fname_div = $("<div></div>").addClass("doc_fname");
+								var fname_bunya = $("<img></img>").attr("src","docimg/bunya.png").addClass("fname_bunya");
+								var fname_img = $("<img></img>").attr("src","docimg/"+data[j].doc_fname).addClass("fname_img");
+
+								$(doc_detail_div).append(name_div);
+								$(spec_div).append(fname_bunya);											
+								$(spec_div).append(specialization_div);	
+								$(doc_detail_div).append(spec_div);	
+								$(fname_div).append(fname_img);				
+								$(doc_div).append(fname_div);
+								$(doc_div).append(doc_detail_div);
+								$("#doc_detail_menu").append(doc_div);
 								
-								$("#doc_detail_menu").append(name_div);
-								$("#doc_detail_menu").append(specialization_div);
 
 							}
 
@@ -49,46 +112,8 @@
 					
 					$("tbody").empty();
 					
-					$.ajax({ // deptname를 받아와서 cotroller로 보내주는 ajax
-						url : "/listA_Board.do",
-						method : "POST",
-						dataType : "json",
-						data : {
-							dept_name : deptname
-						},
-						success : function(data) {
-							for( var a in data){
-
-								var level = eval(data[a].b_level); // b_level을 int로 타입캐스팅
-								var title  = "";
-								//alert(level);
-
-								if(level > 0){
-									for(var i = 0; i < level; i++){
-										title +="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
-										}
-									}
-								title += data[a].title;
-								var table_a = $("<a></a>");
-								$(table_a).html(title).attr("href","detailA_Board.do?no="+data[a].no);
-
-								var table_tr = $("<tr></tr>");
-								var table_td1 = $("<td></td>").html(data[a].no);
-								var table_td2 = $("<td></td>").html(data[a].dept_name);
-								var table_td3 = $("<td></td>").html(table_a);
-								var table_td4 = $("<td></td>").html(data[a].writer);
-								var table_td5 = $("<td></td>").html(data[a].regdate);
-								
-								$(table_tr).append(table_td1,table_td2,table_td3,table_td4,table_td5);
-								$("tbody").append(table_tr);
-								
-								
-								
-								}
-							
-
-						}
-					})
+					
+				
 
 				});
 
@@ -115,8 +140,8 @@
 }
 
 #dept_menu {
-	background-color: #EAEAEA;
-	width: 1200px;
+/* 	background-color: #EAEAEA; */
+	width: 1000px;
 	height: 150px;
 	padding-top: 15px;
 	text-align: center;
@@ -215,6 +240,75 @@ a:visited {
 #btn_div {
 	margin-left: 650px;
 }
+
+/*doctor detail*/
+
+#doc_detail_menu{
+/* 	text-align: center; */
+	width: 1000px;
+	margin-left: 125px;
+}
+
+.doc_div{
+ 	border: 1px solid #EAEAEA; 
+	display: flex;
+	width: 600px;
+	height: 180px;
+	padding : 10px;
+	margin : 10px;
+	
+}
+
+.doc_detail_div{
+	width: 290px;
+	height: 180px;
+/* 	border: 1px solid black; */
+/* 	line-height: 55px; */
+}
+
+.spec_div{
+	display: flex;
+}
+
+.doc_specialization_div{
+/* 	border: 1px solid black; */
+	margin-top: 10px;
+	margin-left: 10px;
+	font-size: 13px;
+	
+}
+
+
+.doc_name_div{
+/* 	border: 1px solid black; */
+	font-size: 20px;
+	font-weight: bold;
+	padding-top: 33px;
+	padding-bottom: 25px;
+}
+
+.doc_fname{
+/* 	border: 1px solid black; */
+	margin-right: 10px;
+	width: 300px;
+	height: 180px;
+	
+}
+
+.fname_img{
+	width: 180px;
+	height: 180px;
+	padding-left: 70px;
+	border-radius: 80px;
+}
+
+.fname_bunya{
+	width : 40px;
+	height: 40px;
+	
+
+}
+
 </style>
 </head>
 <body>
@@ -232,6 +326,7 @@ a:visited {
 	</div>
 
 	<div id="doc_detail_menu"></div>
+
 	<br>
 
 

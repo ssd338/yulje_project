@@ -3,8 +3,10 @@ package com.example.demo.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,10 +16,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.dao.GoodDao;
+import com.example.demo.vo.Advice_BoardVo;
 import com.example.demo.vo.Good_BoardVo;
 
 
@@ -50,6 +54,7 @@ public class GoodBoardController {
 	@RequestMapping("/detailG_Board.do")
 	public void detial(int no, Model model) {
 		model.addAttribute("gb", dao.findByNo(no));
+		dao.updateHit(no);
 	}
 	
 	
@@ -76,6 +81,32 @@ public class GoodBoardController {
 		model.addAttribute("totalPage", totalPage);
 
 	}
+	
+	// 메인 ajax용 controller
+	@GetMapping("/listGood.do")
+	@ResponseBody
+	public List<Good_BoardVo> ajax_list(Model model, @RequestParam(value = "pageNUM", defaultValue = "1") int pageNUM, @RequestParam HashMap map){
+		totalCount = dao.getTotalCount();
+		totalPage = (int) Math.ceil((double) totalCount / pageSIZE);
+		int start = (pageNUM - 1) * pageSIZE + 1;
+		int end = start + pageSIZE;
+		if (end > totalCount) {
+			end = totalCount;
+		}
+
+//		HashMap map = new HashMap();
+		map.put("start", start);
+		map.put("end", end);
+		List<Good_BoardVo> list = dao.findAll(map);
+				
+		model.addAttribute("list",list);
+		model.addAttribute("totalPage", totalPage);
+		
+		return list;
+		
+	}
+	
+	
 	
 	// 등록~
 
@@ -285,10 +316,25 @@ public class GoodBoardController {
 
 		return mav;
 
+		
 	}
 	
 	// 삭제~
+	
+	@PostMapping("/delete_pwd.do")
+	@ResponseBody
+	public Good_BoardVo delete_pwd(Model model, @RequestParam HashMap map) {
+		Good_BoardVo gb = new Good_BoardVo();
+		
+		int no = (int)(map.get("no")); // vo
+		
+		String pwd = dao.findByNo(no).getPwd();
+		model.addAttribute("pwd", pwd);
+		
+		return gb;
+	}
 
+	
 	@GetMapping("/deleteG_Board.do")
 	public void delete_form(int no, String title, Model model) {
 
@@ -299,6 +345,7 @@ public class GoodBoardController {
 	}
 
 	@PostMapping("/deleteG_Board.do")
+//	@ResponseBody
 	public ModelAndView delete_submit(HttpServletRequest request, int no, String pwd) {
 
 		// 원래(이전) file이름과 file크기를 담아둬야함
@@ -332,5 +379,18 @@ public class GoodBoardController {
 
 		return mav;
 
+	}
+	
+
+	@RequestMapping("/HAHAHA")
+	public void list11() {}
+	
+	// 회원 여부 판별
+	@GetMapping("/isMember")
+	@ResponseBody
+	public String isMember(HttpSession session) {
+//			String r = (String)session.getAttribute("roles");
+		String r = "ADMIN";
+		return r;
 	}
 }

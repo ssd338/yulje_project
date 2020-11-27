@@ -268,4 +268,10 @@ public class MemberController {
 	@GetMapping("/joinOk")
 	public void joinOk() {
 	}
+	
+	@GetMapping("/main")
+	public void main() {
+
+	}
+	
 }
