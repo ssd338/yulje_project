@@ -49,6 +49,7 @@ public class FaqDao {
 		return FaqManager.getTotalCount();
 	}
 	
+	
 //	public boolean isMember(String id, String pwd) {
 //		return NoticeManager.isMember(id, pwd);
 //		

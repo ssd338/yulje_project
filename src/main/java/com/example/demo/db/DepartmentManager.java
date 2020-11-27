@@ -65,6 +65,14 @@ public class DepartmentManager {
 		session.close();
 		return list;
 	}
+	//모든목록 출력
+	public static List<DepartmentVo> findAll2(String search){
+		List<DepartmentVo> list = null;
+		SqlSession session = sqlSessionFactory.openSession();
+		list = session.selectList("department.selectAll2", search);
+		session.close();
+		return list;
+	}
 	
 	//가나다순 정렬.
 	public static List<DepartmentVo> findAllSort(){

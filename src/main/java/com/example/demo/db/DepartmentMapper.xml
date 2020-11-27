@@ -15,13 +15,15 @@
   <select id="selectAll" resultType="deptVo">
   	select * from department
   </select>
-  
+  <select id="selectAll2" resultType="deptVo">
+  	select * from department where dept_name like '${search}'
+  </select>
   <select id="selectAllSort" resultType="deptVo">
   	select * from department order by dept_name
   </select>
   
-  <select id="selectByNo" resultType="deptVo">
-  	select * from department where dept_no=#{dept_no}
+  <select id="selectByNo" resultType="doctorVo">
+  	select * from doctor where dept_no=#{dept_no}
   </select>
   
   <!-- 일단은 목록조회만 구현중. -->

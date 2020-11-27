@@ -121,6 +121,7 @@ public class FaqManager {
 
 		return re;
 	}
+	
 
 //		public static boolean isMember(String id, String pwd) {
 //	

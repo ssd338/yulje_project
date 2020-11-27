@@ -164,7 +164,7 @@ select {
 		<table>
 		<tr>
 			<td>글제목 </td>
-			<td><input type="text" name="title" class="board_input" required="required" value="${title }"></td>
+			<td><input type="text" name="title" class="board_input" required="required" value="Q : ${title }"></td>
 			<td>카테고리 </td>
 			<td>
 		<select name="category" required="required">

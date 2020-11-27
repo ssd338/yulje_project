@@ -226,7 +226,7 @@ $(function(){
         dataType : "json",
         async:false,
         success: function(data) {   
-        	Mname=data.name
+           Mname=data.name
            email=data.email
            tel=data.tel
            addr1 = data.addr.split("/")[0]

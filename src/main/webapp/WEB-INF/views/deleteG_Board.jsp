@@ -42,12 +42,12 @@
 .container {
 	width: 450px;
 	height: 450px;
-	margin-top: 120px; padding : 0px;
+	margin-top: 120px;
+	padding: 0px;
 	/*justify-content: center;
 	display: flex;
 	margin-top: 15px;
 	border: 1px solid #bcbcbc;*/
-	
 }
 
 #main_input_menu {
@@ -68,18 +68,17 @@
 	border: 1px solid #D5D5D5;
 }
 
-#main_input_info{
+#main_input_info {
 	font-size: 14px;
 	text-align: center;
 	margin-top: 20px;
 }
 
-#main_btn{
+.main_btn {
 	text-align: center;
 }
 
-
-#btn_delete {
+.btn_delete {
 	border-radius: 10px;
 	width: 100px;
 	height: 35px;
@@ -90,7 +89,7 @@
 	margin-top: 50px;
 }
 
-#btn_list {
+.btn_list {
 	border-radius: 10px;
 	width: 100px;
 	height: 35px;
@@ -106,7 +105,12 @@
 <script type="text/javascript"
 	src="OmniWindow-1.0.1/jquery.omniwindow.js"></script>
 <script type="text/javascript">
-	$(function() {
+
+
+
+$(function() {
+
+	
 		$('div.modal').omniWindow() // create modal
 		.trigger('show'); // and show it
 	});
@@ -114,7 +118,14 @@
 	$('.close-button').click(function(e) {
 		e.preventDefault();
 		$modal.trigger('hide');
+
+
+	
+	
 	});
+
+
+
 </script>
 </head>
 <body>
@@ -133,15 +144,20 @@
 					<input type="hidden" name="no" value="${no }">
 					<div>
 						비밀번호 <input type="password" name="pwd" class="board_input_info">
+						<%-- 						<c:if test="${ pw != pw}"> --%>
+
+						<%-- 						</c:if> --%>
+						<div id="testtt"></div>
 					</div>
 			</div>
-			<div id="main_btn">
-					<button id="btn_delete">삭제</button>
-					<a href="listG_Board.do"><button id="btn_list" type="button">취소</button></a>
-				</form>
-			</div>
-
+			<div class="main_btn">
+				<button class="btn_delete">삭제</button>
+				<a href="listG_Board.do"><button class="btn_list" type="button"
+						id="btn_cancel">취소</button></a>
+			</form>
 		</div>
+
+	</div>
 	</div>
 </body>
 </html>

@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,17 +35,15 @@ public class AdviceBoardController {
 
 	@Autowired
 	private AdviceDao dao;
-	
+
 	@Autowired
 	private DepartmentDao dept_dao;
 
 	public void setDao(AdviceDao dao) {
 		this.dao = dao;
 	}
-	
-	
 
-	@RequestMapping("/A_down.do")
+	@RequestMapping("/a_down.do")
 	public ModelAndView down(HttpServletRequest request, String fname) {
 		// file download controller
 		// 실경로를 알아오기 위해 request씀
@@ -58,11 +57,12 @@ public class AdviceBoardController {
 	@RequestMapping("/detailA_Board.do")
 	public void detial(int no, Model model) {
 		model.addAttribute("ab", dao.findByNo(no));
-		
-		String dept_name=dao.findByNo(no).getDept_name();
-		
+		dao.updateHit(no);
+
+		String dept_name = dao.findByNo(no).getDept_name();
+
 		model.addAttribute("dept_name", dept_name);
-		
+
 	}
 
 //	@RequestMapping("/listA_Board.do")
@@ -86,22 +86,20 @@ public class AdviceBoardController {
 //		model.addAttribute("totalPage", totalPage);
 //
 //	}
-	
-	
+
 	// 뷰페이지 실행을 위한 controller
 	@GetMapping("/listA_Board.do")
 	public void listA_Board(Model model) {
-		
+
 		model.addAttribute("title", "1:1 전문의 상담");
-		
+
 	}
-	
-	
-	
-	//ajax용 controller
+
+	// ajax용 controller
 	@PostMapping("/listA_Board.do")
 	@ResponseBody
-	public List<Advice_BoardVo> list(Model model, @RequestParam(value = "pageNUM", defaultValue = "1") int pageNUM, @RequestParam HashMap map) {
+	public List<Advice_BoardVo> list(Model model, @RequestParam(value = "pageNUM", defaultValue = "1") int pageNUM,
+			@RequestParam HashMap map) {
 
 		totalCount = dao.getTotalCount();
 		totalPage = (int) Math.ceil((double) totalCount / pageSIZE);
@@ -115,34 +113,41 @@ public class AdviceBoardController {
 		map.put("start", start);
 		map.put("end", end);
 		List<Advice_BoardVo> list = dao.findAll(map);
-				
-		model.addAttribute("list",list);
+
+		model.addAttribute("list", list);
 		model.addAttribute("totalPage", totalPage);
-		
+
 		return list;
 
 	}
-	
+
 	@RequestMapping("/listDept.do")
 	@ResponseBody
-	public List<DepartmentVo> listDept() {
+	public List<DepartmentVo> listDept() {		
 		
 		List<DepartmentVo> list = dept_dao.findAll();
 		return list;
 	}
 	
-	
+//	@RequestMapping("/listDept2.do")
+//	@ResponseBody
+//	public List<DepartmentVo> listDept2(@RequestParam) {		
+//		
+//		List<DepartmentVo> list = dept_dao.findAll();
+//		return list;
+//	}
+//	
+
 	@PostMapping("/listDoctor.do")
 	@ResponseBody
-	public List<DoctorVo> findByDept(@RequestParam HashMap map){
-		
-		List<DoctorVo> list = dept_dao.findByDept(map);	
+	public List<DoctorVo> findByDept(@RequestParam HashMap map) {
+
+		List<DoctorVo> list = dept_dao.findByDept(map);
 		System.out.println(map);
-		
+
 		return list;
-		
+
 	}
-	
 
 	@GetMapping("/insertA_Board.do")
 	public void insert_form(@RequestParam(value = "no", defaultValue = "0") int no, Model model) {
@@ -151,21 +156,20 @@ public class AdviceBoardController {
 		model.addAttribute("no", no);
 
 		String title = "";
-		String dept_name="";
-		
-		
+		String dept_name = "";
+
 		// 답글인 경우 title과, dept_name을 전달
 		if (no != 0) {
 			title = "답글>" + dao.findByNo(no).getTitle();
 		}
-		
+
 		if (no != 0) {
 			dept_name = dao.findByNo(no).getDept_name();
 		}
 
 		model.addAttribute("title", title);
 		model.addAttribute("dept_name", dept_name);
-		//System.out.println(dept_name);
+		// System.out.println(dept_name);
 
 	}
 
@@ -173,7 +177,7 @@ public class AdviceBoardController {
 	public ModelAndView insert_submit(HttpServletRequest request, Advice_BoardVo ab) {
 
 		String path = request.getRealPath("upload");
-		path = request.getServletContext().getRealPath("upload");
+//		path = request.getServletContext().getRealPath("upload");
 		System.out.println("path" + path);
 
 		int pno = ab.getNo();
@@ -396,7 +400,10 @@ public class AdviceBoardController {
 		return mav;
 
 	}
+
 	
+	
+
 	//동의서 다운받는 코드
 	@RequestMapping("/Patient_down.do")
 	public File downFile(HttpServletRequest request, String fname) {

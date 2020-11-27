@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <!-- 호버를 사용할때 과이름과 클래스이름을 배열에 넣어서 처리하고 싶으나 
-    	 할줄 몰라서 일일이 15개의 호버를 만들어주는 버전
-     -->
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +8,14 @@
 <title>Insert title here</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
+
+
+.texta:visited { color:white; }
+
+#test{
+	display:inline-block;
+	margin:5px 23px 0 0px;
+}
 /*사이드바 start*/
 .side_ul{
   float: right;
@@ -93,15 +99,12 @@
       justify-content: center;
       display: flex;     
    }
-   .main_under {
+   .main_under, .main_middle {
       justify-content: center;
       display: flex;      
    }
    
-   .main_middle {
-      justify-content: center;
-      display: flex;      
-   }
+  
    /* 아이콘 밑 글자 */
    .main_top h2{
    	 margin: 10px 0px 0px 0px;
@@ -118,7 +121,7 @@
    }
    h4{
     display:inline;
-    margin: 0px 12px 0px 12px;
+    margin: 0px
    	padding:0px;
    	/* 이미지 범위를 넘지 않는 폰트사이즈*/
    	font-size: 15px;
@@ -146,7 +149,7 @@
    
    .main_block{
       border: 1px solid #94CCC4;
-      width: 160px;
+      width: 165px;
       height: 170px;
       margin: 0px 20px 20px 0px;
        /* 이미지를 가운데에 넣으려고 해봄 */
@@ -432,192 +435,81 @@ footer{
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
 $(function(){
+	var deptname = new Array();
+	var span1 = new Array();
+	var span2 = new Array();
+	var search = $("#search").val();    // 검색어
 
-// 	var deptname
-// 	var deptimg
-
-	$(document).on("click","#ajaxtest_btn1",function(){
-		$(".main_top").empty()
-		$(".main_middle").empty()
-		$(".main_under").empty()
+	$(".btnSearch").click(function(){
+		$(".main_top").empty();
+		$(".main_middle").empty();
+		$(".main_under").empty();
 		
-		$.ajax("/listDept1", {success:function(data){
-			for(var deptdata of data){
-				if(deptdata.dept_group == '내과'){
-					var deptname = $("<h2></h2>").html(deptdata.dept_name)
-					var deptimg = $("<img>").attr("src","./image/"+deptdata.icon).addClass("icon")
-					var span1 = $("<span></span>").append(deptname)
-					var span2 = $("<span></span>").append(deptimg)
-					var div = $("<div></div>").addClass("main_block")
-					div.append(span1, span2)
-					$(".main_top").append(div);
+		search = $("#search").val();								// 검색어를 가져옴
+		listDeptfunction(search);
+	})
 
+	 $("document").ready(function(){  			//시작시 화면에 부서목록을 띄워주도록 ajax메소드를 호출
+		listDeptfunction(search)    
+	  });
+	 
 
-					$(document).on("mouseenter",".main_block",function(){
-						 $(this).empty();
-						 $(this).addClass("main_hover");
-						 
-						 $(this).append("<span><h3>"+deptdata.dept_name+"</h3></span>");
-						 $(this).append("<span><img src='./image/doc22.jpg' class='icon2'></span>");
-						 $(this).append("<span><img src='./image/r.jpg' class='icon2'></span>");
-						 $(this).append("<span><h4><a href='listDoctor?dept_no=2'>의료진</a></h4></span>");
-						 $(this).append("<span><h4>예약</h4></span>");
-					});
-					$(document).on("mouseleave",".main_hover",function(){
-						$(this).empty();
-//						var idx = $(this).attr("idx");
-						$(this).append("<span>"+span1+"</span>","<span>"+span2+"</span>");
-						$(this).removeClass("main_hover");
-					});
+	function listDeptfunction(search){				// 모든 부서의 목록을 띄워주는 ajax
+		$.ajax({
+	        url: "/listDept.ajax",
+	        method: "POST",
+	        data: {search:search},
+	        dataType : "json",
+	        async:false,
+	        success: function(data) {
+				$.each(data, function(idx,item){
+					var layer = new Array(".main_top",".main_middle",".main_under")	//부서의 위치 class를 담은 배열
+					var where						//해당 부서가 위치할 자리(class)를 담는 변수
+					if(item.dept_group == '내과'){	//어느 부서인지에 따라서 위치를 정함
+						where = layer[0]
+					}else if(item.dept_group == '외과'){
+						where = layer[1]
+					}else if(item.dept_group == '일반과'){
+						where = layer[2]
+					}
+					var no = item.dept_no
+					deptname[no] = item.dept_name
 					
-				}
-				if(deptdata.dept_group == '외과'){
-					var deptname = $("<h2></h2>").html(deptdata.dept_name)
-					var deptimg = $("<img>").attr("src","./image/"+deptdata.icon).addClass("icon")
-					var span1 = $("<span></span>").append(deptname)
-					var span2 = $("<span></span>").append(deptimg)
+					var dname = $("<h2></h2>").html(deptname[no])
+					var deptimg = $("<img>").attr("src","./image/"+item.icon).addClass("icon")
+					span1[no] = $("<span></span>").append(dname)
+					span2[no] = $("<span></span>").append(deptimg)
 					var div = $("<div></div>").addClass("main_block")
-					div.append(span1, span2)
-					$(".main_middle").append(div);
-
-
-
-					$(document).on("mouseenter",".main_block",function(){
-						 $(this).empty();
-						 $(this).addClass("main_hover");
-						 
-						 $(this).append("<span><h3>"+deptdata.dept_name+"</h3></span>");
-						 $(this).append("<span><img src='./image/doc22.jpg' class='icon2'></span>");
-						 $(this).append("<span><img src='./image/r.jpg' class='icon2'></span>");
-						 $(this).append("<span><h4><a href='listDoctor?dept_no=2'>의료진</a></h4></span>");
-						 $(this).append("<span><h4>예약</h4></span>");
-					});
-					$(document).on("mouseleave",".main_hover",function(){
-						$(this).empty();
-						var idx = $(this).attr("idx");
-						$(this).append("<span>"+deptimg+"</span>","<span>"+deptname+"</span>");
-						$(this).removeClass("main_hover");
-					});
-				}
-				if(deptdata.dept_group == '일반과'){
-					var deptname = $("<h2></h2>").html(deptdata.dept_name)
-					var deptimg = $("<img>").attr("src","./image/"+deptdata.icon).addClass("icon")
-					var span1 = $("<span></span>").append(deptname)
-					var span2 = $("<span></span>").append(deptimg)
-					var div = $("<div></div>").addClass("main_block")
-					div.append(span1, span2)
-					$(".main_under").append(div);
-
-
-
-					$(document).on("mouseenter",".main_block",function(){
-						 $(this).empty();
-						 $(this).addClass("main_hover");
-						 
-						 $(this).append("<span><h3>"+deptdata.dept_name+"</h3></span>");
-						 $(this).append("<span><img src='./image/doc22.jpg' class='icon2'></span>");
-						 $(this).append("<span><img src='./image/r.jpg' class='icon2'></span>");
-						 $(this).append("<span><h4><a href='listDoctor?dept_no=2'>의료진</a></h4></span>");
-						 $(this).append("<span><h4>예약</h4></span>");
-					});
-					$(document).on("mouseleave",".main_hover",function(){
-						$(this).empty();
-						var idx = $(this).attr("idx");
-						$(this).append("<span>"+deptimg+"</span>","<span>"+deptname+"</span>");
-						$(this).removeClass("main_hover");
-					});
-				}
-			} //반복문끝
-		}}) //ajax끝
-	}) //버튼클릭이벤트끝
-
-	$(document).on("click","#ajaxtest_btn2",function(){
-// 		$("#ajaxtest_btn2").click(function(){
-			$(".main_top").empty()
-			$(".main_middle").empty()
-			$(".main_under").empty()
-			$.ajax("/listDept2", {success:function(data){
-				for(var deptdata of data){
-					
-					var deptname = $("<h2></h2>").html(deptdata.dept_name)
-					var deptimg = $("<img>").attr("src","./image/"+deptdata.icon)
-					var span1 = $("<span></span>").append(deptname)
-					var span2 = $("<span></span>").append(deptimg)
-					var div = $("<div></div>").addClass("main_block")
-					div.append(span1, span2)
-					$(".main_top").append(div);
-					
-				} //반복문끝
-			}}) //ajax끝
-		}) //버튼클릭이벤트끝
-		
-		
-
-// 	$(document).on("mouseenter",".main_block",function(){
-// 		// on안에 (이벤트 이름, 대상자, 함수)
-// 		// 미래에 만들어진 노드에도 이벤트를 설정하는 방법(이미 만들어진 노드 포함)
-// 		 $(this).empty();
-// 		 $(this).addClass("main_hover");
-		 
-// 		 var idx = $(this).attr("idx");
-// 		 $(this).append("<span><h3>"+deptname[idx]+"</h3></span>");
-// 		 $(this).append("<span><img src='./image/doc22.jpg' class='icon2'></span>");
-// 		 $(this).append("<span><img src='./image/r.jpg' class='icon2'></span>");
-// 		 $(this).append("<span><h4><a href='listDoctor'>의료진</a></h4></span>");
-// 		 $(this).append("<span><h4>예약</h4></span>");
-// 		/*
-// 		var idx = $(this).attr("idx");
-// 		var id = $(this).attr("id");
-// 		mouseIn(idx,id);*/
-// 	});
-
-// 	$(document).on("mouseleave",".main_hover",function(){
-// 		$(this).empty();
-// 		var idx = $(this).attr("idx");
-// 		$(this).append("<span>"+image[idx]+"</span>","<span>"+deptname[idx]+"</span>");
-// 		$(this).removeClass("main_hover");
-// 	});
+					div.append(span1[no], span2[no])
+					$(div).attr("dept_no",no);			// 부서번호-마우스 호버와 의료진목록,예약을 연결하기 위해 담음 
+					$(where).append(div);
 	
+				}) //반복문끝
+	        }
+		}) //ajax끝
+	}
+
+		$(document).on("mouseenter",".main_block",function(){
+			
+			 $(this).empty();
+			 $(this).addClass("main_hover");
+			 var no = $(this).attr("dept_no");
+			 $(this).append("<span><h3>"+deptname[no]+"</h3></span>");
+			 $(this).append("<span><a href='listDoctor'><img src='./image/doc22.jpg' class='icon2'></a></span>");
+			 $(this).append("<span><a href='#'><img src='./image/r.jpg' class='icon2'></a></span>");
+			 $(this).append("<span id='test'><h4><a class='texta' href='listDoctor'>의료진</a></h4></span>");
+			 $(this).append("<input type='hidden' class='deptname' value='"+deptname[no]+"'>");
+			 $(this).append("<span><a class='texta' href='#'><h4>예약</h4></a></span>");
+			
+		});
 	
-	
-	//꼼수 부분- 다른줄로 옮겨가면 현재줄에서 mouseleave가 먹지 않은 부분을 치워버림 - 없어도 되는 코드
-// 	$(document).on("mouseleave",".main_top",function(){
-// 		$(this).empty();
-// 		$(this).removeClass("main_hover");
-// 		$.each(deptname, function(idx){
-// 			if (idx <= 4) {
-// 				var div = $("<div id='main_top"+(idx+1)+"'><span>"+image[idx]+"</span><span>"+deptname[idx]+"</span></div>");
-// 				$(div).addClass("main_block");
-// 				$(div).attr("idx",idx);
-// 				$(".main_top").append(div);
-// 			}
-// 		});
-// 	});
-// 	$(document).on("mouseleave",".main_middle",function(){
-// 		$(this).empty();
-// 		$(this).removeClass("main_hover");
-// 		$.each(deptname, function(idx){
-// 			if((idx >4)&(idx <=9)){
-// 				var div = $("<div id='main_middle"+(idx+1)+"'><span>"+image[idx]+"</span><span>"+deptname[idx]+"</span></div>");
-// 				$(div).addClass("main_block");
-// 				$(div).attr("idx",idx);
-// 				$(".main_middle").append(div);
-// 			}
-// 		});
-// 	});
-// 	$(document).on("mouseleave",".main_under",function(){
-// 		$(this).empty();
-// 		$(this).removeClass("main_hover");
-// 		$.each(deptname, function(idx){
-// 			if((idx >9)&(idx <=14)){
-// 				var div = $("<div id='main_under"+(idx+1)+"'><span>"+image[idx]+"</span><span>"+deptname[idx]+"</span></div>");
-// 				$(div).addClass("main_block");
-// 				$(div).attr("idx",idx);
-// 				$(".main_under").append(div);
-// 			}
-// 		});
-// 	});
-	//꼼수 끝
+		$(document).on("mouseleave",".main_hover",function(){
+			$(this).empty();
+			
+			var no = $(this).attr("dept_no");
+			$(this).append(span1[no], span2[no])
+			$(this).removeClass("main_hover");
+		});	
 });
 			
 </script>
@@ -656,53 +548,12 @@ $(function(){
      	</div>
      	<!-- 진료과 위에 검색이랑 정렬 놓는 부분 -->
      	<div class="main_search">
-     	
-     	
-     	
-     	
-     	
-     	<!-- ajax버튼테스트용 -->
-     	<div>
-     		<button id="ajaxtest_btn1">기본</button>
-     		<button id="ajaxtest_btn2">가나다순</button>
-     	</div>
-     	
-     	
-     	
-     	
-     	
-     		<span class="search_radio">
-	     		<label class="container">
-					<input type="radio" name="array" checked="checked"/>
-					<span class="checkmark1"></span>
-					<font size="3">기본</font>
-				</label>
-				<label class="container">
-					<input type="radio" name="array"/>
-					<span class="checkmark1"></span>
-					<font size="3">가나다순</font>
-				</label>
-			</span>
      		<div class="search">
-     			<input class="text" type="text" placeholder="진료과 또는 질병명을 입력해주세요">
+     			<input type="text" name="search" class="text" id="search">
      			<button class="btnSearch">검색</button>
      		</div>
      	</div>
      	
-     	
-     	
-     	
-     	<!-- ajax으로 진료과 목록표시 테스트 -->
-     	<div id="ajaxtest1" style="border: 1px solid black"></div>
-     	<div id="ajaxtest2" style="border: 1px solid black"></div>
-     	<div id="ajaxtest3" style="border: 1px solid black"></div>
-	    
-	    
-	    
-	    
-	    
-	    
-	    
 	     	<div class="main_left">
 	     	<!-- 왼쪽에 외과,내과,일반과 팻말 -->
 	     		<div class="main_left_item">
@@ -723,18 +574,12 @@ $(function(){
 	     		</div>
 	     		</div>
 	        <div class="main_top">
-	       
 	        </div>
-	        
 	        <div class="main_middle">
-	        
 	        </div> 
-	           
-	      <div class="main_under">
-	         
-	       </div>   
-	         
-	      </div>
+	        <div class="main_under">
+	        </div>   
+	  </div>
 	        
 	     
    <div class="column side" id="column_side_right" > </div>

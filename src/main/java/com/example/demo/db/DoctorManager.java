@@ -28,6 +28,14 @@ public class DoctorManager {
 			System.out.println("manager:"+e.getMessage());
 		}
 	}
+	public static List<DoctorVo> searchDocList(String str) { //모든의사검색
+		List<DoctorVo> list = null;
+		SqlSession session = sqlSessionFactory.openSession();
+		list = session.selectList("doctor.searchDoc", str);
+		session.close();
+		return list;
+	}
+	
 	public static List<DoctorVo> findByDeptNoList(int dept_no) { //각 진료과에 소속된 의사만 출력
 		List<DoctorVo> list = null;
 		SqlSession session = sqlSessionFactory.openSession();

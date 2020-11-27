@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="register">
+
+<!-- 접수 등록 -->
+  <insert id="insertRegister">
+  	insert into register values(#{regi_no},#{reser_no},sysdate)
+  </insert>
+
+<!-- 접수번호 자동생성 -->  
+  <select id="getNextRegiNo" resultType="java.lang.Integer">
+  select nvl(max(regi_no),0)+1 from register
+  </select>
+
+<!-- 모든 예약 목록 --> 
+  <select id="selectAllReservation" resultType="reservationVo">
+  	select * from reservation
+  </select>
+  
+</mapper>
