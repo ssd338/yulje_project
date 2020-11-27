@@ -52,8 +52,8 @@ public class DepartmentController {
 		return list;
 	}
 	
-	@RequestMapping("/listDept8")
-	public void list22() {}
+//	@RequestMapping("/listDept8")
+//	public void list22() {}
 	
 	@RequestMapping("/listDept8")
 	public void list() {}
