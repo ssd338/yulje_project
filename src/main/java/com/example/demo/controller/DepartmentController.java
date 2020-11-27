@@ -60,8 +60,9 @@ public class DepartmentController {
 		return list;
 	}
 	
-
-	@RequestMapping("/listDept8")
+	
+	
+	@RequestMapping("/listDept7")
 	public void list22() {}
 	
 	@RequestMapping("/listDept8")

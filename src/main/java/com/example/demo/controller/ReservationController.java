@@ -64,7 +64,6 @@ public class ReservationController {
 		List<Doc_ScheduleVo> list = reservationDao.findByNoSche(map);
 		return list;
 	}
-	
 
 	@PostMapping("/insertRes")
 	@ResponseBody
@@ -109,7 +108,7 @@ public class ReservationController {
 	}
 	
 //	kkk end
-	
+
 	//해당예약번호의 예약상세내역 보여주기
 		@GetMapping("/reserconfirm")
 		
