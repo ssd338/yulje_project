@@ -474,24 +474,6 @@ $(function(){
 					}
 					var no = item.dept_no
 					deptname[no] = item.dept_name
-
-					$(document).on("mouseenter",".main_block",function(){
-						 $(this).empty();
-						 $(this).addClass("main_hover");
-						 
-						 $(this).append("<span><h3>"+deptdata.dept_name+"</h3></span>");
-						 $(this).append("<span><img src='./image/doc22.jpg' class='icon2'></span>");
-						 $(this).append("<span><img src='./image/r.jpg' class='icon2'></span>");
-						 $(this).append("<span><h4><a href='listDoctor?dept_no=2'>의료진</a></h4></span>");
-						 $(this).append("<span><h4>예약</h4></span>");
-					});
-					$(document).on("mouseleave",".main_hover",function(){
-						$(this).empty();
-//						var idx = $(this).attr("idx");
-						$(this).append("<span>"+span1+"</span>","<span>"+span2+"</span>");
-						$(this).removeClass("main_hover");
-					});
-
 					
 					var dname = $("<h2></h2>").html(deptname[no])
 					var deptimg = $("<img>").attr("src","./image/"+item.icon).addClass("icon")
@@ -501,111 +483,6 @@ $(function(){
 					div.append(span1[no], span2[no])
 					$(div).attr("dept_no",no);			// 부서번호-마우스 호버와 의료진목록,예약을 연결하기 위해 담음 
 					$(where).append(div);
-<<<<<<< HEAD
-=======
-					div.append(span1, span2)
-					$(".main_middle").append(div);
-
-
-
-					$(document).on("mouseenter",".main_block",function(){
-						 $(this).empty();
-						 $(this).addClass("main_hover");
-						 
-						 $(this).append("<span><h3>"+deptdata.dept_name+"</h3></span>");
-						 $(this).append("<span><img src='./image/doc22.jpg' class='icon2'></span>");
-						 $(this).append("<span><img src='./image/r.jpg' class='icon2'></span>");
-						 $(this).append("<span><h4><a href='listDoctor?dept_no=2'>의료진</a></h4></span>");
-						 $(this).append("<span><h4>예약</h4></span>");
-					});
-					$(document).on("mouseleave",".main_hover",function(){
-						$(this).empty();
-						var idx = $(this).attr("idx");
-						$(this).append("<span>"+deptimg+"</span>","<span>"+deptname+"</span>");
-						$(this).removeClass("main_hover");
-					});
-				}
-				if(deptdata.dept_group == '일반과'){
-					var deptname = $("<h2></h2>").html(deptdata.dept_name)
-					var deptimg = $("<img>").attr("src","./image/"+deptdata.icon).addClass("icon")
-					var span1 = $("<span></span>").append(deptname)
-					var span2 = $("<span></span>").append(deptimg)
-					var div = $("<div></div>").addClass("main_block")
-					div.append(span1, span2)
-					$(".main_under").append(div);
-
-
-
-					$(document).on("mouseenter",".main_block",function(){
-						 $(this).empty();
-						 $(this).addClass("main_hover");
-						 
-						 $(this).append("<span><h3>"+deptdata.dept_name+"</h3></span>");
-						 $(this).append("<span><img src='./image/doc22.jpg' class='icon2'></span>");
-						 $(this).append("<span><img src='./image/r.jpg' class='icon2'></span>");
-						 $(this).append("<span><h4><a href='listDoctor?dept_no=2'>의료진</a></h4></span>");
-						 $(this).append("<span><h4>예약</h4></span>");
-					});
-					$(document).on("mouseleave",".main_hover",function(){
-						$(this).empty();
-						var idx = $(this).attr("idx");
-						$(this).append("<span>"+deptimg+"</span>","<span>"+deptname+"</span>");
-						$(this).removeClass("main_hover");
-					});
-				}
-			} //반복문끝
-		}}) //ajax끝
-	}) //버튼클릭이벤트끝
-
-	$(document).on("click","#ajaxtest_btn2",function(){
-// 		$("#ajaxtest_btn2").click(function(){
-			$(".main_top").empty()
-			$(".main_middle").empty()
-			$(".main_under").empty()
-			$.ajax("/listDept2", {success:function(data){
-				for(var deptdata of data){
-					
-					var deptname = $("<h2></h2>").html(deptdata.dept_name)
-					var deptimg = $("<img>").attr("src","./image/"+deptdata.icon)
-					var span1 = $("<span></span>").append(deptname)
-					var span2 = $("<span></span>").append(deptimg)
-					var div = $("<div></div>").addClass("main_block")
-					div.append(span1, span2)
-					$(".main_top").append(div);
-					
-				} //반복문끝
-			}}) //ajax끝
-		}) //버튼클릭이벤트끝
-		
-		
-
-// 	$(document).on("mouseenter",".main_block",function(){
-// 		// on안에 (이벤트 이름, 대상자, 함수)
-// 		// 미래에 만들어진 노드에도 이벤트를 설정하는 방법(이미 만들어진 노드 포함)
-// 		 $(this).empty();
-// 		 $(this).addClass("main_hover");
-		 
-// 		 var idx = $(this).attr("idx");
-// 		 $(this).append("<span><h3>"+deptname[idx]+"</h3></span>");
-// 		 $(this).append("<span><img src='./image/doc22.jpg' class='icon2'></span>");
-// 		 $(this).append("<span><img src='./image/r.jpg' class='icon2'></span>");
-// 		 $(this).append("<span><h4><a href='listDoctor'>의료진</a></h4></span>");
-// 		 $(this).append("<span><h4>예약</h4></span>");
-// 		/*
-// 		var idx = $(this).attr("idx");
-// 		var id = $(this).attr("id");
-// 		mouseIn(idx,id);*/
-// 	});
-
-// 	$(document).on("mouseleave",".main_hover",function(){
-// 		$(this).empty();
-// 		var idx = $(this).attr("idx");
-// 		$(this).append("<span>"+image[idx]+"</span>","<span>"+deptname[idx]+"</span>");
-// 		$(this).removeClass("main_hover");
-// 	});
->>>>>>> refs/remotes/origin/master
-=======
->>>>>>> branch '추승연' of https://github.com/ssd338/project_total.git
 	
 				}) //반복문끝
 	        }
