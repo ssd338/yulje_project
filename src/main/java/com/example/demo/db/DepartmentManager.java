@@ -69,7 +69,7 @@ public class DepartmentManager {
 	public static List<DepartmentVo> findAll2(String search){
 		List<DepartmentVo> list = null;
 		SqlSession session = sqlSessionFactory.openSession();
-		list = session.selectList("department.selectAll", search);
+		list = session.selectList("department.selectAll2", search);
 		session.close();
 		return list;
 	}

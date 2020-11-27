@@ -474,8 +474,7 @@ $(function(){
 					}
 					var no = item.dept_no
 					deptname[no] = item.dept_name
-<<<<<<< HEAD
-=======
+
 					$(document).on("mouseenter",".main_block",function(){
 						 $(this).empty();
 						 $(this).addClass("main_hover");
@@ -492,9 +491,7 @@ $(function(){
 						$(this).append("<span>"+span1+"</span>","<span>"+span2+"</span>");
 						$(this).removeClass("main_hover");
 					});
->>>>>>> refs/remotes/origin/master
-=======
->>>>>>> branch '추승연' of https://github.com/ssd338/project_total.git
+
 					
 					var dname = $("<h2></h2>").html(deptname[no])
 					var deptimg = $("<img>").attr("src","./image/"+item.icon).addClass("icon")
