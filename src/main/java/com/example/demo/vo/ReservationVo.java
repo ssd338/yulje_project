@@ -16,6 +16,6 @@ public class ReservationVo {
 	private int member_no;
 	private int doc_no;
 	private int dept_no;
-	private int sche_no;
+//	private int sche_no;
 	
 }

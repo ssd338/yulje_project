@@ -45,5 +45,4 @@ public class DepartmentDao {
 	public List<DoctorVo> findByDept(HashMap map) {
 		return DepartmentManager.findByDept(map);
 	}
-	//목록조회만 구현하는중.
 }

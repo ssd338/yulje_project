@@ -5,8 +5,10 @@
 <head>
 <title>CSS Template</title>
 <meta charset="utf-8">
+<link rel="stylesheet" href="./resCal/cal.css">
 <script src="https://kit.fontawesome.com/eef195c997.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript" src="./resCal/cal.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 
@@ -165,19 +167,23 @@ float:left;
 .m3_2{
 	height: 621px;
 	border: 1px solid #EAEAEA;
+/*  	text-align: center;  */
 }
 .m3_2 >h3{
 	padding-left: 20px;
 	padding-top: 25px;
+	padding-bottom: 25px;
 }
 .calendar{
 	text-align: center;
-    padding-top: 100px;
-    padding-left: 36px;
+/*     padding-top: 50px; */
+/*     height: 460px; */
+/*     padding-left: 36px; */
+	height: 370px;
 
 }
 .confirmation_btn{
-    margin-top: 260px;
+   margin-top: 15px; 
     border: 1px solid #94ccc4;
     text-align: center;
     background: #94ccc4;
@@ -186,8 +192,47 @@ float:left;
     color: white;
     padding: 13px;
 }
+.confirmation_btn:hover {
+    border: 1px solid #94ccc4;
+    text-align: center;
+    background: white;
+    font-size: 20px;
+    font-weight: bold;
+    color: #94ccc4;
+    padding: 13px;
+}
 
+#confirm_btn{
+	text-align: center;
+	height: 150px;
+/* 	position: fixed; */
+	}
 
+#cal_btn{
+	text-align: center;
+	padding-top: 30px;
+}
+
+.ampm_btn{
+	background-color: #94ccc4; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+/*   margin: 4px 2px; */
+margin-left: 5px;
+margin-right: 5px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.ampm_btn:hover {
+  background-color: white;
+  color: #94ccc4;
+}
 
 
 /* Style the tab */
@@ -520,92 +565,26 @@ function doctor(evt, cityName) {
 	}
 </script>
 <script type="text/javascript">
-// function showCalendar(y, m) {
-//     var text = '<table>\n<tr><td colspan=7 style="text-align:center">';
-//     text += '<span onclick="showCalendar('+(y-1)+','+m+')"> Y- </span>';
-//     text += '<span onclick="showCalendar('+(m==1?(y-1)+','+12:y+','+(m-1))+')"> M- </span>';
-//     text += '[' + y + '/' + ((m < 10) ? ('0' + m) : m) + ']';
-//     text += '<span onclick="showCalendar('+(m==12?(y+1)+','+1:y+','+(m+1))+')"> M+ </span>';
-//     text += '<span onclick="showCalendar('+(y+1)+','+m+')"> Y+ </span>';
-//     text += '</td>';
-
-// 	text += '<tr>';
-// 	text += '<td>일</td>';
-// 	text += '<td>월</td>';
-// 	text += '<td>화</td>';
-// 	text += '<td>수</td>';
-// 	text += '<td>목</td>';
-// 	text += '<td>금</td>';
-// 	text += '<td>토</td>';
-// 	text +=	'</tr>';
-	
-//     var d1 = (y+(y-y%4)/4-(y-y%100)/100+(y-y%400)/400
-//           +m*2+(m*5-m*5%9)/9-(m<3?y%4||y%100==0&&y%400?2:3:4))%7;
-//     for (i = 0; i < 42; i++) {
-//         if (i%7==0) text += '</tr>\n<tr>';
-//         if (i < d1 || i >= d1+(m*9-m*9%8)/8%2+(m==2?y%4||y%100==0&&y%400?28:29:30))
-//             text += '<td> </td>';
-//         else
-//             text += '<td' + (i%7 ? '' : ' style="color:red;"') + '>' + (i+1-d1) + '</td>';
-//     }
-//     document.getElementById('calendarDiv').innerHTML = text + '</tr>\n</table>';
-// }
-
-function calenderAppend(calendarList){
-	var html = "";
-	var roomNo = $('#roomReserveNo').val();
-	var notThisMonthColor="#BDBDBD";
-	var sundayColor="#FF0000";
-	var weekdayColor="#000000";
-	var saturdayColor="#0000FF";
-	$.each(calendarList,function(key, item) {
-        if(key%7==0){
-			 html+= "<tr class='fc-week'>";
-		}
-		html+= "<td class='fc-day fc-widget-content'>";
-		html+= "<div style='min-height: 80px;'>";
-		html+= "<div class='fc-day-number' style='color:"
-		//해당일수가 현재월에 포함되지않으면 색깔변경
-        if(item.day > (key+1) || (key-item.day) > 27){
-			html+=notThisMonthColor;
-		}else{
-            //요일에따른 색깔변경
-			if(key%7==0){
-				html+= sundayColor;
-			}else if((key%7)>0 && (key%7)<6){
-				html+= weekdayColor;
-			}else if(key%7==6){
-				html+= saturdayColor;
-			}
-		}
-		html+=";font-weight:bold;'>"+item.day;
-		html+="</div>";
-		html+= "<div class='fc-day-content'>";
-        //일수가 index+1보다 작거나같고 두 수의 차이가 27일보다 작으면..
-		if(item.day <=(key+1) && (key-item.day)<27){
-			if(item.reserveVo != null){
-				html+="<h5 style='color:#FF0000;'>예약중</h5>";
-			}else{
-                //예약중이면 예약정보를 보여준다
-				html+="<button type='button' class='btn btn-default'>예약</button>";
-			}
-		}
-		html+= "<div style='position: relative; height: 25px;'></div>";
-		html+= "</div>";
-		html+= "</div>";
-		html+= "</td>";
-		if(key%7==6){
-			 html+= "</tr>";
-		}
-	});
-	return html;
-}
-
 
 $(function(){
+	show();
+	function show(){
+	        if(ampm != null){
+	            $('#confirm_btn').show();
+	        }else{
+	            $('#confirm_btn').hide();
+	        }
+	}
+
 	
+	//진료과 선택
 	$(document).on("click",".res_dept",function(){
+		$("#cal_btn").empty();
+		$("#calendarDiv").empty();
+		ampm = null;
+		show();
 		var dept_no = $(this).val();
+		dept_num = $(this).val();
 		var dname = $(this).attr("dname");
 		$("#deptname").html(dname);
 		$("#res_doc").html("");
@@ -660,12 +639,194 @@ $(function(){
 		});
 	});
 
+	//의사 선택
 	$(document).on("click",".r_btn",function(){
+		$("#cal_btn").empty();
+		ampm = null;
+		show();
 		var doc_no = $(this).attr("doc_no");
+		doctor_num = $(this).attr("doc_no");
 		var doc_name = $(this).attr("doc_name");
 		$("#docname").html(doc_name);
+		getCal();
+
+		$.ajax({
+		    url: "/resSche",
+		    method: "POST",
+		    dataType: "json",
+		    async: false,
+		    data: {doc_no:doc_no},
+		    success: function(data) {
+			    for(var sche of data){
+				    var workday = sche.workday;
+				    var am = sche.am_pm;
+// 				    alert(am)
+					switch(workday){
+						case "일" : // 일요일
+							$(".sunday").addClass("today");
+							$(".sunday").removeClass("sunday");
+							if (am == "오전") {
+// 								alert("ok")
+								$(".sunday").attr("am",am);
+							}
+							if (am == "오후") {
+								$(".sunday").attr("pm",am);
+							}
+	                    	break;
+						case "월" : // 월요일
+							$(".monday").addClass("today");
+							$(".monday").removeClass("day");
+							if (am == "오전") {
+// 								alert("ok")
+								$(".monday").attr("am",am);
+							}
+							if (am == "오후") {
+								$(".monday").attr("pm",am);
+							}
+	                    	break;
+						case "화" : // 화요일
+							$(".tuesday").addClass("today");
+							$(".tuesday").removeClass("day");
+							if (am == "오전") {
+// 								alert("ok")
+								$(".tuesday").attr("am",am);
+							}
+							if (am == "오후") {
+								$(".tuesday").attr("pm",am);
+							}
+	                    	break;
+						case "수" : // 수요일
+							$(".wednesday").addClass("today");
+							$(".wednesday").removeClass("day");
+							if (am == "오전") {
+// 								alert("ok")
+								$(".wednesday").attr("am",am);
+							}
+							if (am == "오후") {
+								$(".wednesday").attr("pm",am);
+							}
+	                    	break;
+						case "목" : // 목요일
+							$(".thursday").addClass("today");
+							$(".thursday").removeClass("day");
+							if (am == "오전") {
+// 								alert("ok")
+								$(".thursday").attr("am",am);
+							}
+							if (am == "오후") {
+								$(".thursday").attr("pm",am);
+							}
+	                    	break;
+						case "금" : // 금요일
+							$(".friday").addClass("today");
+							$(".friday").removeClass("day");
+							if (am == "오전") {
+// 								alert("ok")
+								$(".friday").attr("am",am);
+							}
+							if (am == "오후") {
+								$(".friday").attr("pm",am);
+							}
+	                    	break;
+						case "토" : // 토요일
+							$(".saturday").addClass("today");
+							$(".saturday").removeClass("saturday");
+							if (am == "오전") {
+// 								alert("ok")
+								$(".saturday").attr("am",am);
+							}
+							if (am == "오후") {
+								$(".saturday").attr("pm",am);
+							}
+	                    	break;
+					}
+				}
+		    }
+		});
 	});
+
+	//예약시 필요한 전역번수
+	var year;
+	var month;
+	var day;
+	var ampm;
+	var doctor_num;
+	var dept_num;
+	var resdate
+	
+	//날짜 선택
+	$(document).on("click",".today",function(){
+		ampm = null;
+		show();
+		day = $(this).html();
+		$("#cal_btn").html("");
+		var am = $(this).attr("am");
+		var pm = $(this).attr("pm");
+
+		if (am != null){
+			var resbtn = $("<button></button>").html("오전예약").addClass("res_am ampm_btn");
+			$("#cal_btn").append(resbtn);
+		}
+		if (pm != null){
+			var resbtn = $("<button></button>").html("오후예약").addClass("res_pm ampm_btn");
+			$("#cal_btn").append(resbtn);
+		}
+	});
+
+	//오전예약 선택
+	$(document).on("click",".res_am",function(){
+// 		alert(dept_num);
+// 		alert(doctor_num);
+// 		alert(day);
+		year = $("#year").html();
+		month = $("#month").html();
+		month = month.substring(0,month.length-1);
+		ampm = "오전";
+		resdate = (year+"/"+month+"/"+day);
+// 		resdate = new Date(year+"/"+month+"/"+day);
+// 		var aa = confirm("gg");
+// 		alert(aa)
+		show();
+	});
+	
+	//오후예약 선택
+	$(document).on("click",".res_pm",function(){
+		year = $("#year").html();
+		month = $("#month").html();
+		month = month.substring(0,month.length-1);
+		ampm = "오후";
+		resdate = (year+"/"+month+"/"+day);
+		show();
+	});
+
+	//예약확정버튼
+	$(document).on("click","#confirm_btn2",function(){
+		if (ampm == null){
+			alert("예약일을 정해주세요.");
+			return false;
+		}
 		
+		$.ajax({
+		    url: "/insertRes",
+		    method: "POST",
+		    dataType: "json",
+		    async: false,
+		    data: {reser_date:resdate, reser_time:ampm, doc_no:doctor_num, dept_no:dept_num},
+		    success: function(data) {
+			    if(data.no > 3){
+					alert("예약이 종료되었습니다. 다른날짜를 선택해주세요.");
+					return false;
+				}
+				if (data.re >0){
+					alert("예약에 성공하였습니다.");
+					location.href="/resOk";
+				} else {
+					alert("예약에 실패하였습니다. 다시 예약해주세요.");
+					return false;
+				}
+		    }
+		});
+	});
 	
 	$.ajax("/resDept",{success:function(data){
 		$("#deptul").html("");
@@ -747,79 +908,20 @@ $(function(){
 		<div class="m3_1">
 			<h3>의료진 선택</h3>
 			<div class="doc_box">
-				<ul id="res_doc">
-<!-- 					<li> -->
-<!-- 						<div class="doc_img"><img src="./image/doctor.png"></div> -->
-<!-- 						<div class="doc_info"> -->
-<!-- 							<h3>김형규 교수</h3> -->
-<!-- 							<p>내과</p> -->
-<!-- 							<p><span>오전</span> 월,수,금,토</p> -->
-<!-- 							<p><span>오후</span> 화,수,금</p> -->
-<!-- 							<button class="r_btn">진료예약</button> -->
-<!-- 						</div> -->
-<!-- 					</li> -->
-<!-- 					<li> -->
-<!-- 						<div class="doc_img"><img src="doctor.png"></div> -->
-<!-- 						<div class="doc_info"> -->
-<!-- 							<h3>장미연 교수</h3> -->
-<!-- 							<p>외과</p> -->
-<!-- 							<p><span>오전</span> 수,토</p> -->
-<!-- 							<p><span>오후</span> 월,수,금</p> -->
-<!-- 							<button class="r_btn">진료예약</button> -->
-<!-- 						</div> -->
-<!-- 					</li> -->
-<!-- 					<li> -->
-<!-- 						<div class="doc_img"><img src="doctor.png"></div> -->
-<!-- 						<div class="doc_info"> -->
-<!-- 							<h3>이국영 교수</h3> -->
-<!-- 							<p>피부과</p> -->
-<!-- 							<p><span>오전</span> 토,일</p> -->
-<!-- 							<p><span>오후</span> 월,화</p> -->
-<!-- 							<button class="r_btn">진료예약</button> -->
-<!-- 						</div> -->
-<!-- 					</li> -->
-<!-- 					<li> -->
-<!-- 						<div class="doc_img"><img src="doctor.png"></div> -->
-<!-- 						<div class="doc_info"> -->
-<!-- 							<h3>은지원 교수</h3> -->
-<!-- 							<p>치과</p> -->
-<!-- 							<p><span>오전</span> 화,수</p> -->
-<!-- 							<p><span>오후</span> 금,토</p> -->
-<!-- 							<button class="r_btn">진료예약</button> -->
-<!-- 						</div> -->
-<!-- 					</li> -->
-<!-- 					<li> -->
-<!-- 						<div class="doc_img"><img src="doctor.png"></div> -->
-<!-- 						<div class="doc_info"> -->
-<!-- 							<h3>추승연 교수</h3> -->
-<!-- 							<p>이비인후과</p> -->
-<!-- 							<p><span>오전</span> 수,목</p> -->
-<!-- 							<p><span>오후</span> 월,화,목</p> -->
-<!-- 							<button class="r_btn">진료예약</button> -->
-<!-- 						</div> -->
-<!-- 					</li> -->
-<!-- 					<li> -->
-<!-- 						<div class="doc_img"><img src="doctor.png"></div> -->
-<!-- 						<div class="doc_info"> -->
-<!-- 							<h3>김영대 교수</h3> -->
-<!-- 							<p>소아과</p> -->
-<!-- 							<p><span>오전</span> 월,수,금,토</p> -->
-<!-- 							<p><span>오후</span> 월,수</p> -->
-<!-- 							<button class="r_btn">진료예약</button> -->
-<!-- 						</div> -->
-<!-- 					</li> -->
-				
+				<ul id="res_doc">				
 				</ul>
 			</div>
 		</div>
 		<div class="m3_2">
 			<h3>진료일정</h3>
 			<div class="calendar">
-				<body onload="calenderAppend">
 				<div id="calendarDiv" style= "font-weight:bold;font-size:15pt;"></div>
 			</div>
-			<div class="confirmation_btn">
-				<p><a href="/reserconfirm">예약확정하기</a><p>
+			<div id="cal_btn"></div>
+			<div id="confirm_btn">
+			<button class="confirmation_btn" id="confirm_btn2">
+				예약확정하기
+			</button>
 			</div>
 		</div>
 	</div>  
