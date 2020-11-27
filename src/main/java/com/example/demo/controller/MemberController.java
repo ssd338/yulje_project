@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -96,11 +97,11 @@ public class MemberController {
 	
 	//비밀번호 변경을 위한 메소드
 	@PostMapping("/changePwd")
-	public ModelAndView changePwd(MemberVo m) {
-		ModelAndView mav = new ModelAndView("redirect:/list");
-		dao.changePwd(m);
-		return mav;
-	}
+//	public ModelAndView changePwd(MemberVo m) {
+//		ModelAndView mav = new ModelAndView("redirect:/list");
+//		dao.changePwd(m);
+//		return mav;
+//	}
 	//yd end
 	
 	//회원가입 페이지로 보내기
@@ -115,6 +116,8 @@ public class MemberController {
 	@PostMapping("/insertMember")
 	public ModelAndView insertSubmit(MemberVo m) {
 		ModelAndView mav = new ModelAndView("/joinOk");
+		String pwd = PasswordEncoderFactories.createDelegatingPasswordEncoder().encode(m.getPwd());
+		m.setPwd(pwd);
 		int re = dao.insert(m);
 		mav.addObject("m", m);
 		mav.addObject("re", re);
@@ -230,9 +233,9 @@ public class MemberController {
 		
 		//등록된 비회원 정보를 가져와 request에 담아 로그인처리
 		MemberVo guest = dao.getGuest(map);
-		String tel = (String)map.get("tel");
-		guest.setTel(tel);
 		if (guest != null) {
+			String tel = (String)map.get("tel");
+			guest.setTel(tel);
 			session.setAttribute("m", guest);
 		}
 //		System.out.println(guest);
@@ -255,6 +258,8 @@ public class MemberController {
 //	@ResponseBody
 	public ModelAndView updateGuestSubmit(MemberVo m) {
 		ModelAndView mav = new ModelAndView("joinOk");
+		String pwd = PasswordEncoderFactories.createDelegatingPasswordEncoder().encode(m.getPwd());
+		m.setPwd(pwd);
 		int re = dao.updateGuest(m);
 		mav.addObject("m", m);
 		mav.addObject("re", re);
