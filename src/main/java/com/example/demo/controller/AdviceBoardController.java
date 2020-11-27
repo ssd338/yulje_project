@@ -394,14 +394,7 @@ public class AdviceBoardController {
 
 	}
 
-	// 회원 여부 판별
-	@GetMapping("/isMember")
-	@ResponseBody
-	public String isMember(HttpSession session) {
-//			String r = (String)session.getAttribute("roles");
-		String r = "ADMIN";
-		return r;
-}
+
 	//동의서 다운받는 코드
 	@RequestMapping("/Patient_down.do")
 	public File downFile(HttpServletRequest request, String fname) {

@@ -176,12 +176,5 @@ public class FaqBoardController {
 
 	}
 	
-	// 회원 여부 판별
-	@GetMapping("/isMember")
-	@ResponseBody
-	public String isMember(HttpSession session) {
-//			String r = (String)session.getAttribute("roles");
-		String r = "ADMIN";
-		return r;
-	}
+
 }
