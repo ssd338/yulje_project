@@ -29,4 +29,9 @@ public class RegisterDao {
 	public List<ReservationVo> listReservation(){
 		return RegisterManager.listReservation();
 	}
+	
+	//모든예약횟수
+	public int countAllReservation() {
+		return RegisterManager.cntAllReser();
+	}
 }
