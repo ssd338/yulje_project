@@ -119,7 +119,7 @@ public class ReservationController {
 				member_no = (int)session.getAttribute("member_no");
 			}
 			
-		    String doc_name = reservationDao.findByDoc_name(reser_no);	//예약번호로 의사이름 찾아오기
+		    String doc_name = reservationDao.findByDoc_name(reser_no);		//예약번호로 의사이름 찾아오기
 		    String dept_name = reservationDao.findByDept_name(reser_no);	//예약번호로 진료과 찾아오기
 		    MemberVo m = memberDao.getMember(member_no);
 		    ReservationVo r = reservationDao.findByNo_Date_time(reser_no);	//예약번호로 예약관련내용 찾아오기

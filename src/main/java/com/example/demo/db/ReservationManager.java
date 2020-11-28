@@ -124,11 +124,11 @@ public class ReservationManager {
 		return a;	
 	}
 			
-			//예약번호로 진료과 이름 조회
-			public static String findByDept_name(int reser_no) {
-				SqlSession session = sqlSessionFactory.openSession();
-				String a = session.selectOne("reservation.getReservation_3",reser_no);
-				session.close();
-				return a;	
-			}
+	//예약번호로 진료과 이름 조회
+	public static String findByDept_name(int reser_no) {
+		SqlSession session = sqlSessionFactory.openSession();
+		String a = session.selectOne("reservation.getReservation_3",reser_no);
+		session.close();
+		return a;	
+	}
 }
