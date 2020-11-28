@@ -127,6 +127,7 @@ public class ReservationController {
 		    if(m.getRoles().equals("USER")) {	//회원일 시에 회원 뜨게 하기
 		    	roles="회원";	
 		    }
+		    
 		    mav.addObject("name", m.getName());
 		    mav.addObject("roles", roles);
 		    mav.addObject("tel", m.getTel());
