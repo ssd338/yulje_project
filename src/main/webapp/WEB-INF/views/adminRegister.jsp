@@ -264,8 +264,8 @@ $(function(){
                var ul = $("<ul></ul>");
                $.each(data, function(idx, item){         
                   var li = $("<li></li>");
-                  var date = new Date(item.reserDate); 			//예약일을 DATE포맷을 적용
-                  date = getFormatDate(date)			
+                  var date = new Date(item.reserDate);          //예약일을 DATE포맷을 적용
+                  date = getFormatDate(date)         
                   var reser_no = $("<span class='reser_no'></span>").html(item.reser_no);
                   var patients_name = $("<span class='patients_name'></span>").html(item.member_name);
                   var patients_tel = $("<span class='patients_tel'></span>").html(item.member_tel);
@@ -344,7 +344,7 @@ $(function(){
         });
     }
 
-	
+   
     
     $("document").ready(function(){
         paging(totalData, dataPerPage, pageCount, 1);                  //첫 화면의 페이징 처리 [이전]12345[다음]
@@ -352,20 +352,20 @@ $(function(){
         regiBtn()
     });
     
-    function regiBtn(){													//진료접수 버튼 동작
-    	$(".regibtn").click(function(){									//버튼에 있는 예약번호를 가져옴
+    function regiBtn(){                                       //진료접수 버튼 동작
+       $(".regibtn").click(function(){                           //버튼에 있는 예약번호를 가져옴
          var reserno = $(this).val();
          alert(reserno)
          $.ajax({
-             url: "/insertRegister.ajax",								//진료접수해줌(register에 등록)
+             url: "/insertRegister.ajax",                        //진료접수해줌(register에 등록)
              method: "POST",
              data: {reserno:reserno},
              async:false,
              success: function(data) {
-				alert(data)												//접수 메세지
+            alert(data)                                    //접수 메세지
              }
          })
-    	})
+       })
     } 
     
     function getFormatDate(date){
