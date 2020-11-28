@@ -60,6 +60,7 @@ public class DepartmentController {
 		return list;
 	}
 	
+
 	
 	
 	@RequestMapping("/listDept7")

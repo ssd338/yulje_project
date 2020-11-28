@@ -256,6 +256,7 @@ $(function(){
           url: "/listReservation.ajax",
           method: "POST",
           data: {totalData:totalData, dataPerPage:dataPerPage,currentPage:currentPage},
+          async:false,
           success: function(data) {            //data는 map을 담은 list이고 list안에는 해당 페이지에 맞는 레코드의 수가 들어있다
             if(data.length>0){                  //들어온 예약이 있다면
                                         //예약번호,  환자이름, 환자 연락처, 진료과, 의료진, 예약일, 예약시간
@@ -263,14 +264,16 @@ $(function(){
                var ul = $("<ul></ul>");
                $.each(data, function(idx, item){         
                   var li = $("<li></li>");
+                  var date = new Date(item.reserDate);          //예약일을 DATE포맷을 적용
+                  date = getFormatDate(date)         
                   var reser_no = $("<span class='reser_no'></span>").html(item.reser_no);
                   var patients_name = $("<span class='patients_name'></span>").html(item.member_name);
                   var patients_tel = $("<span class='patients_tel'></span>").html(item.member_tel);
                   var dept = $("<span class='dept_name'></span>").html(item.dept_name);
                   var doc = $("<span class='doc_name'></span>").html(item.doc_name);
-                  var date = $("<span class='date'></span>").html(item.reserDate);
+                  var date = $("<span class='date'></span>").html(date);
                   var time = $("<span class='time'></span>").html(item.reserTime);
-                  var regisertBtn = $("<span class='register'><button value='"+item.reser_no+"'>진료접수</button></span>")
+                  var regisertBtn = $("<span class='register'><button class='regibtn' value='"+item.reser_no+"'>진료접수</button></span>")
 
                   
 
@@ -280,9 +283,12 @@ $(function(){
                
                $("#th").html(th);
                $("#ul").html(ul);
+
+               
             }
           }
       })
+     
    }   
    
     var totalData = $("#cnt").val();    // 총 진료기록 수      6
@@ -320,7 +326,7 @@ $(function(){
                                               "color":"#CBE2B8", 
                                               "font-weight":"bold"});    // 현재 페이지 표시
         }else{                        //진료기록이 없는 경우
-           $("#ul").html("예약 이력이 없습니다.")
+           $("#ul").html("진료 이력이 없습니다.")
         } 
 
                                             
@@ -334,15 +340,42 @@ $(function(){
             
             pagingAjax(totalData,dataPerPage,selectedPage);               //페이지에 맞는 레코드를 가져오는 ajax을 호출
             paging(totalData, dataPerPage, pageCount, selectedPage);      //밑에 페이징 번호표 [이전]12345[다음]이거 생성
-            
+            regiBtn()
         });
     }
+
+   
     
-    $("document").ready(function(){        
+    $("document").ready(function(){
         paging(totalData, dataPerPage, pageCount, 1);                  //첫 화면의 페이징 처리 [이전]12345[다음]
         pagingAjax(totalData,dataPerPage,1);                        //첫 화면의 레코드   총데이터의 수, 한페이지에 나타낼데이터 수, 현재 선택된 페이지
-         });
-
+        regiBtn()
+    });
+    
+    function regiBtn(){                                       //진료접수 버튼 동작
+       $(".regibtn").click(function(){                           //버튼에 있는 예약번호를 가져옴
+         var reserno = $(this).val();
+         alert(reserno)
+         $.ajax({
+             url: "/insertRegister.ajax",                        //진료접수해줌(register에 등록)
+             method: "POST",
+             data: {reserno:reserno},
+             async:false,
+             success: function(data) {
+            alert(data)                                    //접수 메세지
+             }
+         })
+       })
+    } 
+    
+    function getFormatDate(date){
+        var year = date.getFullYear();              //yyyy
+        var month = (1 + date.getMonth());          //M
+        month = month >= 10 ? month : '0' + month;  //month 두자리로 저장
+        var day = date.getDate();                   //d
+        day = day >= 10 ? day : '0' + day;          //day 두자리로 저장
+        return  year + '-' + month + '-' + day;       //'-' 추가하여 yyyy-mm-dd 형태 생성 가능
+    } 
 });
 </script>
 </head>
@@ -366,9 +399,8 @@ $(function(){
            </div>
          <div class="main_top">
               <input type="hidden" value="${cnt }" id="cnt">
-              <div id="member"><h3>관리자님 | <span id="count">[<h4 style="color: pink;"> ${cnt } </h4>]</span>건의 예약접수가 있습니다</h3></div>
+              <div id="member"><h3>관리자님 | <span id="count">[<h4 style="color: pink;"> ${cnt } </h4>]</span>건의 진료접수 대기가 있습니다</h3></div>
            </div>
-           
            <div class="main_middle">
               <div id="th">
               
@@ -386,8 +418,7 @@ $(function(){
      </div>      
      <div class="column side" id="column_side_right"> </div>
   </div>
-  </div>
-  
+</div>  
    <!-- footer -->
    <jsp:include page="/footer.jsp"></jsp:include>
    <!-- //footer -->

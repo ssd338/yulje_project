@@ -43,22 +43,23 @@ public class ReservationDao {
 	
 //	kkk end
 	
+	//회원번호로 예약현황횟수 조회
 	public int cntByNo(int member_no) {
 		return ReservationManager.cntByNo(member_no);
 	}
-	
+	//이름, 예약번호 일치하는 지 확인
 	public int checkReser_no(HashMap map) {
 		return ReservationManager.checkReser_no(map);
 	}
-	
+	//예약번호로 예약번호, 예약날짜, 예약시간 찾아오기
 	public ReservationVo findByNo_Date_time(int reser_no) {
 		return ReservationManager.findByNo_Date_time(reser_no);
 	}
-	
+	//예약번호로 의사이름 조회
 	public String findByDoc_name(int reser_no) {
 		return ReservationManager.findByDoc_name(reser_no);
 	}
-	
+	//예약번호로 진료과 이름 조회
 	public String findByDept_name(int reser_no) {
 		return ReservationManager.findByDept_name(reser_no);
 	}

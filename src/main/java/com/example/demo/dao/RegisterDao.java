@@ -30,8 +30,8 @@ public class RegisterDao {
 		return RegisterManager.listReservation();
 	}
 	
-	//모든예약횟수
+	//모든 예약횟수를 조회
 	public int countAllReservation() {
-		return RegisterManager.cntAllReser();
+		return RegisterManager.countAllReservation();
 	}
 }

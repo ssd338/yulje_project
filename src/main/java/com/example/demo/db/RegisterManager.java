@@ -58,12 +58,12 @@ public class RegisterManager {
 		return list;
 	}
 	
-	//회원들의 예약 총 횟수
-	public static int cntAllReser() {
-		int no = 0;
+	//모든 예약횟수를 조회
+	public static int countAllReservation() {
+		int n = -1;
 		SqlSession session = sqlSessionFactory.openSession();
-		no = session.selectOne("register.cntAllReser");
+		n = session.selectOne("register.countAllReservation");
 		session.close();
-		return no;
+		return n;
 	}
 }
