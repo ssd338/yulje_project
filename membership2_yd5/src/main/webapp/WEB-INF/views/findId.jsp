@@ -4,8 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<%-- <meta id="_csrf" name="_csrf" content="${_csrf.token}" />
-<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" /> --%>
+<meta id="_csrf" name="_csrf" content="${_csrf.token}" />
+<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
 <title>Insert title here</title>
 <style>
 	* {
@@ -211,14 +211,14 @@
 <script type="text/javascript">
 $(function(){
 
-/* 	$(document).ready(function(){
+  	$(document).ready(function(){
 	    var token = $("meta[name='_csrf']").attr("content");
 	    var header = $("meta[name='_csrf_header']").attr("content");
 	    $(document).ajaxSend(function(e, xhr, options) {
 	        xhr.setRequestHeader(header, token);
 	    });
 	});
- */
+ 
 	var checkAlready = true;
 	var checkR = true;
 	
@@ -257,6 +257,7 @@ $(function(){
 				data: {rr_no:rr},
 				success: function(data){
 					alert(data.id);
+					location.href="/login";
 					}
 		});
 			
@@ -271,11 +272,11 @@ $(function(){
 			alert("잘못된 주민등록번호입니다. 주민등록번호를 확인해주세요.");
 			return false;
 		}
-/* 		if(checkAlready){
+ 	/* 	if(checkAlready){
 			alert("이미 가입된 주민등록번호입니다.");
 			return false;
-		} */
-
+		}
+ */
 		
 	});
 
