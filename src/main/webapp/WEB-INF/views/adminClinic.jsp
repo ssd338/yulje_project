@@ -13,16 +13,15 @@ table{
 }
 
 td {
-   padding: 10px;
+   width: 200px;
+   height: 50px;
 }
 
 .title{
    background-color: #f2f2f2;
-}
-
-.content{
-   vertical-align: top;
-   padding-top: 30px;
+   font-size: 15px;
+   text-align: center;
+   
 }
 
 #btn_medi{
@@ -42,17 +41,27 @@ td {
 </style>
 </head>
 <body>
-
-   <h2> 님 예약이 완료되었습니다.</h2><hr>
-   <form action="/insertRegister" method='post'>
+   <h2>진료 내역 등록</h2><hr>
    <table>
    <tr>
-   <td class="title">환자이름</td><td>${name }</td>
-   <td class="title">예약번호</td><td>${reser_no }</td>
+   <td class="title">환자명</td><td></td>
+   <td class="title" height="200px">진료내용</td>
+   <td><textarea rows="10" cols="30" id="cli_content" name="cli_content"></textarea></td>
    </tr>
+   <tr>
+   <td class="title">진료과</td><td></td>
+   <td class="title">담당의</td><td></td>
+   </tr>
+   <tr>
+   <td class="title">날짜</td><td></td>
+   </tr>
+
+   
+  
+   
+   
    </table>
    <hr>
-   <a href="/clinicAdmin"><button id="btn_li">진료기록하기</button></a>
-   </form>
+   <a href="/"><button id="btn_li">등록</button></a>
 </body>
 </html>

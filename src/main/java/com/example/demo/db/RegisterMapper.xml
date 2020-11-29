@@ -14,9 +14,12 @@
   select nvl(max(regi_no),0)+1 from register
   </select>
 
-<!-- 모든 예약 목록 --> 
+<!-- 진료 등록되지 않은 모든 예약 목록 --> 
   <select id="selectAllReservation" resultType="reservationVo">
-  	select * from reservation
+  	select * from reservation rs where rs.reser_no not in(select rg.reser_no from register rg)
   </select>
-  
+<!-- 진료 등록되지 않은 모든 예약 횟수를 조회 -->
+  <select id="countAllReservation" resultType="java.lang.Integer">
+  	select count(*) from reservation rs where rs.reser_no not in(select rg.reser_no from register rg)
+  </select>
 </mapper>

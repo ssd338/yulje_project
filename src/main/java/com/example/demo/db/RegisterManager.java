@@ -53,8 +53,17 @@ public class RegisterManager {
 	public static List<ReservationVo> listReservation(){
 		List<ReservationVo> list = new ArrayList<ReservationVo>();
 		SqlSession session = sqlSessionFactory.openSession();
-		list = session.selectOne("register.selectAllReservation");
+		list = session.selectList("register.selectAllReservation");
 		session.close();
 		return list;
+	}
+	
+	//모든 예약횟수를 조회
+	public static int countAllReservation() {
+		int n = -1;
+		SqlSession session = sqlSessionFactory.openSession();
+		n = session.selectOne("register.countAllReservation");
+		session.close();
+		return n;
 	}
 }
