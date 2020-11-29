@@ -19,12 +19,36 @@ import lombok.AllArgsConstructor;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		// TODO Auto-generated method stub
 		//super.configure(http);
-		http.csrf().disable();
+//	    http.csrf().disable();
+		
+//		http.authorizeRequests()
+        // 페이지 권한 설정
+//        .antMatchers("/admin/**").hasRole("ADMIN")
+//        .antMatchers("/user/myinfo").hasRole("MEMBER")
+//        .antMatchers("/**").permitAll()
+//        .and()
+//        
+//	        // 로그인 설정                
+//	        .formLogin()
+//	        .loginPage("/login")
+//	        .defaultSuccessUrl("/loginSuccess")
+//	        .permitAll()
+//	        .and()
+//	        .oauth2Login()
+//			.loginPage("/login") 
+//        .and() // 로그아웃 설정		
+//			.logout()
+//	        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+//	        .logoutSuccessUrl("/login")
+//	        .invalidateHttpSession(true)
+//	    .and()
+//        // 403 예외처리 핸들링
+//            .exceptionHandling().accessDeniedPage("/user/denied");
+
 		
 		http.authorizeRequests()
 		.mvcMatchers("/","/all/**").permitAll()
@@ -35,24 +59,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.anyRequest().permitAll();
 		
 		http.formLogin().loginPage("/login").permitAll()
-		.defaultSuccessUrl("/main")
+		.defaultSuccessUrl("/loginSuccess")
 		.and()
 		.oauth2Login()
 		.loginPage("/login"); 
 	
 		http.logout()
 		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+		.logoutSuccessUrl("/login")
 		.invalidateHttpSession(true);
 		
-		http.httpBasic();
-		
-		
+		http.httpBasic();		
 	}
-
-
-	
 }
-
 
 
 
