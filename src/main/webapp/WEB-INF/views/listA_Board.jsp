@@ -145,6 +145,7 @@
 	height: 150px;
 	padding-top: 15px;
 	text-align: center;
+	margin-left: 405px;
 }
 
 .dept_button {
@@ -162,29 +163,32 @@
 	width: 950px;
 	height: 80px;
 	text-align: center;
-	padding-top: 40px;
-}
+	padding-top: 250px;
+ 	margin-left: 385px;
+ 	padding-bottom: 125px;
+ }
 
 .main_input {
 	width: 950px;
 	text-align: center;
 }
 
-li {
+.a_li {
 	font-size: 11px;
-	margin-left: 350px;
+	margin-left: 420px;
 }
 
-table {
+.listA_Board {
 	border-collapse: collapse;
-	width: 850px;
+	
 }
 
 .board_table {
-	margin-left: 45px;
+	margin-left: 470px;
+	width: 1000px;
 }
 
-th {
+.listA_Board th {
 	font-weight: bold;
 	border-bottom: 1.4px solid #747474;
 	padding-bottom: 5px;
@@ -192,7 +196,7 @@ th {
 }
 
 /* w3school 긁어옴 */
-td {
+.listA_Board td {
 	padding: 8px;
 	text-align: center;
 	border-bottom: 1px solid #94ccc4;
@@ -238,15 +242,15 @@ a:visited {
 }
 
 #btn_div {
-	margin-left: 650px;
+	margin-left: 1100px;
 }
 
 /*doctor detail*/
 
 #doc_detail_menu{
-/* 	text-align: center; */
+/*  	text-align: center; */
 	width: 1000px;
-	margin-left: 125px;
+	margin-left: 580px;
 }
 
 .doc_div{
@@ -300,6 +304,7 @@ a:visited {
 	height: 180px;
 	padding-left: 70px;
 	border-radius: 80px;
+	padding-bottom: 20px;
 }
 
 .fname_bunya{
@@ -312,10 +317,10 @@ a:visited {
 </style>
 </head>
 <body>
-
+<jsp:include page="header.jsp"></jsp:include>
 	<div class="main_input_menu">${title }</div>
 	<ul>
-		<li>병원을 이용하시면서 선생님께 감사했던 마음을 전해보세요! 따뜻하고 소중한 격려가 됩니다.</li>
+		<li class="a_li">병원을 이용하시면서 선생님께 감사했던 마음을 전해보세요! 따뜻하고 소중한 격려가 됩니다.</li>
 	</ul>
 	<br>
 
@@ -373,7 +378,7 @@ a:visited {
 			<a href="insertA_Board.do"><button id="btn_insert">새글쓰기</button></a>
 		</div>
 	</div>
-
+<jsp:include page="/footer.jsp"></jsp:include>
 
 
 

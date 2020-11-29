@@ -79,14 +79,17 @@
 	width: 950px;
 	height: 80px;
 	text-align: center;
-	padding-top: 40px;
+	padding-top: 250px;
+	margin-left: 405px;
+	padding-bottom: 95px;
+	
 }
 
 .faq_menu {
 	display: flex;
 	text-align: center;
-	width: 950px;
-	padding-left: 21px;
+	width: 1500px;
+	padding-left: 405px;
 }
 
 .faq_bottom_menu {
@@ -106,6 +109,7 @@
 #search_form {
 	text-align: right;
 	width: 920px;
+	margin-left: 385px;
 }
 
 .search_btn {
@@ -132,6 +136,7 @@
 	border: 1px solid #D5D5D5;
 	background-color: white;
 	color: black;
+	margin-left: 1250px;
 }
 
 #search_input_form {
@@ -146,6 +151,7 @@
 	border-bottom: 1.5px solid #94CCC4;
 	padding: 10px;
 	width: 900px;
+	margin-left: 405px;
 }
 
 label {
@@ -210,6 +216,7 @@ input[id*="answer"]:checked+label+div {
 </style>
 </head>
 <body>
+	<jsp:include page="header.jsp"></jsp:include>
 
 	<div class="main_input_menu">${title }</div>
 	
@@ -254,5 +261,7 @@ input[id*="answer"]:checked+label+div {
 	<c:forEach var="i" begin="1" end="${totalPage }">
 		<a href="listSFaq.do?pageNUM=${i }">${i }</a>&nbsp;		
 		</c:forEach>
+		
+		<jsp:include page="/footer.jsp"></jsp:include>	
 </body>
 </html>
