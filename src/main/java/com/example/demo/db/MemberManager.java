@@ -59,13 +59,13 @@ public class MemberManager {
 	}
 	
 	//비밀번호 변경
-//	public static int changePwd(MemberVo m) {
-//		int re = -1;
-//		SqlSession session = sqlSessionFactory.openSession(true);
-//		re = session.update("member.updatePwd", m);
-//		session.close();
-//		return re;
-//	}
+	public static int changePwd(MemberVo m) {
+		int re = -1;
+		SqlSession session = sqlSessionFactory.openSession(true);
+		re = session.update("member.changePwd", m);
+		session.close();
+		return re;
+	}
 	//yd end
 	
 	

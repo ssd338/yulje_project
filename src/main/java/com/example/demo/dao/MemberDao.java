@@ -21,9 +21,9 @@ public class MemberDao {
 	}
 	
 	//비밀번호 변경
-//	public int changePwd(MemberVo m) {
-//		return MemberManager.changePwd(m);
-//	}
+	public int changePwd(MemberVo m) {
+		return MemberManager.changePwd(m);
+	}
 	
 	//yd end
 
