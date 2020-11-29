@@ -239,7 +239,6 @@
      
    }
 </style>
-<link rel="stylesheet" href="./css/sidebar.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
 $(function(){

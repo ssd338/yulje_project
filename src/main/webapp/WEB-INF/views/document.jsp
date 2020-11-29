@@ -14,12 +14,6 @@ body {
   font-family: Arial, Helvetica, sans-serif;	
 }
 
-
-
-
-/* Style the header */
-
-
 /* Create three unequal columns that floats next to each other */
 .column {
   float: left;
@@ -48,18 +42,6 @@ body {
   display: table;
   clear: both;
 }
-/* Style the footer */
-/*
-
-.footer {
-  background-color: #f1f1f1;
-  padding: 10px;
-  text-align: center;
-}
-*/
-
-/* 위에는 w3school 긁어온것 */
-
 
 /* 페이지이름 */
 .part_title{
@@ -289,9 +271,7 @@ padding: 20px 20px 20px 20px;
 
 </style>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="newfooter.css">
 <script src="https://kit.fontawesome.com/eef195c997.js" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="header.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
 
@@ -299,9 +279,9 @@ padding: 20px 20px 20px 20px;
 <title>증명서 발급 안내</title>
 </head>
 <body>
-  <!-- Header Start -->
-     <jsp:include page="/header.jsp"></jsp:include>
-<!-- 	Header End -->
+ <!-- Header Start -->
+      <jsp:include page="/header.jsp"></jsp:include>
+<!--    Header End -->
 
 <div class="row">
 	<!-- 양쪽 빈공간중에 왼쪽. 메뉴바 들어옴. -->
@@ -511,10 +491,9 @@ padding: 20px 20px 20px 20px;
   <div class="column side"></div>
 </div>
 
-  <!-- footer Start -->
-     <jsp:include page="/footer2.jsp"></jsp:include>
-<!-- 	footer End -->
-
+<!-- footer -->
+   <jsp:include page="/footer.jsp"></jsp:include>
+   <!-- //footer -->
 
 </body>
 </html>

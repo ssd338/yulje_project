@@ -206,9 +206,7 @@ background-color: #EAEAEA;
 }  
 </style>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="newfooter.css">
 <script src="https://kit.fontawesome.com/eef195c997.js" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="header.css">
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
@@ -431,10 +429,10 @@ $(function(){
   </div>
 </div>
 
-  <!-- footer Start -->
-     <jsp:include page="/footer2.jsp"></jsp:include>
-<!-- 	footer End -->
-
+  <!-- footer -->
+   <jsp:include page="/footer.jsp"></jsp:include>
+   <!-- //footer -->
+   
 
 </body>
 </html>

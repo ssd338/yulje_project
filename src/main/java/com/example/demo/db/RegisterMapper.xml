@@ -22,4 +22,14 @@
   <select id="countAllReservation" resultType="java.lang.Integer">
   	select count(*) from reservation rs where rs.reser_no not in(select rg.reser_no from register rg)
   </select>
+  
+<!-- 진료기록(clinc)에 등록되지 않은 모든 진료접수(register)의 수를 조회 -->
+ <select id="countAllRegister" resultType="java.lang.Integer">
+	select count(*) from register rg where rg.regi_no not in(select c.regi_no from clinic c)		
+ </select>
+ 
+<!-- 진료기록(clinc)에 등록되지 않은 모든 진료접수(register)를 조회 -->
+<select id="selectAllRegister" resultType="registerVo">
+	select * from register rg where rg.regi_no not in(select c.regi_no from clinic c)
+</select>
 </mapper>
