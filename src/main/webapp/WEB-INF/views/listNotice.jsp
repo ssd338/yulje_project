@@ -36,7 +36,7 @@ $(function(){
 	width : 950px;
 	height: 80px;
 	text-align: center;	
-	padding-top: 150px;
+	padding-top: 250px;
  	margin-left: 385px;
  	padding-bottom: 125px;
 }
@@ -133,13 +133,13 @@ a:visited {
 <title>공지사항</title>
 </head>
 
-<jsp:include page="header.jsp"></jsp:include>
-
 
 
 
 
 <body>
+
+<jsp:include page="header.jsp"></jsp:include>
 
   		<div class="main_input_menu">
 		공지사항
