@@ -44,11 +44,12 @@ public class RegisterController {
 	
 	//진료기록 등록 -clinic에 등록하는 페이지
 	@RequestMapping("/adminClinic")
-	public ModelAndView adminClinic() {
+  public ModelAndView adminClinic() {
 		ModelAndView mav = new ModelAndView();
 		int cnt = registerDao.countAllRegister();   // 총 진료접수
 	    mav.addObject("cnt", cnt);   
 	    return mav;	
+
 	}
 
 	//진료 접수 - 예약목록 보여주는 페이지

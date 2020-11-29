@@ -12,21 +12,23 @@
      box-sizing: border-box;
    }
    /* 제목 부분 */
-   #nameDiv{
-   
+   #nameDiv
+   { 
    clear:both;
    justify-content: center; 
    display: flex; 
    display:inline-block;
    margin:5px 0 5px 0;
    width:886px; 
-      border-left: 5px solid #CBE2B8;
-      padding-left: 40px;
+   border-left: 5px solid #CBE2B8;
+   padding-left: 40px;
    }
-   #name{
-      margin:5px 0 5px 0;
-      padding:0px;
-      font-size: 30px;
+   
+   #name
+   {
+    margin:5px 0 5px 0;
+    padding:0px;
+    font-size: 30px;
    }
    #nameDiv h1{
    vertical-align: 25px;
