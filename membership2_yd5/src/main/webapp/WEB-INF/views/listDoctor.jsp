@@ -124,240 +124,160 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
 $(function () {
+// 	$(".main").hover(function () {
+// 		$(this).addClass("active");
+// 	}, function () {
+// 		$(this).removeClass("active");		
+// 	});
 
-var num;
-var strongtitle = "";
 
-function list(num){ 
+
+var num; //버튼 클릭할때마다 바뀌어야될 변수라서 전역으로 사용할거라 바깥으로 빼둠.
+
+	var list = function(){ //각 과마다 목록을 불러오는 함수
 	
-	$.ajax("/listDoctor1", {success:function(data){
-		console.log(data);
-		
-		//타이틀
-		var titlediv = $("<div></div>").addClass("title");
-		var dept = $("<h1></h1>").html("<strong>"+strongtitle+"</strong> 의료진목록");
-		var searchspan = $("<span></span>");
-		var searchinput = $("<input>").attr("type", "search").attr("size", "50").attr("placeholder", "의료진 이름을 입력하세요");
-		var searchbtn = $("<button>의료진 검색</button>");
-
-		searchspan.append(searchinput);
-		searchspan.append(searchbtn);
-
-		titlediv.append(dept);
-		titlediv.append(searchspan);
-
-		$("#ajaxtest_output").append(titlediv);
-
-		
-		for(var doc of data){
-			if(doc.dept_no==num){
-				console.log(doc.dept_no);
-				//정보
-				var div = $("<div></div").addClass("main");
-				var imgspan = $("<span></span>");
-				var img = $("<img>").attr("src", "./docimage/"+doc.doc_fname).addClass("face");
-				imgspan.append(img);
+	$.ajax("/listDoctor1", {success:function(data){ //컨트롤러에 서비스요청
+		for(var i in data){ //응답받은 데이터(객체배열) 수만큼 반복
+		// ***
+// 		for(var docdata of data){
+// 			console.log(docdata)
+// 			var p = $("<p></p>")
+// 			if(docdata.dept_no==num){
+// 				//var deptname = $("<h2></h2>").html(deptdata.dept_name)
+// 				//var deptimg = $("<img>").attr("src","./image/"+deptdata.icon).addClass("icon")
+// 				//var span2 = $("<span></span>").append(deptimg)
 				
-				var infospan = $("<span></span>").addClass("info");
-
-				var infoul = $("<ul></ul>");
-				var namediv = $("<div></div>");
-				var nameli = $("<li></li>").html("<h2>"+doc.doc_name+"</h2>");
-				namediv.append(nameli);
-				var majorli = $("<li></li>").html("<strong>진료과</strong>"+"<span>"+doc.major+"</span>");
-				var specli = $("<li></li>").html("<strong>전문분야</strong>"+"<span>"+doc.specialization+"</span>");
-				infoul.append(namediv);
-				infoul.append(majorli);
-				infoul.append(specli);
 				
-				var reserbtn = $("<button></button>").html("예약하기");
-
-				var dlink = $("<a></a>").attr("href", "/detailDoctor?doc_no="+doc.doc_no);
-				var detailbtn = $("<button>상세보기</button>").appendTo(dlink);
-
-				infospan.append(infoul);
-				infospan.append(reserbtn);
-				infospan.append(dlink);
+// 				var namespan = $("<span></span>").html(docdata.doc_name)
+// 				console.log(docdata.doc_name)
+// 				console.log(span1)
+// 				var majorspan = $("<span></span>").html(docdata.doc_major)
+// 				var specspan = $("<span></span>").html(docdata.specialization)
+// 				var img = $("<img>").attr("src", "./image/"+docdata.doc_fname)
+// 	// 			.attr("width", 50)
+// 				var imgspan = $("<span></span>").append(img)
+// 	// 			var dlink = $("<a></a>")
+// 				//<a href='listDoctor?deptno='"+deptdata.dept_no
+// 				var dlink = document.createElement("a")
+// 				dlink.setAttribute("href", "/detailDoctor?doc_no="+docdata.doc_no)
+// 				console.log(dlink)
+// 				var btn = $("<button>상세</button>").appendTo(dlink)
+// 				console.log(dlink)
 				
-				div.append(imgspan);
-				div.append(infospan);
+// 				p.append(namespan, majorspan, specspan, imgspan, dlink)
+				
+// 			} //진료과내반복끝
+// 			console.log(p)
+// 			var test = document.getElementById("ajaxtest_output")
+// 			test.append(p)
+// 		} //반복끝
+// 	}}) //ajax끝
+// 	} //listfunction 끝
 
-				$("#ajaxtest_output").append(div);
+			// ***
+			
+			var span1 = document.createElement("span") //doc_name 담을곳
+			var span2 = document.createElement("span") //major 담을곳.
+			var span3 = document.createElement("span") //specialization 담을곳
+			var span4 = document.createElement("span") //doc_fname 담을곳
+			var dlink = document.createElement("a") //상세보기.
+			var rlink = document.createElement("a") //예약.
+			var p = document.createElement("p") //p태그 생성.
+			var a = data[i] //현재 돌고있는 객체를 바라보는 a변수 선언.
+			
+			if(a.dept_no==num){ //num은 각 과별 고유번호. 특정 과에 해당하는 의사정보만 가져옴.
+				for(var j in a){ //객체 내에서 속성값 수만큼 반복
+					if(j=='doc_no'){
+						var dno = JSON.stringify(a[j]) //doc_no의 자료형이 object(객체)이기때문에 이 값을 문자열로 바꿔줄 메소드적용
+// 						console.log(text)
+// 						console.log(typeof text)
+ 						dlink.setAttribute("href", "/detailDoctor?doc_no="+dno) //a태그에 링크 목적지를 부여.
+ 						var btn = $("<button>상세</button>").appendTo(dlink) //상세보기 버튼을 a태그 안에 넣어 <a href="~~~"><button>xxx</button></a> 꼴로 만들어줌
+						rlink.setAttribute("href", "/reservation?doc_no="+dno)
+						var btn2 = $("<button>예약</button>").appendTo(rlink)
+					}
+					if(j=='doc_name'){ //객체 내 속성값이 doc_name일때
+						var text = document.createTextNode(a[j]) //그 속성값 문자열로 가져오기. a[j]는 현재 반복중인 객체 a에서의 j번째 속성(컬럼)을 의미.
+						span1.appendChild(text) //span1태그에 담음
+					}
+					if(j=='major'){ //객체 내 속성값이 major일때.
+						var text = document.createTextNode(a[j])
+						span2.appendChild(text)
+					}
+					if(j=='specialization'){ //객체 내 속성값이 specialization일때
+						var text = document.createTextNode(a[j])
+						span3.appendChild(text)
+					}
+					if(j=='doc_fname'){ //객체 내 속성값이 doc_fname일때.
+						var img = document.createElement("img")
+						img.setAttribute("src", "./image/"+a.doc_fname) //이미지 속성 추가. 이미지파일의 위치 지정
+						img.setAttribute("width", 50) //크기지정
+						img.setAttribute("height", 50)
+						span4.appendChild(img)
+					}
+					p.appendChild(span1)
+					p.appendChild(span2)
+					p.appendChild(span3)
+					p.appendChild(span4)
+					p.appendChild(dlink)
+					p.appendChild(rlink)
+				}
+				var test = document.getElementById("ajaxtest_output") //ajaxtest_output이라는 아이디를 가진 노드를 바라보는 변수 test선언 
+				test.appendChild(p) //test에 span들이 담긴 p태그 담음 == ajaxtest_output에 담음.
 			}
-		} //전체반복끝
+		}
 	}}) //ajax통신끝.
 	} //함수끝
 
-
-	
-	list(1);
-
-
-	
 	$("#ajaxtest_btn1").click(function(){
 		$('#ajaxtest_output').empty(); //매 클릭시마다 중첩되지않게 한번씩 비워줌
-		$.ajax("/listDoctor1", {success:function(data){
-			for(var doc of data){
-				if(doc.dept_no==1){
-					strongtitle = doc.major;
-				}
-			}
-		}});
-		list(1)
+		num = 1 //진료과 고유번호. 호흡기내과
+		list()
 	});
 	$("#ajaxtest_btn2").click(function(){
 		$('#ajaxtest_output').empty();
-		$.ajax("/listDoctor1", {success:function(data){
-			for(var doc of data){
-				if(doc.dept_no==2){
-					strongtitle = doc.major;
-				}
-			}
-		}});
-		list(2)
+		num = 2
+		list()
 	});
 	$("#ajaxtest_btn3").click(function(){
 		$('#ajaxtest_output').empty();
-		$.ajax("/listDoctor1", {success:function(data){
-			for(var doc of data){
-				if(doc.dept_no==3){
-					strongtitle = doc.major;
-				}
-			}
-		}});
-		list(3)
+		num = 3
+		list()
 	});
 	$("#ajaxtest_btn4").click(function(){
 		$('#ajaxtest_output').empty();
-		$.ajax("/listDoctor1", {success:function(data){
-			for(var doc of data){
-				if(doc.dept_no==4){
-					strongtitle = doc.major;
-				}
-			}
-		}});
-		list(4)
+		num = 4
+		list()
 	});
 	$("#ajaxtest_btn5").click(function(){
 		$('#ajaxtest_output').empty();
-		$.ajax("/listDoctor1", {success:function(data){
-			for(var doc of data){
-				if(doc.dept_no==5){
-					strongtitle = doc.major;
-				}
-			}
-		}});
-		list(5)
+		num = 5
+		list()
 	});
 	$("#ajaxtest_btn6").click(function(){
 		$('#ajaxtest_output').empty();
-		$.ajax("/listDoctor1", {success:function(data){
-			for(var doc of data){
-				if(doc.dept_no==6){
-					strongtitle = doc.major;
-				}
-			}
-		}});
-		list(6)
+		num = 6
+		list()
 	});
 	$("#ajaxtest_btn7").click(function(){
 		$('#ajaxtest_output').empty();
-		$.ajax("/listDoctor1", {success:function(data){
-			for(var doc of data){
-				if(doc.dept_no==7){
-					strongtitle = doc.major;
-				}
-			}
-		}});
-		list(7)
+		num = 7
+		list()
 	});
 	$("#ajaxtest_btn8").click(function(){
 		$('#ajaxtest_output').empty();
-		$.ajax("/listDoctor1", {success:function(data){
-			for(var doc of data){
-				if(doc.dept_no==8){
-					strongtitle = doc.major;
-				}
-			}
-		}});
-		list(8)
+		num = 8
+		list()
 	});
 	$("#ajaxtest_btn9").click(function(){
 		$('#ajaxtest_output').empty();
-		$.ajax("/listDoctor1", {success:function(data){
-			for(var doc of data){
-				if(doc.dept_no==9){
-					strongtitle = doc.major;
-				}
-			}
-		}});
-		list(9)
+		num = 9
+		list()
 	});
 	$("#ajaxtest_btn10").click(function(){
 		$('#ajaxtest_output').empty();
-		$.ajax("/listDoctor1", {success:function(data){
-			for(var doc of data){
-				if(doc.dept_no==10){
-					strongtitle = doc.major;
-				}
-			}
-		}});
-		list(10)
-	});
-	$("#ajaxtest_btn11").click(function(){
-		$('#ajaxtest_output').empty();
-		$.ajax("/listDoctor1", {success:function(data){
-			for(var doc of data){
-				if(doc.dept_no==11){
-					strongtitle = doc.major;
-				}
-			}
-		}});
-		list(11)
-	});
-	$("#ajaxtest_btn12").click(function(){
-		$('#ajaxtest_output').empty();
-		$.ajax("/listDoctor1", {success:function(data){
-			for(var doc of data){
-				if(doc.dept_no==12){
-					strongtitle = doc.major;
-				}
-			}
-		}});
-		list(12)
-	});
-	$("#ajaxtest_btn13").click(function(){
-		$('#ajaxtest_output').empty();
-		$.ajax("/listDoctor1", {success:function(data){
-			for(var doc of data){
-				if(doc.dept_no==13){
-					strongtitle = doc.major;
-				}
-			}
-		}});
-		list(13)
-	});
-	$("#ajaxtest_btn14").click(function(){
-		$('#ajaxtest_output').empty();
-		$.ajax("/listDoctor1", {success:function(data){
-			for(var doc of data){
-				if(doc.dept_no==14){
-					strongtitle = doc.major;
-				}
-			}
-		}});
-		list(14)
-	});
-	$("#ajaxtest_btn15").click(function(){
-		$('#ajaxtest_output').empty();
-		$.ajax("/listDoctor1", {success:function(data){
-			for(var doc of data){
-				if(doc.dept_no==15){
-					strongtitle = doc.major;
-				}
-			}
-		}});
-		list(15)
+		num = 10
+		list()
 	});
 
 })
@@ -387,7 +307,6 @@ function list(num){
   
 </div>
   <div class="column middle">
-  <!-- 
   	<div class="title">
   		<h1><strong>호흡기 내과</strong> 의료진목록</h1>
   		<span>
@@ -395,7 +314,6 @@ function list(num){
 	  		<button>의료진 검색</button>
   		</span>
   	</div>
-  	 -->
   	<div id="ajaxtest">
   		<div id="buttons">
   		<button id="ajaxtest_btn1">호흡기내과</button>
@@ -415,10 +333,8 @@ function list(num){
   		<button id="ajaxtest_btn15">산부인과</button>
   		</div>
   		<div id="ajaxtest_output">
-  		
   		</div>
   	</div>
-  	<!-- 
   	<div class="main">
   	
   		<span class="img"><img alt="" src="./image/yu.jpg" class="face"></span>
@@ -447,7 +363,7 @@ function list(num){
 				<button>예약하기</button><button>상세보기</button>
   		</span>
   	</div>
-  	 -->
+  	
   <div class="column side"></div>
 </div>
 

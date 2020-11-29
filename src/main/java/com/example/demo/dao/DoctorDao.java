@@ -25,4 +25,8 @@ public class DoctorDao {
 	public DoctorVo findDocDept(int dept_no) {
 		return DoctorManager.findDocDept(dept_no);
 	}
+	
+	public List<DoctorVo> searchDoc(String str){
+		return DoctorManager.searchDocList(str);
+	}
 }

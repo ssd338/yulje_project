@@ -53,7 +53,34 @@ public class RegisterManager {
 	public static List<ReservationVo> listReservation(){
 		List<ReservationVo> list = new ArrayList<ReservationVo>();
 		SqlSession session = sqlSessionFactory.openSession();
-		list = session.selectOne("register.selectAllReservation");
+		list = session.selectList("register.selectAllReservation");
+		session.close();
+		return list;
+	}
+	
+	//모든 예약횟수를 조회
+	public static int countAllReservation() {
+		int n = -1;
+		SqlSession session = sqlSessionFactory.openSession();
+		n = session.selectOne("register.countAllReservation");
+		session.close();
+		return n;
+	}
+	
+//진료기록(clinc)에 등록되지 않은 모든 진료접수(register)의 수를 조회
+	public static int countAllRegister() {
+		int n = -1;
+		SqlSession session = sqlSessionFactory.openSession();
+		n = session.selectOne("register.countAllRegister");
+		session.close();
+		return n;
+	}
+	
+//진료기록 등록 - 진료기록(clinc)에 등록되지 않은 모든 진료접수(register)를 조회
+	public static List<RegisterVo> selectAllRegister(){
+		List<RegisterVo> list = new ArrayList<RegisterVo>();
+		SqlSession session = sqlSessionFactory.openSession();
+		list = session.selectList("register.selectAllRegister");
 		session.close();
 		return list;
 	}

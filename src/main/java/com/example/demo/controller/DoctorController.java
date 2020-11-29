@@ -35,30 +35,38 @@ public class DoctorController {
 	
 	
 	
-//	@RequestMapping("/listDoctor")
-//	public void list(@RequestParam(defaultValue = "1")int dept_no, Model model) {
-//		model.addAttribute("dept_no", dept_no);
-//	}
-//	
-//	@RequestMapping("/listDoctor1")
-//	@ResponseBody
-//	public List<DoctorVo> listDoctor() {
-//		System.out.println("의료진목록 컨트롤러 동작");
-//		List<DoctorVo> list  = dao.findAll();
-//		return list;
-//	}
-	
-	
-	
-	
-	
 	@RequestMapping("/listDoctor")
-	public void doctorList(@RequestParam(defaultValue = "1")int dept_no, Model model) {
-		model.addAttribute("dlist", dao.findAllByDeptNo(dept_no));
+	public void list(@RequestParam(defaultValue = "1")int dept_no, Model model) {
+		model.addAttribute("dept_no", dept_no);
 		model.addAttribute("d", dao.findDocDept(dept_no));
 	}
 	
+	@RequestMapping("/listDoctor1")
+	@ResponseBody
+	public List<DoctorVo> listDoctor(int dept_no, Model model) {
+		model.addAttribute("d", dao.findDocDept(dept_no));
+		System.out.println("버튼클릭");
+		List<DoctorVo> list  = dao.findAll();
+		return list;
+	}
 	
+	@RequestMapping("/listDoctor2")
+	@ResponseBody
+	public List<DoctorVo> searchDoc(String str){
+		List<DoctorVo> list = dao.searchDoc(str);
+		return list;
+	}
+	
+	
+	
+//	@RequestMapping("/listDoctor")
+//	public void doctorList(@RequestParam(defaultValue = "1")int dept_no, Model model) {
+//		model.addAttribute("dlist", dao.findAllByDeptNo(dept_no));
+//		model.addAttribute("d", dao.findDocDept(dept_no));
+//	}
+//	
+//	
+//	
 	@RequestMapping("/detailDoctor")
 	public void detail(int doc_no, Model model) {
 		model.addAttribute("d", dao.findByNo(doc_no));

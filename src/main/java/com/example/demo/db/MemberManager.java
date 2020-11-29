@@ -59,13 +59,13 @@ public class MemberManager {
 	}
 	
 	//비밀번호 변경
-	public static int changePwd(MemberVo m) {
-		int re = -1;
-		SqlSession session = sqlSessionFactory.openSession(true);
-		re = session.update("member.updatePwd", m);
-		session.close();
-		return re;
-	}
+//	public static int changePwd(MemberVo m) {
+//		int re = -1;
+//		SqlSession session = sqlSessionFactory.openSession(true);
+//		re = session.update("member.updatePwd", m);
+//		session.close();
+//		return re;
+//	}
 	//yd end
 	
 	
@@ -100,9 +100,10 @@ public class MemberManager {
 	//주민번호 중복확인
 	public static int checkRR(HashMap map) {
 		int n = -1;
-//		System.out.println(map);
+		System.out.println(map);
 		SqlSession session = sqlSessionFactory.openSession();
 		n = session.selectOne("member.checkRR", map);
+		System.out.println(n);
 		session.close();
 		return n;
 	}
