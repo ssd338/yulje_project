@@ -43,7 +43,7 @@ public class RegisterController {
 	}
 	
 	//진료기록 등록 -clinic에 등록하는 페이지
-	@RequestMapping("/clinicAdmin")
+	@RequestMapping("/adminClinic")
 	public void clinicAdmin() {
 		
 	}
