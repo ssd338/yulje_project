@@ -25,13 +25,22 @@ public class RegisterDao {
 		return RegisterManager.getNextRegiNo();
 	}
 	
-	//진료접수를 위한 예약목록
+	//(진료접수 되지 않은)진료접수를 위한 예약목록
 	public List<ReservationVo> listReservation(){
 		return RegisterManager.listReservation();
 	}
 	
-	//모든 예약횟수를 조회
+	//진료접수 되지 않은 모든 예약횟수를 조회
 	public int countAllReservation() {
 		return RegisterManager.countAllReservation();
+	}
+	//진료기록(clinc)에 등록되지 않은 모든 진료접수(register)의 수를 조회
+	public int countAllRegister() {
+		return RegisterManager.countAllRegister();
+	}
+	
+	//진료기록 등록 - 진료기록(clinc)에 등록되지 않은 모든 진료접수(register)를 조회
+	public List<RegisterVo> selectAllRegister(){
+		return RegisterManager.selectAllRegister();
 	}
 }
