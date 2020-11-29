@@ -36,27 +36,30 @@ $(function(){
 	width : 950px;
 	height: 80px;
 	text-align: center;	
-	padding-top: 40px;
+	padding-top: 150px;
+ 	margin-left: 385px;
+ 	padding-bottom: 125px;
 }
 
 .main_input{
 	width : 950px;
 	text-align: center;
+	margin-left: 430px;
 	
 }
 
-li{
+.n_li{
 	font-size: 13px;
-	margin-left: 350px;
+	margin-left: 420px;
 	
 }
 
-table{
+.listNotice{
 	border-collapse: collapse;
 	width: 850px;
 }
 
-th{
+.listNotice th{
 	font-weight: bold;
 	border-bottom: 1.4px solid #747474;
 	padding-bottom: 5px;
@@ -65,7 +68,7 @@ th{
 
 /* w3school 긁어옴 */
 
-td {
+.listNotice td {
   padding: 8px;
   text-align: center;
   border-bottom: 1px solid #94ccc4;
@@ -122,11 +125,15 @@ a:visited {
 
 }
 
+.div_num{
+	padding-right: 100px;
+}
+
 </style>
 <title>공지사항</title>
 </head>
 
-
+<jsp:include page="header.jsp"></jsp:include>
 
 
 
@@ -138,7 +145,7 @@ a:visited {
 		공지사항
 	</div>
 		<ul>
-			<li>율제병원의 새 소식을 알려드립니다.
+			<li class="n_li">율제병원의 새 소식을 알려드립니다.
 			</li>
 		</ul>
 	<br>
@@ -146,7 +153,7 @@ a:visited {
 	
 	
 	<div class="main_input">
-	<table class="listG_Board">
+	<table class="listNotice">
 	
 		<tr>
 			<th id="td_no">글번호</th>
@@ -187,7 +194,7 @@ a:visited {
   </div>
   <div class="column side"> </div>
 </div>
-
+<jsp:include page="/footer.jsp"></jsp:include>
 
 
 </body>

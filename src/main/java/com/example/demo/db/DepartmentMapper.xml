@@ -13,7 +13,7 @@
 <!--     select * from department where dept_group='일반과' -->
 <!--   </select> -->
   <select id="selectAll" resultType="deptVo">
-  	select * from department where dept_name like '${search}'
+  	select * from department
   </select>
   
   <select id="selectAllSort" resultType="deptVo">

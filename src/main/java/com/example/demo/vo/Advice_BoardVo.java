@@ -16,6 +16,7 @@ public class Advice_BoardVo {
 	private int member_no;
 	private String title;
 	private String writer;
+	private String pwd;
 	private String content;
 	private Date regdate;
 	private int hit;
