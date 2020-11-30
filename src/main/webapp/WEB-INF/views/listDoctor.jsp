@@ -126,6 +126,7 @@
 	color: #94CCC4;
 }
 
+
 #buttons > button {
 	margin: 5px;
 	color: white;
@@ -147,6 +148,7 @@
     margin-top : 10px;
  	height: 40px;
  	font-size: 18px;
+
 }
 
 </style>
@@ -257,7 +259,7 @@ function list(num){
 		for(var doc of data){
 			if(doc.dept_no==num){
 // 				console.log(doc.dept_no);
-				//정보
+				
 				$('#titleline').html("<strong>"+doc.major+"</strong> 의료진목록");
 				var div = $("<div></div>").addClass("main");
 				var imgspan = $("<span></span>");
@@ -410,21 +412,21 @@ function list(num){
  	<div class="column middle">
   	<div id="ajaxtest">
   		<div id="buttons">
-  		<button id="ajaxtest_btn1">호흡기내과</button>
-  		<button id="ajaxtest_btn2">순환기내과</button>
-  		<button id="ajaxtest_btn3">소화기내과</button>
-  		<button id="ajaxtest_btn4">알레르기내과</button>
-  		<button id="ajaxtest_btn5">내과(일반)</button>
-  		<button id="ajaxtest_btn6">간담췌외과</button>
-  		<button id="ajaxtest_btn7">위장관외과</button>
-  		<button id="ajaxtest_btn8">대장항문외과</button>
-  		<button id="ajaxtest_btn9">이식혈관외과</button>
-  		<button id="ajaxtest_btn10">외과(일반)</button>
-  		<button id="ajaxtest_btn11">신경과</button>
-  		<button id="ajaxtest_btn12">안과</button>
-  		<button id="ajaxtest_btn13">정형외과</button>
-  		<button id="ajaxtest_btn14">가정의학과</button>
-  		<button id="ajaxtest_btn15">산부인과</button>
+  		<button id="ajaxtest_btn1" class="deptbtn">호흡기내과</button>
+  		<button id="ajaxtest_btn2" class="deptbtn">순환기내과</button>
+  		<button id="ajaxtest_btn3" class="deptbtn">소화기내과</button>
+  		<button id="ajaxtest_btn4" class="deptbtn">알레르기내과</button>
+  		<button id="ajaxtest_btn5" class="deptbtn">내과(일반)</button>
+  		<button id="ajaxtest_btn6" class="deptbtn">간담췌외과</button>
+  		<button id="ajaxtest_btn7" class="deptbtn">위장관외과</button>
+  		<button id="ajaxtest_btn8" class="deptbtn">대장항문외과</button>
+  		<button id="ajaxtest_btn9" class="deptbtn">이식혈관외과</button>
+  		<button id="ajaxtest_btn10" class="deptbtn">외과(일반)</button>
+  		<button id="ajaxtest_btn11" class="deptbtn">신경과</button>
+  		<button id="ajaxtest_btn12" class="deptbtn">안과</button>
+  		<button id="ajaxtest_btn13" class="deptbtn">정형외과</button>
+  		<button id="ajaxtest_btn14" class="deptbtn">가정의학과</button>
+  		<button id="ajaxtest_btn15" class="deptbtn">산부인과</button>
   		</div>
   		
   		<div class="title">
@@ -445,6 +447,7 @@ function list(num){
   		</div> 
   	</div>
   	</div>
+
   <div class="column side"></div>
 </div>
  	<jsp:include page="/footer.jsp"></jsp:include> 
