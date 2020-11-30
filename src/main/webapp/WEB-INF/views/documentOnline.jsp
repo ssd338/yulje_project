@@ -157,7 +157,7 @@ background-color: #EAEAEA;
 	border-radius: 2px;
 	width: 380px;
 	height:57px;
-	margin:0 20px 0 70px;
+	margin:0 10px 0 20px;
 	cursor: pointer;
 	
 }
@@ -178,7 +178,7 @@ background-color: #EAEAEA;
 	text-align:center;
 }
 #guidList{
-	width:900px;
+	width:800px;
 	height:50px;
 	margin-bottom: 15px;
 	display: inline-block;
