@@ -71,6 +71,7 @@ $(function(){
 	}); 
 
 
+  	
   	$('.menu_drop_area').mouseleave(function(){
 
 		$('.menu_drop_area').addClass('close');
@@ -84,8 +85,6 @@ $(function(){
 		$('.menu_drop_list_area1').removeClass('on');
 		$('.drop_board_list1').removeClass('on');
 		$('.menu_drop_list_wrap').removeClass('on');
-
-		
 	}); 
 
 
@@ -165,7 +164,7 @@ $(function(){
 						</li>
 					
 						<li>
-							<a href="#"><img src="./menu/insertMember.png"></a>
+							<a href="/checkMember"><img src="./menu/insertMember.png"></a>
 						</li>
 						
 					</c:if>		
@@ -180,7 +179,7 @@ $(function(){
 					</c:if>	
 						
 						<li>
-							<a href="#"><img src="./menu/map.png"></a>
+							<a href="map.jsp"><img src="./menu/map.png"></a>
 						</li>
 					</ul>
 				</div>
@@ -218,8 +217,8 @@ $(function(){
 									</div>
 									<div class="drop_detail_area">
 										<ul class="drop_board_list1">
-											<li><a href="#">예약안내</a></li>
-											<li><a href="#">온라인예약</a></li>
+											<!-- <li><a href="#">예약안내</a></li> -->
+											<li><a href="/reservation">온라인예약</a></li>
 											<li><a href="#">예약조회/취소</a></li>
 											<li><a href="#">1:1전문의 상담</a></li>
 											<li><a href="#">진료과별 상담</a></li>
@@ -233,9 +232,9 @@ $(function(){
 									</div>
 									<div class="drop_detail_area">
 										<ul class="drop_board_list2">
-											<li><a href="#">의료진</a></li>
-											<li><a href="#">진료과</a></li>
-											<li><a href="#">의료과 검색</a></li>
+											<li><a href="/listDoctor">의료진</a></li>
+											<li><a href="/listDept">진료과</a></li>
+<!-- 										<li><a href="#">의료과 검색</a></li> -->
 										</ul>
 									</div>
 								</div>
@@ -246,13 +245,15 @@ $(function(){
 									</div>
 									<div class="drop_detail_area">
 										<ul class="drop_board_list3">
-											<li><a href="#">병문안 안내</a></li>
-											<li><a href="#">편의시설 안내</a></li>
-											<li><a href="#">층별 안내</a></li>
-											<li><a href="#">찾아오시는 길 안내</a></li>
-											<li><a href="#">칭찬게시판</a></li>
-											<li><a href="#">공지사항</a></li>
-											<li><a href="#">병원소개/소식?</a></li>
+											<li><a href="visit.jsp">병문안 안내</a></li>
+<!-- 											<li><a href="#">편의시설 안내</a></li> -->
+											<li><a href="floorGuide.jsp">층별 안내</a></li>
+											<li><a href="map.jsp">찾아오시는 길 안내</a></li>
+											<li><a href="/listNotice">공지사항</a></li>
+											<li><a href="/listG_Board.do">칭찬합시다</a></li>
+											<li><a href="#">상담 게시판</a></li>
+											<li><a href="/listFaq">자주묻는 질문</a></li>											
+											<li><a href="hosInfo.jsp">병원소개</a></li>
 										</ul>
 									</div>
 								</div>
@@ -263,16 +264,16 @@ $(function(){
 									</div>
 									<div class="drop_detail_area">
 										<ul class="drop_board_list4">
-											<li><a href="#">로그인</a></li>
-											<li><a href="#">회원가입</a></li>
-											<li><a href="#">마이페이지</a></li>
-											<li><a href="#">증명서 발급 안내</a></li>
-											<li><a href="#">증명서 발급</a></li>
-											<li><a href="#">온라인 신청</a></li>
+									<!-- 		<li><a href="/login">로그인</a></li>
+											<li><a href="/checkMember">회원가입</a></li>
+											<li><a href="/myPage_1">마이페이지</a></li> -->
+											<!-- <li><a href="#">증명서 발급 안내</a></li> -->
+											<li><a href="/document">증명서 발급</a></li>
+											<li><a href="/listFaq">자주묻는질문</a></li>
 											<li><a href="#">건강 정보</a></li>
-											<li><a href="#">건강TV</a></li>
-											<li><a href="#">약정보</a></li>
-											<li><a href="#">이달의 강좌</a></li>
+											<li><a href="/listMedicalTV">건강TV</a></li>
+											<li><a href="/listMedicine">약정보</a></li>
+											<li><a href="course.jsp">이달의 강좌</a></li>
 										</ul>
 									</div>
 								</div>

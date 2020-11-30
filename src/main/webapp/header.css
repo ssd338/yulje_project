@@ -259,8 +259,7 @@ ul{
     margin-left: 20px;     /* 마진 왼쪽 오른쪽 억지로 가운데 보이게 한거고 수정해야함 */
 
 }
-.drop_board_list1 li:hover{
-	border-bottom:2px solid #94ccc4;
+.drop_board_list1 li a:hover{
 	color:#94ccc4;  /*호버시 문자들이 움직임ㅡㅡ*/
 }
 
@@ -281,9 +280,13 @@ ul{
     margin-left: 20px;     /* 마진 왼쪽 오른쪽 억지로 가운데 보이게 한거고 수정해야함 */
 
 }
-.drop_board_list2 li:hover{
+/* .drop_board_list2 li a:hover{
 	font-color:#94ccc4;
 	border-bottom:2px solid #94ccc4;
+	color:#94ccc4;  호버시 문자들이 움직임ㅡㅡ
+	
+} */
+.drop_board_list2 li a:hover{
 	color:#94ccc4;  /*호버시 문자들이 움직임ㅡㅡ*/
 }
 
@@ -304,8 +307,7 @@ ul{
     margin-left: 20px;     /* 마진 왼쪽 오른쪽 억지로 가운데 보이게 한거고 수정해야함 */
 
 }
-.drop_board_list3 li:hover{
-	border-bottom:2px solid #94ccc4;
+.drop_board_list3 li a:hover{
 	color:#94ccc4;  /*호버시 문자들이 움직임ㅡㅡ*/
 }
 
@@ -326,8 +328,7 @@ ul{
     margin-left: 20px;     /* 마진 왼쪽 오른쪽 억지로 가운데 보이게 한거고 수정해야함 */
 
 }
-.drop_board_list4 li:hover{
-	border-bottom:2px solid #94ccc4;
+.drop_board_list4 li a:hover{
 	color:#94ccc4;  /*호버시 문자들이 움직임ㅡㅡ*/
 }
 
