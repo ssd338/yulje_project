@@ -245,7 +245,7 @@ function list(num){
 		for(var doc of data){
 			if(doc.dept_no==num){
 // 				console.log(doc.dept_no);
-				//정보
+				
 				$('#titleline').html("<strong>"+doc.major+"</strong> 의료진목록");
 				var div = $("<div></div>").addClass("main");
 				var imgspan = $("<span></span>");
