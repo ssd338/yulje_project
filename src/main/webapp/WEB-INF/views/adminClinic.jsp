@@ -273,11 +273,11 @@ td {
   }
     
 #member h3{
-   display: inline;
+	display: inline;
 }
 
 #clinicBtn{
-   margin-left: 10px;
+	margin-left: 10px;
 }
 
 </style>
@@ -308,24 +308,22 @@ $(function(){
                   var formatdate = new Date(item.date);          //예약일을 DATE포맷을 적용
                   formatdate = getFormatDate(formatdate)  
                   var regi_no = $("<span class='regi_no'></span>").html(item.regi_no)
-                  var hidden = $("<input type='hidden'>").attr("value",item.regi_no).addClass("regin")
-                  regi_no.append(hidden)
-                  
-                  var patients_name = $("<span class='patients_name'></span>").html(item.member_name);
-                  hidden = $("<input type='hidden'>").attr("value",item.member_name).addClass("patientsn")
-                  patients_name.append(hidden)
-                  
+          		 
+          		  
+                  var patients_name = $("<span class='patients_name'></span>").html(item.member.name);
+                  hidden = $("<input type='hidden'>").attr("value",item.member.member_no).addClass("memberno")
+          		  patients_name.append(hidden)
+          		  
                   var dept = $("<span class='dept_name'></span>").html(item.dept_name);
                   var hidden = $("<input type='hidden'>").attr("value",item.dept_no).addClass("deptno")
-                  dept.append(hidden)
-                  
+          		  dept.append(hidden)
+          		  
                   var doc = $("<span class='doc_name ddn'></span>").html(item.doc_name);
                   hidden = $("<input type='hidden'>").attr("value",item.doc_no).addClass("docno")
-                  doc.append(hidden)
-                  
+          		  doc.append(hidden)
+          		  
                   var date = $("<span class='date'></span>").html(formatdate);
-                  hidden = $("<input type='hidden'>").attr("value",formatdate).addClass("regid")
-                  date.append(hidden)
+                 
                   
 
                   $(li).append(regi_no,patients_name,dept,doc,date);
@@ -414,43 +412,45 @@ $(function(){
         return  year + '-' + month + '-' + day;     //'-' 추가하여 yyyy-mm-dd 형태 생성 가능
     }
 
-    function listClick(){                     //진료 접수 목록을 눌렀을때 진료기록을 남기는 폼으로 값이 가도록 하는 메소드
-       $(".regiList").click(function(){
-          $("#register_no").html($(this).find('.regin').val())          
-          $("#member_name").html($(this).find('.patientsn').val())
-          var input = $("<input type='hidden'>").attr("value",$(this).find('.deptno').val()).addClass("dept_no")
-          $("#department_name, #docter_name").empty()
-          $("#department_name").append($(this).find('.dept_name').text(),input)
-          
-          input = $("<input type='hidden'>").attr("value",$(this).find('.docno').val()).addClass("doc_no")   
-          $("#docter_name").append($(this).find('.doc_name').text(), input)
-          $("#register_date").html($(this).find('.regid').val())
-       }) 
+    function listClick(){							//진료 접수 목록을 눌렀을때 진료기록을 남기는 폼으로 값이 가도록 하는 메소드
+	    $(".regiList").click(function(){
+	    	$("#member_name, #department_name, #docter_name").empty()
+	    		 
+	    	$("#register_no").html($(this).find('.regi_no').text())   	
+	    	var input = $("<input type='hidden'>").attr("value",$(this).find('.memberno').val()).addClass("member_no")
+	    	$("#member_name").append($(this).find('.patients_name').text(), input)
+	    	input = $("<input type='hidden'>").attr("value",$(this).find('.deptno').val()).addClass("dept_no")
+	    	$("#department_name").append($(this).find('.dept_name').text(),input)
+	    	input = $("<input type='hidden'>").attr("value",$(this).find('.docno').val()).addClass("doc_no")	
+	    	$("#docter_name").append($(this).find('.doc_name').text(), input)
+	    	$("#register_date").html($(this).find('.date').text())
+	    }) 
     }
 
-   function clinicBtn1(){                     //진료기록 등록버튼 눌렀을때
-      $("#clinicBtn").click(function(){         //진료기록을 적는 폼의 값을 변수에 담아서 ajax통신으로 보냄
-         var NO = $("#register_no").text()
-         var Mname = $("#member_name").text()
-         var DEPTname = $("#department_name").text()
-         var DOCname = $("#docter_name").text()
-         var DATE = $("#register_date").text()
-         var CONTENT = $("#cli_content").val()
-         var MEDI = $("#medicine").val()
-         var DOCNO = $(".doc_no").val()
-         var DEPTNO = $(".dept_no").val()
-         $.ajax({
-                url: "/adminInsertClinic.ajax",
-                method: "POST",
-                data: {no:NO, mname:Mname,deptname:DEPTname,docname:DOCname,date:DATE,content:CONTENT,medi:MEDI,docno:DOCNO,deptno:DEPTNO},
-                async:false,
-                success: function(data) {
-                   alert(data)
-                }
-         })
-      })
-   }
-   
+	function clinicBtn1(){							//진료기록 등록버튼 눌렀을때
+		$("#clinicBtn").click(function(){			//진료기록을 적는 폼의 값을 변수에 담아서 ajax통신으로 보냄
+			var NO = $("#register_no").text()
+			var Mname = $("#member_name").text()
+			var DEPTname = $("#department_name").text()
+			var DOCname = $("#docter_name").text()
+			var DATE = $("#register_date").text()
+			var CONTENT = $("#cli_content").val()
+			var MEDI = $("#medicine").val()
+			var DOCNO = $(".doc_no").val()
+			var DEPTNO = $(".dept_no").val()
+			var MEMNO = $(".member_no").val()
+			$.ajax({
+	          	url: "/adminInsertClinic.ajax",
+	          	method: "POST",
+	          	data: {no:NO, mname:Mname,deptname:DEPTname,docname:DOCname,date:DATE,content:CONTENT,medi:MEDI,docno:DOCNO,deptno:DEPTNO,memno:MEMNO},
+	          	async:false,
+	          	success: function(data) {
+		          	alert(data)
+	          	}
+			})
+		})
+	}
+	
     
 });
 </script>
