@@ -981,8 +981,9 @@ $(function(){
 </script>
 </head>
 <body>
-
-	<jsp:include page="header.jsp"></jsp:include>
+ <!-- Header Start -->
+     <jsp:include page="/header.jsp"></jsp:include>
+<!-- 	Header End -->
 
 	<div class="row">
 		<div class="column-side-left" style="background-color: #aaa;">Column</div>

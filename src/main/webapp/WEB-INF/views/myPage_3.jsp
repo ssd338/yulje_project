@@ -491,9 +491,9 @@ $(function(){
                   <input type="hidden" value="${m.id }" name="id" id="id">
                   <input type="hidden" value="${m.pwd }" name="pwd" id="pwd">
                   <input type="hidden" value="${m.member_no}" name="member_no">
-                    <span id="mypage_title_sub_span1"><input type="text" class="pw_input" placeholder="현재 비밀번호" name='oldpwd' id="oldpwd"></span><br>
-                    <span id="mypage_title_sub_span2"> <input type="text" class="pw_input" placeholder="새 비밀번호" name='newpwd1' id="newpwd1"></span><br>
-                    <span id="mypage_title_sub_span3"><input type="text" class="pw_input" placeholder="새 비밀번호 확인" name="newpwd2" id="newpwd2"></span><br>
+                    <span id="mypage_title_sub_span1"><input type="password" class="pw_input" placeholder="현재 비밀번호" name='oldpwd' id="oldpwd"></span><br>
+                    <span id="mypage_title_sub_span2"> <input type="password" class="pw_input" placeholder="새 비밀번호" name='newpwd1' id="newpwd1"></span><br>
+                    <span id="mypage_title_sub_span3"><input type="password" class="pw_input" placeholder="새 비밀번호 확인" name="newpwd2" id="newpwd2"></span><br>
                     
                  </div>
               </div>

@@ -11,11 +11,14 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
 $(function(){
-
+	
   	$('.reser_board').mouseenter(function(){
  		$('.menu_drop_area').addClass('on');
 		$('.menu_drop_wrap').addClass('on');
 		$('.menu_drop_list_area1').addClass('on');
+		$('.menu_drop_list_area2').addClass('close');
+		$('.menu_drop_list_area3').addClass('close');
+		$('.menu_drop_list_area4').addClass('close');
 		$('.drop_board_list1').addClass('on');
 		$('.menu_drop_list_wrap').addClass('on');
 		
@@ -31,6 +34,9 @@ $(function(){
  		$('.menu_drop_area').addClass('on');
 		$('.menu_drop_wrap').addClass('on');
 		$('.menu_drop_list_area2').addClass('on');
+		$('.menu_drop_list_area1').addClass('close');
+		$('.menu_drop_list_area3').addClass('close');
+		$('.menu_drop_list_area4').addClass('close');
 		$('.drop_board_list2').addClass('on');
 		$('.menu_drop_list_wrap').addClass('on');
 		
@@ -45,6 +51,9 @@ $(function(){
  		$('.menu_drop_area').addClass('on');
 		$('.menu_drop_wrap').addClass('on');
 		$('.menu_drop_list_area3').addClass('on');
+		$('.menu_drop_list_area2').addClass('close');
+		$('.menu_drop_list_area1').addClass('close');
+		$('.menu_drop_list_area4').addClass('close');
 		$('.drop_board_list3').addClass('on');
 		$('.menu_drop_list_wrap').addClass('on');
 		
@@ -60,6 +69,9 @@ $(function(){
  		$('.menu_drop_area').addClass('on');
 		$('.menu_drop_wrap').addClass('on');
 		$('.menu_drop_list_area4').addClass('on');
+		$('.menu_drop_list_area2').addClass('close');
+		$('.menu_drop_list_area3').addClass('close');
+		$('.menu_drop_list_area1').addClass('close');
 		$('.drop_board_list4').addClass('on');
 		$('.menu_drop_list_wrap').addClass('on');
 		
