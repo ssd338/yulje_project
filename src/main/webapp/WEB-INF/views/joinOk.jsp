@@ -14,13 +14,13 @@
 <script type="text/javascript">
 $(function(){
 	$("#btnMain").click(function(){
-		alert("main");
-// 		location.href="/main";
+// 		alert("main");
+		location.href="/main";
 	});
 
 	$("#btnLogin").click(function(){
-		alert("login");
-// 		location.href="/login";
+// 		alert("login");
+		location.href="/login";
 	});
 
 	if ($("#sp").val() == "회원"){
