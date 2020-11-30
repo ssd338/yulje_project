@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.demo.dao.MemberDao;
 import com.example.demo.dao.RegisterDao;
 import com.example.demo.dao.ReservationDao;
+import com.example.demo.vo.ClinicVo;
 import com.example.demo.vo.MemberVo;
 import com.example.demo.vo.RegisterVo;
 import com.example.demo.vo.ReservationVo;
@@ -154,7 +155,7 @@ public class RegisterController {
             MemberVo m = memberDao.getMember(rs.getMember_no());
             
             map2.put("regi_no",rg.getRegi_no());                          		 		//접수번호
-            map2.put("member_name",m.getName());                                 		//환자이름
+            map2.put("member",m);                                 						//환자정보
             map2.put("dept_name", reservationDao.findByDept_name(rg.getReser_no())); 	//예약번호로 진료과 찾아오기
             map2.put("dept_no", rs.getDept_no());										//진료과번호
             map2.put("doc_name", reservationDao.findByDoc_name(rg.getReser_no()));   	//예약번호로 의사이름 찾아오기
@@ -174,21 +175,26 @@ public class RegisterController {
 		//no, mname,deptname,docname,date,content,medi,docno,deptno
 		String msg = "";
 		
-		int no =Integer.parseInt((String)map.get("no"));
+		int regi_no =Integer.parseInt((String)map.get("no"));
 		String mname = (String)map.get("mname");
 		String deptname = (String)map.get("deptname");
 		String docname = (String)map.get("docname");
 		
 		String strDate = (String)map.get("date");					//String을 sqlDate타입으로 바꿈
-		Date d = Date.valueOf(strDate);
-		String content = (String)map.get("content");
-		int medi =Integer.parseInt((String)map.get("medi"));
-		int docno =Integer.parseInt((String)map.get("docno"));
-		int deptno =Integer.parseInt((String)map.get("deptno"));
-
+		Date cli_date = Date.valueOf(strDate);
+		String cli_content = (String)map.get("content");
+		int medi_no =Integer.parseInt((String)map.get("medi"));
+		int doc_no =Integer.parseInt((String)map.get("docno"));
+		int dept_no =Integer.parseInt((String)map.get("deptno"));
+		int member_no =Integer.parseInt((String)map.get("memno"));
 		
-		msg="등록에 성공하였습니다.";
-			
+		ClinicVo cn = new ClinicVo(registerDao.getNextCliNo(), cli_date, cli_content, medi_no, regi_no, dept_no, doc_no, member_no);
+		int a = registerDao.insertClinic(cn);
+		if(a == 1) {
+			msg="등록에 성공하였습니다.";
+		}else {
+			msg="등록절차에 오류가 있었습니다. 확인 후 다시 시도해 주세요";
+		}
 		
 		return msg;
 	} 
