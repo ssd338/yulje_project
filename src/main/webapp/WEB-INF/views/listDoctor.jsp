@@ -151,6 +151,24 @@
 
 }
 
+#deptbtn {
+	margin: 5px;
+	color: white;
+	background-color: #94CCC4;
+	border-radius: 3px;
+ 	border: none;
+ 	justify-content: center;
+ 	text-align : center;
+	display: flex;
+  	text-decoration: none;
+  	display: inline-block;
+  	font-size: 19px;
+  	transition-duration: 0.4s;
+  	cursor: pointer;
+  	padding: 10px;
+
+}
+
 </style>
 <title>율제대병원 의료진 목록</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -443,10 +461,13 @@ function list(num){
   		 
   		<div id="ajaxtest_output">
   		
-  			</div>
-  		</div> 
+  		</div>
+  		<div>
+  			<a href="/listDept"><button id="deptbtn">진료과</button></a>
+  		</div>
+  	</div> 
   	</div>
-  	</div>
+  </div>
 
   <div class="column side"></div>
 </div>
