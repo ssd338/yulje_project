@@ -23,7 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		// TODO Auto-generated method stub
 		//super.configure(http);
-	    http.csrf().disable();
+	    //http.csrf().disable();
 		
 //		http.authorizeRequests()
         // 페이지 권한 설정
