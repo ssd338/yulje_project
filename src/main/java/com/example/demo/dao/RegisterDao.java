@@ -2,10 +2,14 @@ package com.example.demo.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.example.demo.db.ClinicManager;
+import com.example.demo.db.MemberManager;
 import com.example.demo.db.RegisterManager;
 import com.example.demo.vo.ClinicVo;
+import com.example.demo.vo.MemberVo;
 import com.example.demo.vo.RegisterVo;
 import com.example.demo.vo.ReservationVo;
 
