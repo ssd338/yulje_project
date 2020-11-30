@@ -35,7 +35,7 @@
 
 	<update id="update">
 		update Good_Board set
-		title=#{title},content=#{content},fname=#{fname},dept_name=#{dept_name}
+		title=#{title},content=#{content},fname=#{fname}
 		where no=#{no} and pwd=#{pwd}
 	</update>
 

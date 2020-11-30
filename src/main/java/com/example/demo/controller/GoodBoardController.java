@@ -239,10 +239,10 @@ public class GoodBoardController {
 
 		// 원래(이전) file이름과 file크기를 담아둬야함
 		String oldFname = gb.getFname();
-		String oldDept_name=gb.getDept_name();
+//		String oldDept_name=gb.getDept_name();
 		
 		System.out.println("oldFname: " + oldFname);
-		System.out.println("oldDept_name: " + oldDept_name);
+//		System.out.println("oldDept_name: " + oldDept_name);
 		
 		String path = request.getRealPath("upload");
 		System.out.println("path" + path);
