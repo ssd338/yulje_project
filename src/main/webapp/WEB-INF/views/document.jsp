@@ -213,11 +213,10 @@ padding: 20px 20px 20px 20px;
 .side_ul{
   float: right;
   list-style-type: none;
-  margin: 0px;
+   margin: 100px 50px 0 0;
   padding: 0px;
   padding-top: 20px;
   width: 200px;
-  margin-right: 50px;
   color: #5D5D5D;
 }
 

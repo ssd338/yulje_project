@@ -152,15 +152,17 @@ public class RegisterController {
             RegisterVo rg = RegisterList.get(i);
             int reser_no = rg.getReser_no();                                          //예약번호
             ReservationVo rs = reservationDao.findByNo_Date_time(reser_no);
+           
             MemberVo m = memberDao.getMember(rs.getMember_no());
-            
-            map2.put("regi_no",rg.getRegi_no());                                       //접수번호
-            map2.put("member",m);                                                   //환자정보
+            System.out.println("하하:"+rs.getMember_no());
+            map2.put("regi_no",rg.getRegi_no());                                        //접수번호
+            map2.put("member",m);                                                       //환자정보
+           
             map2.put("dept_name", reservationDao.findByDept_name(rg.getReser_no()));    //예약번호로 진료과 찾아오기
-            map2.put("dept_no", rs.getDept_no());                              //진료과번호
+            map2.put("dept_no", rs.getDept_no());                              			//진료과번호
             map2.put("doc_name", reservationDao.findByDoc_name(rg.getReser_no()));      //예약번호로 의사이름 찾아오기
-            map2.put("doc_no", rs.getDoc_no());                                 //의사번호
-            map2.put("date", rg.getRegi_date());                                 //접수날짜
+            map2.put("doc_no", rs.getDoc_no());                                 		//의사번호
+            map2.put("date", rg.getRegi_date());                                 		//접수날짜
             list.add(map2);
             
           }

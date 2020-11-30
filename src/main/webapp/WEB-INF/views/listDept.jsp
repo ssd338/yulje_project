@@ -20,11 +20,10 @@
 .side_ul{
   float: right;
   list-style-type: none;
-  margin: 0px;
+  margin: 100px 50px 0 0;
   padding: 0px;
   padding-top: 20px;
   width: 200px;
-  margin-right: 50px;
   color: #5D5D5D;
 }
 
@@ -283,150 +282,8 @@
      clear: both;
    }
    
-   /* Style the footer */
-   .footer {
-     background-color: #f1f1f1;
-     padding: 10px;
-     text-align: center;
-   }
-   
-   /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
-   @media (max-width: 600px) {
-     .column.side, .column.middle {
-       width: 100%;
-     }  
-
-   }
-   /*footer start*/
-#footer .family-site dd li {
-    margin-bottom: 12px;
-}
-
-
-#footer .family-site {
-    float: left;
-    width: 250px;
-    height: 184px;
-    padding: 15px 28px;
-    border-left: 1px solid #4e5157;
-}
-
-#hos_ul > li {
-    list-style: none;
-    display: list-item;
-    text-align: -webkit-match-parent;
-    
-}
-
-.clearfix > li {
-    list-style: none;
-
-}
-
-#hos_ul {
-    list-style-type: disc;
-    display: block;
-    padding: 0px;
-    font-size: 13px;
-    text-align: left;
-}
-
-#footer .btn-home {
-    position: absolute;
-   
-    font-size: 11px;
-    text-align: center;
-    text-decoration:none;
-    display: block;
-    padding-top: 13px;
-
-}
-
-*, *:before, *:after {
-    margin: 0px;
-    padding: 0px;
-    box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -o-box-sizing: border-box;
-}
-.inner > a {
-    color: #333;
-    text-decoration: none;
-    font-family: "NotoSans-Regular";
-    vertical-align: middle;
-}
-
-
-.inner > a:-webkit-any-link {
-    color: -webkit-link;
-    cursor: pointer;
-    text-decoration: underline;
-}
-
-#footer {
-    padding: 35px 0 88px 0;
-   /* background: #7A9AA0;*/
-    font-size: 16px;
-    color: #5D5D5D;
-    text-align: center;
-}
-
-#footer .info {
-    float: left;
-    width: 700px;
-    height: 184px;
-    padding-top: 15px;
-}
-
-#footer .tel-num {
-    float: left;
-    width: 295px;
-    height: 184px;
-    padding-top: 15px;
-    border-left: 1px solid #4e5157;
-    text-align: center;
-}
-
-#footer .family-site {
-    float: left;
-    width: 305px;
-    height: 184px;
-    padding: 15px 28px;
-    border-left: 1px solid #4e5157;
-}
-
-#footer a{
-	text-decoration:none;
-	color: #5D5D5D;
-	text-align:center;
-}
-
-.inner {
-    max-width: 1300px;
-    margin: 0 auto;
-    position: relative;
-}
-
-
-
-footer{
-    display: block\9;
-    margin: 0\9;
-    padding: 0\9;
-    display: block;
-}
-
-.btn-top{
-	border: 1px solid #ccc;
-}
-
-/*footer end*/
-   
-   /*진료과*/
-/* .deptp{ */
-/* 	display: inline-block; */
-/* } */
+  
+ 
 
 </style>
 <link rel="stylesheet" href="newfooter.css">
@@ -495,11 +352,11 @@ $(function(){
 			 $(this).addClass("main_hover");
 			 var no = $(this).attr("dept_no");
 			 $(this).append("<span><h3>"+deptname[no]+"</h3></span>");
-			 $(this).append("<span><a href='listDoctor'><img src='./image/doc22.jpg' class='icon2'></a></span>");
-			 $(this).append("<span><a href='#'><img src='./image/r.jpg' class='icon2'></a></span>");
-			 $(this).append("<span id='test'><h4><a class='texta' href='listDoctor'>의료진</a></h4></span>");
+			 $(this).append("<span><a href='/listDoctor'><img src='./image/doc22.jpg' class='icon2'></a></span>");
+			 $(this).append("<span><a href='/reservation'><img src='./image/r.jpg' class='icon2'></a></span>");
+			 $(this).append("<span id='test'><h4><a class='texta' href='/listDoctor'>의료진</a></h4></span>");
 			 $(this).append("<input type='hidden' class='deptname' value='"+deptname[no]+"'>");
-			 $(this).append("<span><a class='texta' href='#'><h4>예약</h4></a></span>");
+			 $(this).append("<span><a class='texta' href='/reservation'><h4>예약</h4></a></span>");
 			
 		});
 	
@@ -528,8 +385,8 @@ $(function(){
   	<div>
   		<ul class="side_ul">
   		<h1 style="font-size: 23px;" class="leftTop">진료과/의료진</h1>		<!-- 메뉴 이름 (페이지마다 다르게 지정) -->
-		  <li class="side_li"><a href="">진료과</a></li>			<!-- 사이드 메뉴 이름 (페이지마다 다르게 지정) -->
-		  <li class="side_li"><a href="">의료진</a></li>
+		  <li class="side_li"><a href="/listDept">진료과</a></li>			<!-- 사이드 메뉴 이름 (페이지마다 다르게 지정) -->
+		  <li class="side_li"><a href="/listDoctor">의료진</a></li>
 		  
 		  
 
@@ -586,69 +443,9 @@ $(function(){
    </section>
    </div>
    <!-- footer -->
-   <footer id="footer">
-		<div class="inner">
-			<div class="info">
-				<ul class="footer-link">
-					<li><a href="#" onclick="ajaxPopup('.ajaxPopup', '', '/ilsan/etc/privacy_policy.asp', this, '.popup-privacyList'); return false;"><span class="white fs14">개인정보처리방침</span></a></li>
-					<li class="link-policy"><a href="#popupVideoPolicy" onclick="ajaxPopup('.ajaxPopup', '', '/ilsan/etc/video_policy.asp', this,'.popup-videoPolicy'); return false;">영상정보처리기기운영방침</a></li>
-					<li><a href="" onclick="ajaxPopup('.ajaxPopup', '', this.href, this,'.popup-popRights'); return false;">환자권리장전</a></li>
-					<!--<li><a href="#">사이트맵</a></li>-->
-				</ul>
-				<div class="copyright">
-					<address>04108 서울 마포구 백범로 23 구프라자 3층</address>
-					<span>HELLJAVA COPYRIGHT (C)2018 YULJE UNIVERSITY HOSPITAL.ALL RIGHTS RESERVED.</span>
-				</div>
-				<div class="etc">
-					<i class="ico ico-certify">보건복지부 인증 의료기관</i>
-					<div class="sns-link">
-						<a href="" target="_blank" title="새창"><i class="">facebook</i></a>
-						<a href="" target="_blank" title="새창"><i class="">blog</i></a>
-                        <a href="" target="_blank" title="새창"><i class="">YouTube</i></a>
-					</div>
-				</div>
-			</div>
-			<div class="tel-num">
-				<dl>
-					<dt>대표전화(안내)</dt>
-					<dd>02-707-1480</dd>
-				</dl>
-			</div>
-			<div class="family-site">
-				<dl>
-					<dt><em>FAMILY SITE</em></dt>
-					<dd>
-						<ul id="hos_ul">
-							<li><a href="">율제중앙의료원</a></li>
-							<li><a href="">서울대병원</a></li>
-							<li><a href="">일산백병원</a></li>
-							<li><a href="" target="_blank" title="새창열림">율제대학교</a></li>
-						</ul>
-					</dd>
-				</dl>
-
-			</div>
-		</div>
-		<!-- footer_menu -->
-		<div class="footer-menu">
-			<div class="inner">
-				<ul class="clearfix">
-					<li><a href="">예약/조회/발급</a></li>
-					<li><a href="" onclick="open(this.href, '_swin_', 'width=1120,height=800,scrollbars,resizable');return false;"></i>의료진/의료과</a></li>
-					<li><a href="">이용안내</a></li>
-					<li><a href="">건강정보</a></li>
-					<li><a href="">병원소개</a></li>
-					<li><a href="">전화번호안내</a></li>
-					<li><a href="">오시는길</a></li>
-				</ul>
-				<a href="" class="btn-home">HOME</a>
-				<button type="button" class="btn-top">TOP</button>
-			</div>
-		</div>
-		<!--// footer_menu -->
-	</footer>
-	
-	<!-- //footer -->
+   <jsp:include page="/footer.jsp"></jsp:include>
+   <!-- //footer -->
+   
    
 
 </body>
