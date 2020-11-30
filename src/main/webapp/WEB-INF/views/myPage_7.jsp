@@ -395,12 +395,7 @@
      clear: both;
    }
    
-   /* Style the footer */
-   .footer {
-     background-color: #f1f1f1;
-     padding: 10px;
-     text-align: center;
-   }
+   
    
    /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
    @media (max-width: 600px) {
@@ -503,7 +498,6 @@
    
    /* 탈퇴안내 모달 끝*/  
 </style>
-<link rel="stylesheet" href="newHeader.css">
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -786,8 +780,9 @@ $(function() {
    </div>
         
      
-   
+   <!-- footer -->
    <jsp:include page="/footer.jsp"></jsp:include>
+   <!-- //footer -->
 
    
 
