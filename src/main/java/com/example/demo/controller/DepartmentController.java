@@ -66,6 +66,6 @@ public class DepartmentController {
 	@RequestMapping("/listDept7")
 	public void list22() {}
 	
-	@RequestMapping("/listDept8")
+	@RequestMapping("/listDept")
 	public void list() {}
 }

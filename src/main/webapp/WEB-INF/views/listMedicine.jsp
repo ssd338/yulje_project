@@ -67,11 +67,10 @@ body {
 .side_ul{
   float: right;
   list-style-type: none;
-  margin: 0px;
+  margin: 100px 50px 0 0;
   padding: 0px;
   padding-top: 20px;
   width: 200px;
-  margin-right: 50px;
   color: #5D5D5D;
 }
 
@@ -263,14 +262,12 @@ body {
    }
 
 </style>
-<link rel="stylesheet" href="newfooter.css">
 <script src="https://kit.fontawesome.com/eef195c997.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="header.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
 $(function(){
 function pagingAjax(dataPerPage,currentPage,search){   //매개변수로 한페이지에 나타낼데이터 수, 현재 선택된 페이지,검색어
-	alert("search1:"+search)
     $.ajax({
         url: "/listMedicine.ajax",
         method: "POST",
@@ -391,10 +388,10 @@ function pagingAjax(dataPerPage,currentPage,search){   //매개변수로 한페�
   	<div>
   		<ul class="side_ul">
   		<h1 style="font-size: 23px;" class="leftTop">고객 서비스</h1>		<!-- 메뉴 이름 (페이지마다 다르게 지정) -->
-		  <li class="side_li"><a href="">증명서 발급 안내</a></li>			<!-- 서브 메뉴 이름 (페이지마다 다르게 지정) -->
-		  <li class="side_li"><a href="listTV.jsp">건강TV</a></li>
-		  <li class="side_li"><a href="listMedicine.jsp">약품 정보</a></li>
-		  <li class="side_li"><a href="">이달의 강좌</a></li>
+		  <li class="side_li"><a href="/document">증명서 발급 안내</a></li>			<!-- 서브 메뉴 이름 (페이지마다 다르게 지정) -->
+		  <li class="side_li"><a href="/listMedicalTV">건강TV</a></li>
+		  <li class="side_li"><a href="/listMedicine">약품 정보</a></li>
+		  <li class="side_li"><a href="/course.jsp">이달의 강좌</a></li>
 		</ul>
   	</div>
   	
@@ -439,9 +436,10 @@ function pagingAjax(dataPerPage,currentPage,search){   //매개변수로 한페�
   <div class="column side">
   </div>
 </div>
-
  <!-- footer -->
    <jsp:include page="/footer.jsp"></jsp:include>
    <!-- //footer -->
+   
+   
 </body>
 </html>
