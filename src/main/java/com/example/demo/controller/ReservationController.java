@@ -98,7 +98,9 @@ public class ReservationController {
 		System.out.println(list);
 		ReservationVo rv = list.get(0);
 		int dept_no = rv.getDept_no();
+		System.out.println(dept_no);
 		int doc_no = rv.getDoc_no();
+		System.out.println(doc_no);
 		String dept_name = deptDao.findByNo(dept_no).getDept_name();
 		String doc_name = doctorDao.findByNo(doc_no).getDoc_name();
 		mav.addObject("dept_name", dept_name);

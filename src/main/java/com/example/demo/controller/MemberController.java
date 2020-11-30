@@ -57,6 +57,13 @@ public class MemberController {
 		return "main";
 	}
 	
+	
+//	@RequestMapping("/index")
+//	public ModelAndView main2() {
+//		ModelAndView mav = new ModelAndView("redirect:/main");
+//		return mav;
+//	}
+	
 	//아이디찾기
 	@GetMapping("/findId")
 	public void findId() {
