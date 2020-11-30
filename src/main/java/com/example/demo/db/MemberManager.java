@@ -90,6 +90,7 @@ public class MemberManager {
 	
 	//아이디 중복확인
 	public static int checkId(HashMap map) {
+		System.out.println(map);
 		int n = -1;
 		SqlSession session = sqlSessionFactory.openSession();
 		n = session.selectOne("member.checkId", map);

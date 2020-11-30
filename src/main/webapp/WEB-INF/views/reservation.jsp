@@ -5,6 +5,8 @@
 <head>
 <title>예약</title>
 <meta charset="utf-8">
+<meta id="_csrf" name="_csrf" content="${_csrf.token}" />
+<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
 <link rel="stylesheet" href="./resCal/cal.css">
 <link rel="stylesheet" href="./css/reservation/reservation.css">
 <script src="https://kit.fontawesome.com/eef195c997.js" crossorigin="anonymous"></script>
@@ -44,6 +46,14 @@ function doctor(evt, cityName) {
 <script type="text/javascript">
 
 $(function(){
+  	$(document).ready(function(){
+	    var token = $("meta[name='_csrf']").attr("content");
+	    var header = $("meta[name='_csrf_header']").attr("content");
+	    $(document).ajaxSend(function(e, xhr, options) {
+	        xhr.setRequestHeader(header, token);
+	    });
+	});
+	
 	show();
 	function show(){
 	        if(ampm != null){
