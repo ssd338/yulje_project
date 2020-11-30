@@ -116,14 +116,13 @@ public class ReservationController {
 		
 		public ModelAndView reserconfirm(HttpSession session, int reser_no) {
 			ModelAndView mav = new ModelAndView();
-			int member_no = -1;
-			if(session.getAttribute("member_no") != null) {
-				member_no = (int)session.getAttribute("member_no");
+			MemberVo m = new MemberVo();
+			if(session.getAttribute("m") != null) {
+			    m = (MemberVo)session.getAttribute("m");
 			}
 			
 		    String doc_name = reservationDao.findByDoc_name(reser_no);		//예약번호로 의사이름 찾아오기
 		    String dept_name = reservationDao.findByDept_name(reser_no);	//예약번호로 진료과 찾아오기
-		    MemberVo m = memberDao.getMember(member_no);
 		    ReservationVo r = reservationDao.findByNo_Date_time(reser_no);	//예약번호로 예약관련내용 찾아오기
 		    String roles = m.getRoles();
 		    if(m.getRoles().equals("USER")) {	//회원일 시에 회원 뜨게 하기
