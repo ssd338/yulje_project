@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -156,7 +155,7 @@ public class RegisterController {
             MemberVo m = memberDao.getMember(rs.getMember_no());
             
             map2.put("regi_no",rg.getRegi_no());                                       //접수번호
-            map2.put("member_name",m.getName());                                       //환자이름
+            map2.put("member",m);                                                   //환자정보
             map2.put("dept_name", reservationDao.findByDept_name(rg.getReser_no()));    //예약번호로 진료과 찾아오기
             map2.put("dept_no", rs.getDept_no());                              //진료과번호
             map2.put("doc_name", reservationDao.findByDoc_name(rg.getReser_no()));      //예약번호로 의사이름 찾아오기
@@ -176,26 +175,27 @@ public class RegisterController {
       //no, mname,deptname,docname,date,content,medi,docno,deptno
       String msg = "";
       
-      int no =Integer.parseInt((String)map.get("no"));
+      int regi_no =Integer.parseInt((String)map.get("no"));
       String mname = (String)map.get("mname");
       String deptname = (String)map.get("deptname");
       String docname = (String)map.get("docname");
       
       String strDate = (String)map.get("date");               //String을 sqlDate타입으로 바꿈
-      Date d = Date.valueOf(strDate);
-      String content = (String)map.get("content");
-      int medi =Integer.parseInt((String)map.get("medi"));
-      int docno =Integer.parseInt((String)map.get("docno"));
-      int deptno =Integer.parseInt((String)map.get("deptno"));
-
-      ClinicVo c = new ClinicVo();
-      c.setCli_no(registerDao.getNextCliNo());
-      int a = registerDao.insertClinic(c);
+      Date cli_date = Date.valueOf(strDate);
+      String cli_content = (String)map.get("content");
+      int medi_no =Integer.parseInt((String)map.get("medi"));
+      int doc_no =Integer.parseInt((String)map.get("docno"));
+      int dept_no =Integer.parseInt((String)map.get("deptno"));
+      int member_no =Integer.parseInt((String)map.get("memno"));
+      
+      ClinicVo cn = new ClinicVo(registerDao.getNextCliNo(), cli_date, cli_content, medi_no, regi_no, dept_no, doc_no, member_no);
+      int a = registerDao.insertClinic(cn);
       if(a == 1) {
-         msg = "진료기록등록 하였습니다.";
+         msg="등록에 성공하였습니다.";
       }else {
-         msg="진료기록등록에 오류가 있습니다. 다시 접수 바랍니다.";   
+         msg="등록절차에 오류가 있었습니다. 확인 후 다시 시도해 주세요";
       }
+      
       return msg;
    } 
    
