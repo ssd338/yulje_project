@@ -2,11 +2,10 @@ package com.example.demo.controller;
 
 
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.demo.dao.MemberDao;
 import com.example.demo.dao.RegisterDao;
 import com.example.demo.dao.ReservationDao;
-import com.example.demo.vo.ClinicVo;
 import com.example.demo.vo.MemberVo;
 import com.example.demo.vo.RegisterVo;
 import com.example.demo.vo.ReservationVo;
@@ -124,6 +122,74 @@ public class RegisterController {
 			msg="진료접수에 오류가 있습니다. 다시 접수 바랍니다.";
 			
 		}
+		return msg;
+	} 
+	
+	//진료접수 목록을 가져온다 - 진료기록(clinic)에 등록되지 않은
+	@RequestMapping("/listRegister.ajax")
+	@ResponseBody
+	public ArrayList listRegister(@RequestParam HashMap map) {
+		List<RegisterVo> RegisterList = registerDao.listRegister();  //모든 진료접수 목록 
+		//(totalData,dataPerPage,currentPage)  				 //매개변수로 총데이터의 수, 한페이지에 나타낼데이터 수, 현재 선택된 페이지
+		ArrayList list = new ArrayList();
+		
+	    int currentPage =Integer.parseInt((String)map.get("currentPage"));    // 현재 페이지               7
+	    int dataPerPage = Integer.parseInt((String)map.get("dataPerPage"));   // 한페이지에 보여질 데이터의 수      5
+	    int totalData = Integer.parseInt((String)map.get("totalData"));       // 총 데이터의 수            31
+	    int end =currentPage * dataPerPage;      			//현재 페이지의 끝레코드      현재페이지 * 한페이지에서 보여줄 레코드의 수      35
+	    int start = end - (dataPerPage);   					//현재 페이지의 시작시코드      35-5 30
+	    if(start<0) {
+	    	start=0;
+	    }
+	    if(end >totalData) {                  //35>31   => 31   //5   //10
+	    	end = totalData;
+	    }
+
+	  //리스트 돌면서 맵에 접수정보를 담음 - 접수번호 환자명 진료날짜 진료과 담당의 
+        for(int i=start; i<end; i++) {   
+            HashMap map2 = new HashMap();
+            RegisterVo rg = RegisterList.get(i);
+            int reser_no = rg.getReser_no();                              				//예약번호
+            ReservationVo rs = reservationDao.findByNo_Date_time(reser_no);
+            MemberVo m = memberDao.getMember(rs.getMember_no());
+            
+            map2.put("regi_no",rg.getRegi_no());                          		 		//접수번호
+            map2.put("member_name",m.getName());                                 		//환자이름
+            map2.put("dept_name", reservationDao.findByDept_name(rg.getReser_no())); 	//예약번호로 진료과 찾아오기
+            map2.put("dept_no", rs.getDept_no());										//진료과번호
+            map2.put("doc_name", reservationDao.findByDoc_name(rg.getReser_no()));   	//예약번호로 의사이름 찾아오기
+            map2.put("doc_no", rs.getDoc_no());											//의사번호
+            map2.put("date", rg.getRegi_date());   										//접수날짜
+            list.add(map2);
+            
+          }
+		
+		return list;
+	}
+	
+	//진료등록 버튼 눌렀을때 clinic으로 등록해주는 ajax
+	@PostMapping("/adminInsertClinic.ajax")
+	@ResponseBody
+	public String insertClinic(@RequestParam HashMap map) {
+		//no, mname,deptname,docname,date,content,medi,docno,deptno
+		String msg = "";
+		
+		int no =Integer.parseInt((String)map.get("no"));
+		String mname = (String)map.get("mname");
+		String deptname = (String)map.get("deptname");
+		String docname = (String)map.get("docname");
+		
+		String strDate = (String)map.get("date");					//String을 sqlDate타입으로 바꿈
+		Date d = Date.valueOf(strDate);
+		String content = (String)map.get("content");
+		int medi =Integer.parseInt((String)map.get("medi"));
+		int docno =Integer.parseInt((String)map.get("docno"));
+		int deptno =Integer.parseInt((String)map.get("deptno"));
+
+		
+		msg="등록에 성공하였습니다.";
+			
+		
 		return msg;
 	} 
 	

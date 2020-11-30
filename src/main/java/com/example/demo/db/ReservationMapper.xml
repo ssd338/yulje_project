@@ -40,9 +40,9 @@
   	select count(*) from reservation where member_no in (select member_no from member where name = #{name}) and reser_no = #{reser_no}
  </select>
 
-<!-- 예약번호로 예약번호, 예약날짜, 예약시간 불러오기 -->
+<!-- 예약번호로 ReservationVo 가져오기 -->
 <select id="getReservation_1" resultType="reservationVo">
-	select reser_no, reser_date, reser_time from reservation where reser_no = #{reser_no}
+	select * from reservation where reser_no = #{reser_no}
 </select>
 
 <!-- 예약번호로 의사이름 불러오기 -->
