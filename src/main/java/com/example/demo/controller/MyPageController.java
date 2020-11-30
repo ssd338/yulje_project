@@ -45,7 +45,6 @@ public class MyPageController {
 	
 	@RequestMapping("/myPage_1")					//나의 차트 페이지/ 최근 예약건수와 진료내역을 보여줌
 	public ModelAndView myPage_1(HttpSession session) {
-		session.setAttribute("member_no", 1);		//임시 코드
 		int member_no = -1;
 		if(session.getAttribute("member_no") != null) {
 			member_no = (int)session.getAttribute("member_no");
@@ -59,7 +58,6 @@ public class MyPageController {
 //	<<   회원정보 수정 -  비밀번호 확인    >>
 	@RequestMapping(value="/myPage_2",method = RequestMethod.GET )
 	public ModelAndView get_myPage_2(HttpSession session) {
-		session.setAttribute("member_no", 1);		//임시 코드
 		int member_no = -1;								//로그인한 회원의 회원정보를 가져옴
 		if(session.getAttribute("member_no") != null) {
 			member_no = (int)session.getAttribute("member_no");
