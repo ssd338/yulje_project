@@ -2,44 +2,56 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="register">
-
-<!-- 접수 등록 -->
-  <insert id="insertRegister">
-     insert into register values(#{regi_no},#{reser_no},sysdate)
-  </insert>
-
-<!-- 접수번호 자동생성 -->  
-  <select id="getNextRegiNo" resultType="java.lang.Integer">
-  select nvl(max(regi_no),0)+1 from register
-  </select>
-
-<!-- 진료 등록되지 않은 모든 예약 목록 --> 
-  <select id="selectAllReservation" resultType="reservationVo">
-     select * from reservation rs where rs.reser_no not in(select rg.reser_no from register rg)
-  </select>
-<!-- 진료 등록되지 않은 모든 예약 횟수를 조회 -->
-  <select id="countAllReservation" resultType="java.lang.Integer">
-     select count(*) from reservation rs where rs.reser_no not in(select rg.reser_no from register rg)
+<mapper namespace="reservation">
+<!-- kkk -->
+  <select id="selectAllDept" resultType="deptVo">
+     select * from department
   </select>
   
-<!-- 진료기록(clinc)에 등록되지 않은 모든 진료접수(register)의 수를 조회 -->
- <select id="countAllRegister" resultType="java.lang.Integer">
-   select count(*) from register rg where rg.regi_no not in(select c.regi_no from clinic c)      
+  <select id="selectByNoDoc" resultType="doctorVo">
+     select * from doctor where dept_no=#{dept_no}
+  </select>
+  
+  <select id="selectByNoSche" resultType="scheVo">
+     select * from doc_schedule where doc_no=#{doc_no}
+  </select>
+  
+  <insert id="insertRes">
+     insert into reservation values(seq_res.nextval, #{reser_date}, #{reser_time}, #{member_no}, #{doc_no}, #{dept_no})
+  </insert>
+  
+  <select id="cntRes" resultType="java.lang.Integer">
+     select count(*) from reservation where reser_date=#{reser_date} and reser_time=#{reser_time} and doc_no=#{doc_no}
+  </select>
+  
+  <select id="findRes" resultType="reservationVo">
+     select * from reservation where member_no=#{member_no} order by reser_date desc, reser_time 
+  </select>
+  
+<!--   kkk end -->
+  
+  <!-- 회원번호로 예약 현황 횟수 조회 -->
+ <select id="cntByNo" resultType="java.lang.Integer">
+  select count(*) from reservation where member_no = #{member_no}
  </select>
  
-<!-- 진료기록(clinc)에 등록되지 않은 모든 진료접수(register)를 조회 -->
-<select id="selectAllRegister" resultType="registerVo">
-   select * from register rg where rg.regi_no not in(select c.regi_no from clinic c)
+<!-- 이름과 예약 번호 일치하는 지 확인 -->
+ <select id="checkReser_no" resultType="java.lang.Integer">
+     select count(*) from reservation where member_no in (select member_no from member where name = #{name}) and reser_no = #{reser_no}
+ </select>
+
+<!-- 예약번호로 예약번호, 예약날짜, 예약시간 불러오기 -->
+<select id="getReservation_1" resultType="reservationVo">
+   select reser_no, reser_date, reser_time from reservation where reser_no = #{reser_no}
 </select>
 
-<!-- 진료 등록 -->  
-<insert id="insertClinic">
-   insert into clinic values(#{cli_no},#{cli_date},#{cli_content},#{medi_no},#{regi_no},#{dept_no},#{doc_no},#{member_no})
-</insert>
+<!-- 예약번호로 의사이름 불러오기 -->
+<select id="getReservation_2" resultType="String">
+   select doc_name from doctor where doc_no in(select doc_no from reservation where reser_no = #{reser_no})
+</select>
 
-<!-- 진료번호 자동생성 -->  
-<select id="getNextCliNo" resultType="java.lang.Integer">
-  select nvl(max(cli_no),0)+1 from clinic
+<!-- 예약번호로 진료과이름 불러오기-->
+<select id="getReservation_3" resultType="String">
+   select dept_name from Department where dept_no in(select dept_no from reservation where reser_no = #{reser_no})
 </select>
 </mapper>
