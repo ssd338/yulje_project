@@ -5,6 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta id="_csrf" name="_csrf" content="${_csrf.token}" />
+<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
 <title>Insert title here</title>
 <script src="https://kit.fontawesome.com/eef195c997.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="header.css">
@@ -478,7 +480,13 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
 $(function(){
-	
+	$(document).ready(function(){
+	       var token = $("meta[name='_csrf']").attr("content");
+	       var header = $("meta[name='_csrf_header']").attr("content");
+	       $(document).ajaxSend(function(e, xhr, options) {
+	           xhr.setRequestHeader(header, token);
+	       });
+	   });	
 	
 	//매개변수로 총데이터의 수, 한페이지에 나타낼데이터 수, 현재 선택된 페이지
 	//진료 내역을 ajax통신을 통해서 가져온다.
