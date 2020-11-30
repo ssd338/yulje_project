@@ -5,101 +5,22 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>가입/인증 완료</title>
 <link rel="stylesheet" href="./css/temp.css">
 <link rel="stylesheet" href="./css/sidebar.css">
-<style>
-#title {
-	text-align: center;
-	border-bottom: 2px solid #94CCC4;
-	padding-bottom: 20px;
-}
+<link rel="stylesheet" href="./css/join/joinOk.css">
 
-#main {
-	color: #5d5d5d;
-}
-
-.mtitle {
-	margin-top: 50px;
-	border-left: 5px solid #94CCC4;
- 	padding-left: 20px;
-	margin-left: 20%;
-}
-
-.mmain {
-	padding-left: 20%;
-	padding-right: 20%;
-}
-
-.mmain table {
-	margin-top: 40px;
-	margin-bottom: 40px;
-  border-collapse: collapse;
-  width: 100%;
-  border-top: solid 2px #CBE2B8;
-}
-
-.mmain th, td {
-  padding: 8px;
-  text-align: center;
-  border-bottom: 1px solid #ddd;
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-
-.mmain th {
-	width: 35%;
-	
-}
-
-#mbot {
-	padding-top: 5%;
- 	text-align: center;
-}
-
-.btnBot {
-	margin-left: 10px;
-	height: 30px;
-	background-color: #94CCC4;
-	
-	  border: none;
-	  color: white;
-	  text-align: center;
-	  text-decoration: none;
-	  display: inline-block;
-	  transition-duration: 0.4s;
-	  cursor: pointer;
-	  width: 70px;
-}
-
-.btnBot:hover {
-  background-color: white;
-  color: #94CCC4;
-}
-
-#mimg {
-	padding-top: 50px;
-	padding-bottom: 30px;
-	text-align: center;
-}
-
-#mimg p {
-	text-align: center;
-	font-size: 30px;
-	font-family: 맑은 고딕;
-}
-</style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
 $(function(){
 	$("#btnMain").click(function(){
-		alert("main");
-// 		location.href="/main";
+// 		alert("main");
+		location.href="/main";
 	});
 
 	$("#btnLogin").click(function(){
-		alert("login");
-// 		location.href="/login";
+// 		alert("login");
+		location.href="/login";
 	});
 
 	if ($("#sp").val() == "회원"){
@@ -107,6 +28,11 @@ $(function(){
 		var sp = $("<span></span>").html(text);
 		$("#mimg").append(sp);
 	}
+// 	if($("#re").val() < 1){
+// 		alert("회원등록 또는 인증에 실패하였습니다. 메인페이지로 이동합니다.");
+// 		location.href="/main";
+// 	}
+	
 });
 </script>
 </head>
@@ -137,18 +63,19 @@ $(function(){
      	<!-- 메인부분 -->
   		<div class="column middle">
 			<div id="title">
-				<h1>${msg }가입</h1>
+				<h1>${msg }</h1>
 			</div>
+			<input type="hidden" id="re" value="${re }">
 			
 			
 			<div id="main">
 				<div id="mimg">
 					<img alt="" src="./image/select.jpg" width="100" height="100">
-					<p>${msg }가입이 완료되었습니다.</p>
+					<p>${msg }이 완료되었습니다.</p>
 					<input type="hidden" id="sp" value="${msg }">
 				</div>
 				<div class="mtitle">
-					<h2>${msg }정보</h2>
+					<h2>${msg } 정보</h2>
 				</div>
 				<div class="mmain">
 					<table>
@@ -156,18 +83,22 @@ $(function(){
 							<th>이름</th>
 							<td>${m.name }</td>
 						</tr>
+						<c:if test="${m.roles eq 'USER' }">
 						<tr>
 							<th>아이디</th>
 							<td>${m.id }</td>
 						</tr>
+						</c:if>
 						<tr>
 							<th>연락처</th>
 							<td>${m.tel }</td>
 						</tr>
+						<c:if test="${m.roles eq 'USER' }">
 						<tr>
 							<th>이메일</th>
 							<td>${m.email }</td>
 						</tr>
+						</c:if>
 					</table>
 				</div>
 				

@@ -22,8 +22,9 @@
 
 }
 .insert_main{
-	width : 800px;
+	width : 2000px;
 	margin: auto;
+	padding-left: 350px;
 	
 	
 }
@@ -49,16 +50,18 @@
 	width : 950px;
 	height: 80px;
 	text-align: center;	
-	padding-top: 40px;
-	padding-left: 70px;
+	padding-top: 230px;
+ 	padding-left: 690px;
+ 	padding-bottom: 150px;
 }
 
 .main_button{
 	text-align: center;
-	width : 950px
+	width : 1800px;
+	padding-left:400px;
 }
 
-li{
+.n_li{
 	font-size: 13px;
 }
 
@@ -121,14 +124,14 @@ li{
 
 /* } */
 
-tr, td{
+.main_input tr, td{
 	padding: 3px;
 	
 }
 
 /*select box*/
 
-select {
+.main_input select {
 
     width: 157px; /* 원하는 너비설정 */
     padding: .4em .4em; /* 여백으로 높이 설정 */
@@ -152,6 +155,8 @@ select {
 
 </head>
 <body>
+
+	<jsp:include page="header.jsp"></jsp:include>
 	<div class="main_Board">
 	<div class="main_input_menu">공지사항
 	
@@ -173,7 +178,7 @@ select {
 	<form action="insertNotice" method="post" enctype="multipart/form-data">
 		
 		<ul>
-		<li>공지사항이므로 유의하여 작성 부탁드립니다.</li>
+		<li class="n_li">공지사항이므로 유의하여 작성 부탁드립니다.</li>
 		</ul>
 		<div id="main_input_form">
 		<input type="hidden" name="no" value="${no }">
@@ -213,6 +218,9 @@ select {
 		<button id="btn_insert">등록</button>
 		<a href="listG_Board.do"><button id="btn_list" type="button">목록</button></a>
 	</form>
+	
+	<jsp:include page="/footer.jsp"></jsp:include>
+	
 <script type="text/javascript"> 
     CKEDITOR.replace('content', {height: 350});
 </script>
@@ -223,7 +231,6 @@ select {
 	
 	</div>
 	
-
 
 	
 </body>

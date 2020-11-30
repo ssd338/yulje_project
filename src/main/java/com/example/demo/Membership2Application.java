@@ -14,12 +14,11 @@ public class Membership2Application {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Membership2Application.class, args);
-		//MemberManager.insert(new MemberVo(5,"yd",PasswordEncoderFactories.createDelegatingPasswordEncoder().encode("yd"),"영대","900912-1111111","010-9644-9912","kyd900@naver.com","우리집","user","o","o"));
+
 	}
 	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 	    return PasswordEncoderFactories.createDelegatingPasswordEncoder();
 	}
-
 }

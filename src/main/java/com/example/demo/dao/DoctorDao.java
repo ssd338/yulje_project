@@ -17,4 +17,16 @@ public class DoctorDao {
 	public DoctorVo findByNo(int doc_no) {
 		return DoctorManager.findByNoDoc(doc_no);
 	}
+	
+	public List<DoctorVo> findAllByDeptNo(int dept_no) { 
+		return DoctorManager.findByDeptNoList(dept_no);
+	}
+	
+	public DoctorVo findDocDept(int dept_no) {
+		return DoctorManager.findDocDept(dept_no);
+	}
+	
+	public List<DoctorVo> searchDoc(String str){
+		return DoctorManager.searchDocList(str);
+	}
 }

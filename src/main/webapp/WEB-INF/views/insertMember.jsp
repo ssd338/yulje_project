@@ -4,175 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<meta id="_csrf" name="_csrf" content="${_csrf.token}" />
+<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
+<title>회원 가입</title>
 <link rel="stylesheet" href="./css/temp.css">
-<style type="text/css">
+<link rel="stylesheet" href="./css/join/joinMember.css">
 
-.side {
-/* 	border: solid 1px black; */
-}
-
-/* 타이틀 */
-#title {
-	text-align: center;
-	border-bottom: 2px solid #94CCC4;
-}
-
-/* 메인 */
-#main {
-	color: #5d5d5d;
-	justify-content: center;
- 	width: 100%; 
- 	padding-right: 10%;
- 	padding-left: 10%;
-}
-
-.maintitle {
-	margin-bottom: 20px;
-}
-
-.mtitle {
-	margin-top: 30px;
-	border-left: 5px solid #94CCC4;
-	padding-left: 10px;
-}
-.ptitle {
-	color: #94CCC4;
-	margin-top: 30px;
-	border-bottom: solid 1px #CBE2B8;
-	padding-bottom: 20px;
-}
-
-/* 테이블 */
-.table {
- 	width: 100%; 
- 	border-collapse: collapse;
-}
-
-.table tr {
-	padding-bottom: 20px;
-	margin-bottom: 20px;
-}
-
-.table th {
-	text-align: left;
-	padding-right: 50px;
-	padding-bottom: 20px;
-	padding-top: 20px;
-	margin-right: 0px;
-	width: 30%;
-	border-bottom: 1px solid #ddd;
-}
-.table td {
-	text-align: left;
-	padding-left: 30px;
-	padding-bottom: 20px;
-	padding-top: 20px;
-	margin-left: 0px;
-	border-bottom: 1px solid #ddd;
-	width: 70%;
-}
-
-.tel {
-	width: 60px;
-}
-
-.table .input {
-	height: 30px;
- 	width: 230px; 
-}
-
-.select {
-	height: 30px;
-	width: 150px;
-}
-
-.table button {
-	margin-left: 10px;
-	height: 30px;
-	background-color: #94CCC4;
-	
-	  border: none;
-	  color: white;
-	  text-align: center;
-	  text-decoration: none;
-	  display: inline-block;
-	  transition-duration: 0.4s;
-	  cursor: pointer;
-}
-
-.table button:hover {
-  background-color: white;
-  color: #94CCC4;
-}
-
-.table span {
-	color: #94CCC4;
-	font-size: 12px;
-	padding-top: 10px;
-}
-
-#sex {
-	height: 30px;
-	width: 50px;
-	text-align: center;
-}
-
-#addr1 {
-	height: 30px;
-	width: 150px;
-	margin-bottom: 5px;
-}
-
-#addr2 {
-	height: 30px;
-	width: 400px;
-	margin-bottom: 5px;
-}
-#addr3 {
-	height: 30px;
-	width: 400px;
-}
-
-
-/* 버튼 */
-.btn {
-	margin-left: 10px;
-	height: 30px;
-	background-color: #94CCC4;
-	
-	  border: none;
-	  color: white;
-	  text-align: center;
-	  text-decoration: none;
-	  display: inline-block;
-	  transition-duration: 0.4s;
-	  cursor: pointer;
-	  width: 100px;
-}
-
-.btn:hover {
-  background-color: white;
-  color: #94CCC4;
-}
-
-#bot {
-	margin-top: 50px;
-	justify-content: center;
-	display: flex;
-	margin-bottom: 50px;
-}
-
-.choice {
-	margin-top: 30px;
-	padding-top: 30px;
-}
-
-#tel, #name, #rr_no{
-	border: none;
-}
-
-</style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
@@ -209,6 +46,15 @@ var checkP = true;
 	}
 	
 $(function(){
+	
+  	$(document).ready(function(){
+	    var token = $("meta[name='_csrf']").attr("content");
+	    var header = $("meta[name='_csrf_header']").attr("content");
+	    $(document).ajaxSend(function(e, xhr, options) {
+	        xhr.setRequestHeader(header, token);
+	    });
+	});
+	
 	var id1;
 	//아이디 중복확인을 했는지 알기위한 변수
 	var checkId = true;
@@ -308,7 +154,7 @@ $(function(){
 
 	var rr_show = $("#rr_no").val();
 	rr_show = rr_show.substring(0,8)+"******";
-	console.log(rr_show);
+// 	console.log(rr_show);
 	$("#rr_show").html(rr_show);
 });
 </script>
@@ -389,6 +235,14 @@ $(function(){
   						</td>
   						<input type="hidden" id="email" name="email" class="input">
   					</tr>
+  					<tr>
+  						<th>주소</th>
+  						<td><input type="text" name="addr1" id="addr1" readonly="readonly" required="required"><button type="button" id="btnAddr">우편번호 검색</button><br>
+  							<input type="text" name="addr2" id="addr2" readonly="readonly"><br>
+  							<input type="text" name="addr3" id="addr3" placeholder="상세주소를 입력하세요." required="required">
+  							<input type="hidden" name="addr" id="addr">
+  						</td>
+  					</tr>
   				</table>
   			</div>
   		</div>
@@ -397,14 +251,6 @@ $(function(){
   			<h3 class="ptitle">선택정보 입력</h3>
   			<div>
   				<table class="table">
-  					<tr>
-  						<th>주소</th>
-  						<td><input type="text" name="addr1" id="addr1" readonly="readonly"><button type="button" id="btnAddr">우편번호 검색</button><br>
-  							<input type="text" name="addr2" id="addr2" readonly="readonly"><br>
-  							<input type="text" name="addr3" id="addr3" placeholder="상세주소를 입력하세요.">
-  							<input type="hidden" name="addr" id="addr">
-  						</td>
-  					</tr>
   					<tr>
   						<th>메일수신여부</th>
   						<td><input type="radio" name="emailReceive" value="o" checked="checked">동의 

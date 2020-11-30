@@ -30,6 +30,7 @@ public class ReservationManager {
 		}
 	}
 	
+//	kkk
 	//부서목록 불러오기
 	public static List<DepartmentVo> findAllDept() {
 		List<DepartmentVo> list = null;
@@ -56,6 +57,36 @@ public class ReservationManager {
 		session.close();
 		return list;
 	}
+	//예약 등록
+	public static int insertRes(HashMap map) {
+		// TODO Auto-generated method stub
+		int re = -1;
+		SqlSession session = sqlSessionFactory.openSession(true);
+		re = session.insert("reservation.insertRes", map);
+		session.close();
+		return re;
+	}
+	
+	//예약 횟수 조회
+	public static int cntRes(HashMap map) {
+		int no = 0;
+		SqlSession session = sqlSessionFactory.openSession();
+		no = session.selectOne("reservation.cntRes", map);
+		session.close();
+		return no;
+	}
+	
+	//예약 목록 조회
+	public static List<ReservationVo> findRes(int member_no){
+		List<ReservationVo> list = null;
+		SqlSession session = sqlSessionFactory.openSession();
+		list = session.selectList("reservation.findRes", member_no);
+		session.close();
+		return list;
+	}
+	
+//	kkk end
+	
 	//회원번호로 예약현황횟수 조회
 	public static int cntByNo(int member_no) {
 		int n = 0;
@@ -93,11 +124,11 @@ public class ReservationManager {
 		return a;	
 	}
 			
-			//예약번호로 진료과 이름 조회
-			public static String findByDept_name(int reser_no) {
-				SqlSession session = sqlSessionFactory.openSession();
-				String a = session.selectOne("reservation.getReservation_3",reser_no);
-				session.close();
-				return a;	
-			}
+	//예약번호로 진료과 이름 조회
+	public static String findByDept_name(int reser_no) {
+		SqlSession session = sqlSessionFactory.openSession();
+		String a = session.selectOne("reservation.getReservation_3",reser_no);
+		session.close();
+		return a;	
+	}
 }

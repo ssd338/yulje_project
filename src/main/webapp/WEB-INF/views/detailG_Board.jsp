@@ -17,9 +17,11 @@
 	font-size: 25px;
 	width : 950px;
 	height: 80px;
-	padding-top: 40px;
 	text-align: center;
-	
+	padding-top: 230px;
+ 	margin-left: 350px;
+ 	padding-bottom: 100px;
+ 	
 	
 	
 }
@@ -30,11 +32,14 @@
 	width : 850px;
 	height: 400px;
 	/*border: 1px solid;*/
+	padding-left: 405px;
 	
 }
 
-li{
+.g_li{
 	font-size: 13px;
+	padding-left: 555px;
+	padding-bottom: 45px;
 	
 		
 }
@@ -86,8 +91,9 @@ li{
 
 
 #detail_menu_content{
-	padding-left: 5px;
+	padding-left: 10px;
 	font-size: 14px;
+	width: 850px;
 }
 
 a{
@@ -140,11 +146,12 @@ a:visited {
 </style>
 </head>
 <body>
+<jsp:include page="header.jsp"></jsp:include>
 	<div id="main_detail_menu">
 	고마워요 율제병원
 	</div>
 		<ul>
-			<li>병원을 이용하시면서 선생님께 감사했던 마음을 전해보세요!
+			<li class="g_li">병원을 이용하시면서 선생님께 감사했던 마음을 전해보세요!
 따뜻하고 소중한 격려가 됩니다.
 			</li>
 		</ul>
@@ -173,6 +180,7 @@ a:visited {
 	<!-- <a href="insertG_Board.do?no=${gb.no }">답글</a> --> 
 	</div>
 	</div>
+	<jsp:include page="/footer.jsp"></jsp:include>
 	
 </body>
 </html>

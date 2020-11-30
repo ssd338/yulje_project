@@ -17,8 +17,10 @@
 	font-size: 25px;
 	width : 950px;
 	height: 80px;
-	padding-top: 40px;
+	padding-top: 250px;
 	text-align: center;
+	margin-left: 380px;
+ 	padding-bottom: 100px;
 	
 	
 	
@@ -30,11 +32,12 @@
 	width : 850px;
 	height: 400px;
 	/*border: 1px solid;*/
-	
+	padding-left: 400px;
 }
 
-li{
+.n_li{
 	font-size: 13px;
+	padding-left: 750px;
 	
 		
 }
@@ -56,7 +59,8 @@ li{
 	padding-left: 5px;
 	padding-bottom : 10px;
 	border-bottom: 1.4px solid #747474;
-
+	padding-top: 50px;
+	
 }
 
 #detail_menu_writer{
@@ -88,6 +92,7 @@ li{
 #detail_menu_content{
 	padding-left: 5px;
 	font-size: 14px;
+	width: 800px;
 }
 
 a{
@@ -140,11 +145,12 @@ a:visited {
 </style>
 </head>
 <body>
+<jsp:include page="header.jsp"></jsp:include>
 	<div id="main_detail_menu">
 	공지사항
 	</div>
 		<ul>
-			<li>율제병원의 새로운 소식을 알려드립니다.
+			<li class="n_li">율제병원의 새로운 소식을 알려드립니다.
 			</li>
 		</ul>
 	
@@ -167,10 +173,10 @@ a:visited {
 	<div id="btn_div">
 	<a href="updateNotice?no=${n.no }"><button id="btn_update">수정</button></a>
 	<a href="deleteNotice?no=${n.no }"><button id="btn_delete">삭제</button></a>
-	<a href="listNotice.do"><button id="btn_list">목록</button></a>
+	<a href="listNotice"><button id="btn_list">목록</button></a>
 	
 	</div>
 	</div>
-	
+			<jsp:include page="/footer.jsp"></jsp:include>
 </body>
 </html>

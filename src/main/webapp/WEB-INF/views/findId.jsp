@@ -4,8 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<%-- <meta name="_csrf" th:content="${_csrf.token}">
-<meta name="_csrf_header" th:content="${_csrf.headerName}"> --%>
+<meta id="_csrf" name="_csrf" content="${_csrf.token}" />
+<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
 <title>Insert title here</title>
 <style>
 	* {
@@ -209,42 +209,21 @@
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
-/* $(function () {
-    var token = $("meta[name='_csrf']").attr('content');
-    var header = $("meta[name='_csrf_header']").attr('content');
-    if(token && header) {
-        $(document).ajaxSend(function(event, xhr, options) {
-            xhr.setRequestHeader(header, token);
-        });
-    }
-});
-
- $(function () {
-    var token = $("meta[name='_csrf']").attr('content');
-    var header = $("meta[name='_csrf_header']").attr('content');
-    if(token && header) {
-        $(document).ajaxSend(function(event, xhr, options) {
-            xhr.setRequestHeader(header, token);
-        });
-    }
-}); */
 
 $(function(){
 
-/* 	$(function () {
-	    var token = $("meta[name='_csrf']").attr('content');
-	    var header = $("meta[name='_csrf_header']").attr('content');
-	    if(token && header) {
-	        $(document).ajaxSend(function(event, xhr, options) {
-	            xhr.setRequestHeader(header, token);
-	        });
-	    }
-	}); */
-
+  	$(document).ready(function(){
+	    var token = $("meta[name='_csrf']").attr("content");
+	    var header = $("meta[name='_csrf_header']").attr("content");
+	    $(document).ajaxSend(function(e, xhr, options) {
+	        xhr.setRequestHeader(header, token);
+	    });
+	});
+ 
 	var checkAlready = true;
 	var checkR = true;
 	
-	$("#btnSubmit").click(function(){
+	$("#btnSubmit").click(function(){		
 		var tel1 = $("#tel1").val();
 		var tel2 = $("#tel2").val();
 		var tel3 = $("#tel3").val();
@@ -279,6 +258,7 @@ $(function(){
 				data: {rr_no:rr},
 				success: function(data){
 					alert(data.id);
+					location.href="/login";
 					}
 		});
 			
@@ -293,11 +273,12 @@ $(function(){
 			alert("잘못된 주민등록번호입니다. 주민등록번호를 확인해주세요.");
 			return false;
 		}
-/* 		if(checkAlready){
+
+ 	/* 	if(checkAlready){
 			alert("이미 가입된 주민등록번호입니다.");
 			return false;
-		} */
-
+		}
+ */
 		
 	});
 
@@ -348,7 +329,9 @@ $(function(){
 		  		</div>
 		  	<div class="mypage_detail_under">
 		  			<h3>회원님의 개인정보보호와 더욱 안정된 서비스를 위해 최선을 다하겠습니다.</h3>
-				<form action="/checkMember" method="post">
+
+				<form action="/findId" method="post">
+
 		  		<div id="mypage_title_sub">
 		  			<div class="tr">
 		  			<strong>이름</strong>

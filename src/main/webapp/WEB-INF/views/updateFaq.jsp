@@ -12,7 +12,7 @@
 	
 	<hr>
 	<form 
-		action="updateS_Board.do" 
+		action="uupdateFaq.do" 
 		method="post"
 		enctype="multipart/form-data">
 		<input type="hidden" name="no" value="${sb.no }">

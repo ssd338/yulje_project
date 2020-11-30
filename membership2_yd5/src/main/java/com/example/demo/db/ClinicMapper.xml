@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="clinic">
+<!-- 회원번호를 통해 진료기록 가져오기 -->
+  <select id="selectByNoMem" resultType="clinicVo">
+     select * from Clinic where member_no = ${member_no} order by cli_no desc
+  </select>
+ 
+<!-- 진료번호를 통해 진료기록 가져오기 -->
+  <select id="selectByNoCli" resultType="clinicVo">
+     select * from clinic where cli_no=#{cli_no}
+  </select>
+  
+<!-- 진료번호로 진료받은 진료과 조회 -->
+  <select id="selectByNoMem2" resultType="String">
+    select dept_name from department where dept_no in(select dept_no from clinic where cli_no = #{cli_no})
+  </select>
+<!-- 진료번호로 진료받은 의사 조회 -->
+  <select id="selectByNoMem3" resultType="String">
+    select doc_name from doctor where doc_no in(select doc_no from clinic where cli_no = #{cli_no})
+  </select>  
+<!-- 진료번호로 진료받은 약품 조회 -->
+  <select id="selectByNoMem4" resultType="String">
+    select medi_name from medicine where medi_no in(select medi_no from clinic where cli_no = #{cli_no})
+  </select>  
+   
+<!-- 회원번호로 진료 횟수 조회 -->
+  <select id="cntByClinic" resultType="java.lang.Integer">
+     select count(*) from Clinic where member_no = #{member_no}
+  </select> 
+</mapper>

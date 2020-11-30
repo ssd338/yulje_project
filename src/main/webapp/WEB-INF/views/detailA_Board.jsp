@@ -17,8 +17,10 @@
 	font-size: 25px;
 	width : 950px;
 	height: 80px;
-	padding-top: 40px;
 	text-align: center;
+	padding-top: 250px;
+ 	margin-left: 380px;
+ 	padding-bottom: 100px;
 	
 	
 	
@@ -30,12 +32,14 @@
 	width : 850px;
 	height: 400px;
 	/*border: 1px solid;*/
-	
+	padding-left: 400px;
 }
 
-li{
+.a_li{
 	font-size: 13px;
-	margin-left: 50px;
+	margin-left: 405px;
+	margin-bottom: 0px;
+	padding-bottom: 30px;
 		
 }
 
@@ -56,6 +60,7 @@ li{
 	padding-left: 5px;
 	padding-bottom : 10px;
 	border-bottom: 1.4px solid #747474;
+	padding-top: 50px;
 
 }
 
@@ -140,12 +145,14 @@ a:visited {
 </style>
 </head>
 <body>
+<jsp:include page="header.jsp"></jsp:include>
+
 	<div id="main_detail_menu">
 	1:1 전문의 상담
 	</div>
 		<ul>
-			<li>${dept_name } 1:1전문의상담 입니다.</li>
-			<li>분야별 최고 전문의에게 궁금한 모든 것을 물어보세요.
+			<li class="a_li">${dept_name } 1:1전문의상담 입니다.</li>
+			<li class="a_li">분야별 최고 전문의에게 궁금한 모든 것을 물어보세요.
 양질의 상담 서비스를 위해 교수님별 일일 상담건수를 제한하고 있습니다
 			</li>
 		</ul>
@@ -157,7 +164,7 @@ a:visited {
 		<div id="detail_menu_writer">작성자 : ${ab.writer }</div>
 		<div id="detail_menu_regdate">등록일 : ${ab.regdate }</div>
 		<div id="detail_menu_hit">조회수 : ${ab.hit }</div>
-		<div id="detail_menu_file">첨부파일 : <a href="../upload/${ab.fname }">${ab.fname }</a></div>
+		<div id="detail_menu_file">첨부파일 : <a href="A_down.do?fname=${ab.fname }">${ab.fname }</a></div>
 	</div>
 	<br>
 	<div id="detail_menu_content">
@@ -174,6 +181,6 @@ a:visited {
 	<!-- <a href="insertG_Board.do?no=${ab.no }">답글</a> --> 
 	</div>
 	</div>
-	
+		<jsp:include page="/footer.jsp"></jsp:include>
 </body>
 </html>

@@ -22,7 +22,7 @@
 .insert_main{
 	width : 800px;
 	margin: auto;
-	
+	padding-left: 400px;
 	
 }
 
@@ -47,15 +47,18 @@
 	width : 950px;
 	height: 80px;
 	text-align: center;	
-	padding-top: 40px;
+	padding-top: 230px;
+ 	margin-left: 350px;
+ 	padding-bottom: 25px;
 }
 
 .main_button{
 	text-align: center;
-	width : 950px
+	width : 950px;
+	padding-left: 450px;
 }
 
-li{
+.g_li{
 	font-size: 13px;
 }
 
@@ -106,20 +109,20 @@ li{
 		
 	}
 
-textarea{
+.main_input textarea{
 
 	border: 1px solid #D5D5D5;
 	width: 500px;
 
 }
 
-tr, td{
+.main_input tr, td{
 	padding: 3px;
 }
 
 /*select box*/
 
-select {
+.main_input select {
 
     width: 157px; /* 원하는 너비설정 */
     padding: .4em .4em; /* 여백으로 높이 설정 */
@@ -139,6 +142,7 @@ select {
 </style>
 </head>
 <body>
+<jsp:include page="header.jsp"></jsp:include>
 	<div class="main_Board">
 	<div class="main_input_menu">고마워요 율제병원
 	
@@ -159,7 +163,7 @@ select {
 	<form action="insertG_Board.do" method="post" enctype="multipart/form-data">
 		
 		<ul>
-		<li>본문 또는 첨부파일내에 개인정보(주민등록번호, 연락처 등)가 포함되지 않도록 유의해 주세요.</li>
+		<li class="g_li">본문 또는 첨부파일내에 개인정보(주민등록번호, 연락처 등)가 포함되지 않도록 유의해 주세요.</li>
 		</ul>
 		<div id="main_input_form">
 		<input type="hidden" name="no" value="${no }">

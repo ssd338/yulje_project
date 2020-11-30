@@ -28,9 +28,35 @@ public class DoctorManager {
 			System.out.println("manager:"+e.getMessage());
 		}
 	}
+	public static List<DoctorVo> searchDocList(String str) { //모든의사검색
+		List<DoctorVo> list = null;
+		SqlSession session = sqlSessionFactory.openSession();
+		list = session.selectList("doctor.searchDoc", str);
+		session.close();
+		return list;
+	}
+	
+	public static List<DoctorVo> findByDeptNoList(int dept_no) { //각 진료과에 소속된 의사만 출력
+		List<DoctorVo> list = null;
+		SqlSession session = sqlSessionFactory.openSession();
+		list = session.selectList("doctor.selectAllByDeptNo", dept_no);
+		session.close();
+		return list;
+	}
+	
+	public static DoctorVo findDocDept(int dept_no) { //진료과 이름출력
+		DoctorVo d = null;
+		SqlSession session = sqlSessionFactory.openSession();
+		d = session.selectOne("doctor.selectDocDept", dept_no);
+		session.close();
+		return d;
+	}
+	
+	
+	
 	
 	//doctor list
-	public static List<DoctorVo> findAllDoc() {
+	public static List<DoctorVo> findAllDoc() { //모든 의사목록
 		List<DoctorVo> list = null;
 		SqlSession session = sqlSessionFactory.openSession();
 		list = session.selectList("doctor.selectAll");
@@ -38,7 +64,7 @@ public class DoctorManager {
 		return list;
 	}
 	
-	public static DoctorVo findByNoDoc(int doc_no) {
+	public static DoctorVo findByNoDoc(int doc_no) { //의사 세부정보
 		DoctorVo d = null;
 		SqlSession session = sqlSessionFactory.openSession();
 		d = session.selectOne("doctor.selectByNo", doc_no);

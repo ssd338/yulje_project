@@ -4,6 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
+<meta id="_csrf" name="_csrf" content="${_csrf.token}" />
+<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
+
 <title>Insert title here</title>
 <style>
 	* {
@@ -209,6 +213,16 @@
 <script type="text/javascript">
 $(function(){
 
+
+
+   	$(document).ready(function(){
+	    var token = $("meta[name='_csrf']").attr("content");
+	    var header = $("meta[name='_csrf_header']").attr("content");
+	    $(document).ajaxSend(function(e, xhr, options) {
+	        xhr.setRequestHeader(header, token);
+	    });
+	}); 
+
 	var checkAlready = true;
 	var checkR = true;
 	
@@ -237,20 +251,26 @@ $(function(){
 			    if(data.re == "o"){
 					checkR = false;
 				}
-		    }
+
+		    },
+		    error:function(request,status,error){
+	             alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	          }
 		});
 
-		$.ajax({
+   		$.ajax({
+
 			url: "/findPwd",
 				method:"POST",
 				dateType: "json",
 				data: {rr_no:rr},
 				success: function(data){
-					alert(data.pwd);
+
+					//alert(data.pwd);
+					location.href="/changePwd";
 					}
-					
-	
-		});
+		});  
+
 			
 		$("#rr_no").val(rr_no1+"-"+rr_no2);
 
@@ -351,7 +371,9 @@ $(function(){
 		  			</div>
 		  		</div>
 		  		<div id="mypage_title_btn">
-		  			<button class="mypage_title_btn1" id="btnSubmit">확인</button>
+
+		  			<button class="mypage_title_btn1" id="btnSubmit">비밀번호 변경</button>
+
 		  			<button class="mypage_title_btn2" type="re">취소</button>
 		  		</div>
 			</form>

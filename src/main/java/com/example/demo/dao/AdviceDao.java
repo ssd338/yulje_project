@@ -47,6 +47,10 @@ public class AdviceDao {
 		return AdviceManager.getTotalCount();
 	}
 	
+	public int updateHit(int no) {
+		return AdviceManager.updateHit(no);
+	}
+	
 //	public boolean isMember(String id, String pwd) {
 //		return NoticeManager.isMember(id, pwd);
 //		

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,37 +30,65 @@ public class MemberController {
 
 	@Autowired
 	private MemberDao dao;
-	
-	@RequestMapping(value = "/main", method = RequestMethod.GET)
-	public void main() {	
-	}
-	
 
-	@RequestMapping(value = "/login", method = {RequestMethod.GET, RequestMethod.POST})
+	// yd
+	@RequestMapping(value = "/main", method = RequestMethod.GET)
+	public void main() {
+//	HttpSession session		
+//		Authentication authentication 
+//		= SecurityContextHolder.getContext().getAuthentication();
+//
+//		User user = (User) authentication.getPrincipal();
+//		String id = user.getUsername();
+//		MemberVo m = MemberManager.selectMember(id);
+//		session.setAttribute("m", m);
+	}
+	 // 로그인 페이지
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+
 	public void login() {	
 		System.out.println("로그인 컨트롤러 동작함!");
 	}
 	
-	
 
+	// 로그인 결과 페이지
+	@GetMapping("/loginSuccess")
+	public String dispLoginResult(HttpSession session) {		
+		  Authentication authentication =
+		  SecurityContextHolder.getContext().getAuthentication();
+		  
+		  User user = (User) authentication.getPrincipal(); 
+		  String id = user.getUsername(); 
+		  MemberVo m = MemberManager.selectMember(id);
+		  session.setAttribute("m", m); 
+		  return "/main";
+	}
+	
+	//전체 페이지로 세션 유지해서 뿌려줌
 	@RequestMapping("/")
-	public String memberStart(HttpSession session) {
-		Authentication authentication
+	public void memberStart(HttpSession session) {
+		Authentication authentication 
 		= SecurityContextHolder.getContext().getAuthentication();
-		
-		User user = (User)authentication.getPrincipal();
+
+		User user = (User) authentication.getPrincipal();
 		String id = user.getUsername();
 		MemberVo m = MemberManager.selectMember(id);
 		session.setAttribute("m", m);
-		return "main";
 	}
-	
-	//아이디찾기
+
+	// 접근 거부 페이지
+	@GetMapping("/user/denied")
+	public String dispDenied() {
+		return "/denied";
+	}
+
+
 	@GetMapping("/findId")
 	public void findId() {
-		
+
 	}
-	
+
+
 	@PostMapping("/findId")
 	@ResponseBody
 	public HashMap findId(@RequestParam HashMap map) {
@@ -71,22 +100,39 @@ public class MemberController {
 		return data;
 	}
 
-	//비밀번호 찾기
+	// 비밀번호 찾기
 	@RequestMapping("/findPwd")
 	public void findPwd() {
-		
+
 	}
-	
+
 	@PostMapping("/findPwd")
-	@ResponseBody
-	public HashMap findPwd(@RequestParam HashMap map) {
-		System.out.println(map);
-		MemberVo pwd = dao.findPwd(map);
-		System.out.println(pwd.getPwd());
-		HashMap data = new HashMap<>();
-		data.put("pwd", pwd.getPwd());
-		return data;
+	public ModelAndView findPwd(MemberVo m) {
+		ModelAndView mav = new ModelAndView("/changePwd");
+		mav.addObject("m", m);
+		return mav;
+
+//		HashMap data = new HashMap<>();
+//		data.put("m", m);
+//		return data;
 	}
+
+	// 비밀번호 변경 페이지로 보내기
+	@GetMapping("/changePwd")
+	public ModelAndView changePwd() {
+		ModelAndView mav = new ModelAndView();
+		return mav;
+	}
+
+	// 비밀번호 변경을 위한 메소드
+	@PostMapping("/changePwd")
+	public ModelAndView changePwd(MemberVo m) {
+		ModelAndView mav = new ModelAndView("/login");
+		dao.changePwd(m);
+		return mav;
+	}
+	// yd end
+
 	
 	//회원가입 페이지로 보내기
 	@GetMapping("/insertMember")
@@ -100,23 +146,25 @@ public class MemberController {
 	@PostMapping("/insertMember")
 	public ModelAndView insertSubmit(MemberVo m) {
 		ModelAndView mav = new ModelAndView("/joinOk");
+		String pwd = PasswordEncoderFactories.createDelegatingPasswordEncoder().encode(m.getPwd());
+		m.setPwd(pwd);
 		int re = dao.insert(m);
 		mav.addObject("m", m);
 		mav.addObject("re", re);
-		mav.addObject("msg", "회원");
+		mav.addObject("msg", "회원가입");
 		return mav;
 	}
-	
-	//회원등록을 위한 메소드
-	@PostMapping("/insertGuest")
-	public ModelAndView insertGuest(MemberVo m) {
-		ModelAndView mav = new ModelAndView("/joinOk");
-		int re = dao.insert(m);
-		mav.addObject("m", m);
-		mav.addObject("re", re);
-		mav.addObject("msg", "비회원");
-		return mav;
-	}
+//	
+//	//비회원등록을 위한 메소드
+//	@PostMapping("/insertGuest")
+//	public ModelAndView insertGuest(MemberVo m) {
+//		ModelAndView mav = new ModelAndView("/joinOk");
+//		int re = dao.insert(m);
+//		mav.addObject("m", m);
+//		mav.addObject("re", re);
+//		mav.addObject("msg", "비회원");
+//		return mav;
+//	}
 	
 	//회원 아이디 중복확인
 	@PostMapping("/checkId")
@@ -142,7 +190,7 @@ public class MemberController {
 	@PostMapping("/checkRR")
 	@ResponseBody
 	public HashMap checkRR(@RequestParam HashMap map) {
-		System.out.println(map);
+//		System.out.println(map);
 		map.put("roles", "USER");
 		String rr_check = (String)map.get("rr_check");
 		int already = dao.checkRR(map);
@@ -172,50 +220,93 @@ public class MemberController {
 	public void guestForm() {}
 	
 	@PostMapping("/checkGuest")
-	public ModelAndView guestSubmit(MemberVo m) {
+	public ModelAndView guestSubmit() {
 		ModelAndView mav = new ModelAndView("/joinOk");
-		mav.addObject("m", m);
+
+		mav.addObject("msg", "비회원인증");
 		return mav;
 	}
 	
 	@PostMapping("/guestRR")
 	@ResponseBody
-	public HashMap guestRR(@RequestParam HashMap map) {
+	public HashMap guestRR(@RequestParam HashMap map, HttpSession session) {
 		map.put("roles", "GUEST");
-		String rr_check = (String)map.get("rr_check");
+//		System.out.println(map);
 		int already = dao.checkRR(map);
 		
-//		System.out.println(already);
+		//비회원에 없는 주민번호라면 비회원등록
+		if(already <= 0) {
+			int ig = dao.insertGuest(map);
+		}
+
 		
-		String re = CheckRR.check(rr_check);
-		MemberVo mem = dao.getName(map);
-		System.out.println(mem);
-		
+		//등록된 비회원 정보를 가져와 session에 담아 로그인처리
+		MemberVo guest = dao.getGuest(map);
+		System.out.println(guest);
+		if (guest != null) {
+			session.setAttribute("m", guest);
+		}
+		System.out.println(guest);
 		HashMap data = new HashMap<>();
-		data.put("already",	already);
-		data.put("re", re);
-		data.put("mem", mem);
+		data.put("guest", guest);
 		return data;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	@GetMapping("/list")
-	public void list() {
+	@PostMapping("/guestRRtoMem")
+	@ResponseBody
+	public HashMap guestRRtoMem(@RequestParam HashMap map, HttpSession session) {
+		map.put("roles", "GUEST");
+//		System.out.println(map);
+		
+		//비회원 등록되어있는 주민번호인지 확인
+		int already = dao.checkRR(map);
+		
+		//등록된 비회원 정보를 가져와 request에 담아 로그인처리
+		MemberVo guest = dao.getGuest(map);
+		if (guest != null) {
+			String tel = (String)map.get("tel");
+			guest.setTel(tel);
+			session.setAttribute("m", guest);
+		}
+//		System.out.println(guest);
+		HashMap data = new HashMap<>();
+		data.put("already", already);
+
+
+		data.put("guest", guest);
+		return data;
 	}
-	@GetMapping("/test")
-	public void test(String ir1) {
-		System.out.println(ir1);
+	
+	@GetMapping("/updateGuest")
+//	@ResponseBody
+	public ModelAndView updateGuest() {
+		ModelAndView mav = new ModelAndView();
+		return mav;
 	}
+	
+	@PostMapping("/updateGuest")
+//	@ResponseBody
+	public ModelAndView updateGuestSubmit(MemberVo m) {
+		ModelAndView mav = new ModelAndView("joinOk");
+		String pwd = PasswordEncoderFactories.createDelegatingPasswordEncoder().encode(m.getPwd());
+		m.setPwd(pwd);
+		int re = dao.updateGuest(m);
+		mav.addObject("m", m);
+		mav.addObject("re", re);
+		mav.addObject("msg", "회원가입");
+		return mav;
+	}
+	
 	@GetMapping("/join-allow")
 	public void join() {
 	}
 	@GetMapping("/joinOk")
 	public void joinOk() {
 	}
+	
+//	@GetMapping("/main")
+//	public void main() {
+//
+//	}
+	
 }

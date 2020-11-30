@@ -21,7 +21,6 @@
   	select * from medicine where medi_no=#{medi_no}
   </select>
 		
-  
   <!-- (관리자) 약품의 추가, 수정, 삭제 -->
    <insert id="insert">
   	insert into medicine values(#{medi_no},#{medi_name},#{medi_detail},#{medi_fname},#{caution})

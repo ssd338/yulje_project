@@ -40,9 +40,11 @@ public class MyPageController {
 	public void main() {
 		
 	}
+	
+/*  member_no 줘서 memberVo가져오는 코드 있는 부분은 다 findMyIf.ajax통신으로 처리하도록 수정할 예정  */
+	
 	@RequestMapping("/myPage_1")					//나의 차트 페이지/ 최근 예약건수와 진료내역을 보여줌
 	public ModelAndView myPage_1(HttpSession session) {
-		session.setAttribute("member_no", 1);		//임시 코드
 		int member_no = -1;
 		if(session.getAttribute("member_no") != null) {
 			member_no = (int)session.getAttribute("member_no");
@@ -56,7 +58,6 @@ public class MyPageController {
 //	<<   회원정보 수정 -  비밀번호 확인    >>
 	@RequestMapping(value="/myPage_2",method = RequestMethod.GET )
 	public ModelAndView get_myPage_2(HttpSession session) {
-		session.setAttribute("member_no", 1);		//임시 코드
 		int member_no = -1;								//로그인한 회원의 회원정보를 가져옴
 		if(session.getAttribute("member_no") != null) {
 			member_no = (int)session.getAttribute("member_no");
@@ -211,5 +212,24 @@ public class MyPageController {
 		return mav;
 	}
 	
+	//나의 서류 발급
+	@RequestMapping(value="/findMyInfo.ajax",method = RequestMethod.GET )
+	@ResponseBody
+	public MemberVo documentOnline(HttpSession session) {	
+		int member_no = -1;
+		if(session.getAttribute("member_no") != null) {
+			member_no = (int)session.getAttribute("member_no");
+		}
+		MemberVo m = memberDao.getMember(member_no);
+		return m;
+	}
 	
+	//증명서발급
+	@RequestMapping(value="/document", method = RequestMethod.GET)
+	public void document() {
+	}
+	//증명서발급
+	@RequestMapping(value="/documentOnline", method = RequestMethod.GET)
+	public void documentOnline() {
+	}
 }
