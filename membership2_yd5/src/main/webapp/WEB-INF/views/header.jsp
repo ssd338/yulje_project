@@ -12,91 +12,134 @@
 <script type="text/javascript">
 $(function(){
 
- 	$('.reser_board, .menu_drop_wrap').mouseenter(function(){
- 		
+  	$('.reser_board').mouseenter(function(){
+ 		$('.menu_drop_area').addClass('on');
 		$('.menu_drop_wrap').addClass('on');
 		$('.menu_drop_list_area1').addClass('on');
 		$('.drop_board_list1').addClass('on');
+		$('.menu_drop_list_wrap').addClass('on');
 		
+		$('.menu_drop_area').removeClass('close'); 
  		$('.menu_drop_wrap').removeClass('close'); 
 		$('.menu_drop_list_area1').removeClass('close');
 		$('.drop_board_list1').removeClass('close');
-		
+		$('.menu_drop_list_wrap').removeClass('close');
 	});
+ 
 
- 	$('.menu_drop_wrap').mouseleave(function(){
- 		
-     	$('.menu_drop_wrap').addClass('close');
- 		$('.menu_drop_list_area1').addClass('close');
-		$('.drop_board_list1').addClass('close');
-
-		$('.menu_drop_wrap').removeClass('on');
-		$('.menu_drop_list_area1').removeClass('on');
-		$('.drop_board_list1').removeClass('on');
-	}); 
-
-	$('.doctor_board').mouseover(function(){
+  	$('.doctor_board').mouseenter(function(){
+ 		$('.menu_drop_area').addClass('on');
 		$('.menu_drop_wrap').addClass('on');
 		$('.menu_drop_list_area2').addClass('on');
 		$('.drop_board_list2').addClass('on');
+		$('.menu_drop_list_wrap').addClass('on');
 		
-		$('.menu_drop_wrap').removeClass('close');
+		$('.menu_drop_area').removeClass('close'); 
+ 		$('.menu_drop_wrap').removeClass('close'); 
 		$('.menu_drop_list_area2').removeClass('close');
 		$('.drop_board_list2').removeClass('close');
-		
-	});	
+		$('.menu_drop_list_wrap').removeClass('close');
+	});
 
-	$('.menu_drop_wrap').mouseout(function(){
-		$('.menu_drop_wrap').addClass('close');
-		$('.menu_drop_list_area2').addClass('close');
-		$('.drop_board_list2').addClass('close');
-
-		$('.menu_drop_wrap').removeClass('on');
-		$('.menu_drop_list_area2').removeClass('on');
-		$('.drop_board_list2').removeClass('on');
-	});	
-
-	$('.util_board').mouseover(function(){
+   	$('.util_board').mouseenter(function(){
+ 		$('.menu_drop_area').addClass('on');
 		$('.menu_drop_wrap').addClass('on');
 		$('.menu_drop_list_area3').addClass('on');
 		$('.drop_board_list3').addClass('on');
+		$('.menu_drop_list_wrap').addClass('on');
 		
-		$('.menu_drop_wrap').removeClass('close');
+		$('.menu_drop_area').removeClass('close'); 
+ 		$('.menu_drop_wrap').removeClass('close'); 
 		$('.menu_drop_list_area3').removeClass('close');
 		$('.drop_board_list3').removeClass('close');
-		
-	});	
+		$('.menu_drop_list_wrap').removeClass('close');
+	});
 
-	$('.menu_drop_wrap').mouseout(function(){
-		$('.menu_drop_wrap').addClass('close');
-		$('.menu_drop_list_area3').addClass('close');
-		$('.drop_board_list3').addClass('close');
 
-		$('.menu_drop_wrap').removeClass('on');
-		$('.menu_drop_list_area3').removeClass('on');
-		$('.drop_board_list3').removeClass('on');
-	});	
-
-	$('.service_board').mouseover(function(){
+  	$('.service_board').mouseenter(function(){
+ 		$('.menu_drop_area').addClass('on');
 		$('.menu_drop_wrap').addClass('on');
 		$('.menu_drop_list_area4').addClass('on');
 		$('.drop_board_list4').addClass('on');
+		$('.menu_drop_list_wrap').addClass('on');
 		
-		$('.menu_drop_wrap').removeClass('close');
+		$('.menu_drop_area').removeClass('close'); 
+ 		$('.menu_drop_wrap').removeClass('close'); 
 		$('.menu_drop_list_area4').removeClass('close');
 		$('.drop_board_list4').removeClass('close');
-		
-	});	
+		$('.menu_drop_list_wrap').removeClass('close');
+	}); 
 
-	$('.menu_drop_wrap').mouseout(function(){
+
+  	$('.menu_drop_area').mouseleave(function(){
+
+		$('.menu_drop_area').addClass('close');
+		$('.menu_drop_wrap').addClass('close');
+		$('.menu_drop_list_area1').addClass('close');
+		$('.drop_board_list1').addClass('close');
+		$('.menu_drop_list_wrap').addClass('close');
+		
+		$('.menu_drop_area').removeClass('on'); 
+ 		$('.menu_drop_wrap').removeClass('on'); 
+		$('.menu_drop_list_area1').removeClass('on');
+		$('.drop_board_list1').removeClass('on');
+		$('.menu_drop_list_wrap').removeClass('on');
+
+		
+	}); 
+
+
+
+  	$('.menu_drop_area').mouseleave(function(){
+ 		
+		$('.menu_drop_area').addClass('close');
+		$('.menu_drop_wrap').addClass('close');
+		$('.menu_drop_list_area2').addClass('close');
+		$('.drop_board_list2').addClass('close');
+		$('.menu_drop_list_wrap').addClass('close');
+		
+		$('.menu_drop_area').removeClass('on'); 
+ 		$('.menu_drop_wrap').removeClass('on'); 
+		$('.menu_drop_list_area2').removeClass('on');
+		$('.drop_board_list2').removeClass('on');
+		$('.menu_drop_list_wrap').removeClass('on');
+	}); 
+
+
+
+  	$('.menu_drop_wrap').mouseleave(function(){
+ 		
+		$('.menu_drop_area').addClass('close');
+		$('.menu_drop_wrap').addClass('close');
+		$('.menu_drop_list_area3').addClass('close');
+		$('.drop_board_list3').addClass('close');
+		$('.menu_drop_list_wrap').addClass('close');
+		
+		$('.menu_drop_area').removeClass('on'); 
+ 		$('.menu_drop_wrap').removeClass('on'); 
+		$('.menu_drop_list_area3').removeClass('on');
+		$('.drop_board_list3').removeClass('on');
+		$('.menu_drop_list_wrap').removeClass('on');
+	}); 
+
+
+
+  	$('.menu_drop_wrap').mouseleave(function(){
+ 		
+		$('.menu_drop_area').addClass('close');
 		$('.menu_drop_wrap').addClass('close');
 		$('.menu_drop_list_area4').addClass('close');
 		$('.drop_board_list4').addClass('close');
-
-		$('.menu_drop_wrap').removeClass('on');
+		$('.menu_drop_list_wrap').addClass('close');
+		
+		$('.menu_drop_area').removeClass('on'); 
+ 		$('.menu_drop_wrap').removeClass('on'); 
 		$('.menu_drop_list_area4').removeClass('on');
 		$('.drop_board_list4').removeClass('on');
-	});	
+		$('.menu_drop_list_wrap').removeClass('on');
+	});  
+
+
 })
 </script>
 <style>

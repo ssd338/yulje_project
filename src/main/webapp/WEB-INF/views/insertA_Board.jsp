@@ -17,8 +17,9 @@
 }
 
 .insert_main {
-	width: 950px;
+	width: 2000px;
 	margin: auto;
+	margin-left: 340px;
 }
 
 /*.insert_text1 {
@@ -111,10 +112,12 @@
 
 .main_input_menu {
 	font-size: 25px;
-	width: 950px;
+	width: 1300px;
 	height: 80px;
 	text-align: center;
-	padding-top: 40px;
+	padding-top: 230px;
+ 	padding-left: 470px;
+ 	padding-bottom: 150px;
 }
 
 .main_button {
@@ -122,7 +125,7 @@
 	width: 950px
 }
 
-li {
+.a_li {
 	font-size: 11px;
 }
 
@@ -166,12 +169,13 @@ li {
 	border: 1px solid #D5D5D5;
 }
 
-tr, td {
+#main_input_form tr, td {
 	padding: 3px;
 }
 
 /*select box*/
-select {
+
+#main_input_form select {
 	width: 157px; /* 원하는 너비설정 */
 	padding: .4em .4em; /* 여백으로 높이 설정 */
 	font-family: inherit; /* 폰트 상속 */
@@ -187,6 +191,7 @@ select {
 
 </head>
 <body>
+<jsp:include page="header.jsp"></jsp:include>
 	<div class="main_Board">
 		<div class="main_input_menu">1:1 전문의 상담</div>
 
@@ -292,7 +297,7 @@ select {
 							enctype="multipart/form-data">
 
 							<ul>
-								<li>본문 또는 첨부파일내에 개인정보(주민등록번호, 연락처 등)가 포함되지 않도록 유의해 주세요.</li>
+								<li class="a_li">본문 또는 첨부파일내에 개인정보(주민등록번호, 연락처 등)가 포함되지 않도록 유의해 주세요.</li>
 							</ul>
 							<div id="main_input_form">
 								<input type="hidden" name="no" value="${no }">
@@ -374,5 +379,6 @@ select {
 			</div>
 			</form>
 		</div>
+		<jsp:include page="/footer.jsp"></jsp:include>
 </body>
 </html>

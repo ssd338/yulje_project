@@ -3,10 +3,12 @@ package com.example.demo.controller;
 
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.demo.dao.MemberDao;
 import com.example.demo.dao.RegisterDao;
 import com.example.demo.dao.ReservationDao;
+import com.example.demo.vo.ClinicVo;
 import com.example.demo.vo.MemberVo;
 import com.example.demo.vo.RegisterVo;
 import com.example.demo.vo.ReservationVo;

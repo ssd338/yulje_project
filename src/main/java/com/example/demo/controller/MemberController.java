@@ -31,38 +31,64 @@ public class MemberController {
 	@Autowired
 	private MemberDao dao;
 	
-	//yd
+	// yd
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
-	public void main(HttpSession session) {	
-
+	public void main() {
+//	HttpSession session		
+//		Authentication authentication 
+//		= SecurityContextHolder.getContext().getAuthentication();
+//
+//		User user = (User) authentication.getPrincipal();
+//		String id = user.getUsername();
+//		MemberVo m = MemberManager.selectMember(id);
+//		session.setAttribute("m", m);
 	}
-	
-
-	@RequestMapping(value = "/login", method = {RequestMethod.GET, RequestMethod.POST})
+	 // 로그인 페이지
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public void login() {	
-		
+		System.out.println("로그인 컨트롤러 동작함!");
 	}
 	
-	
 
+
+	// 로그인 결과 페이지
+	@GetMapping("/loginSuccess")
+	public String dispLoginResult(HttpSession session) {		
+		  Authentication authentication =
+		  SecurityContextHolder.getContext().getAuthentication();
+		  
+		  User user = (User) authentication.getPrincipal(); 
+		  String id = user.getUsername(); 
+		  MemberVo m = MemberManager.selectMember(id);
+		  session.setAttribute("m", m); 
+		  return "/main";
+	}
+	
+	//전체 페이지로 세션 유지해서 뿌려줌
 	@RequestMapping("/")
-	public String memberStart(HttpSession session) {
-		Authentication authentication
+	public void memberStart(HttpSession session) {
+		Authentication authentication 
 		= SecurityContextHolder.getContext().getAuthentication();
-		
-		User user = (User)authentication.getPrincipal();
+
+		User user = (User) authentication.getPrincipal();
 		String id = user.getUsername();
 		MemberVo m = MemberManager.selectMember(id);
 		session.setAttribute("m", m);
-		return "main";
 	}
-	
-	//아이디찾기
+
+	// 접근 거부 페이지
+	@GetMapping("/user/denied")
+	public String dispDenied() {
+		return "/denied";
+	}
+
+
+	// 아이디찾기
 	@GetMapping("/findId")
 	public void findId() {
-		
+
 	}
-	
+
 	@PostMapping("/findId")
 	@ResponseBody
 	public HashMap findId(@RequestParam HashMap map) {
@@ -74,35 +100,38 @@ public class MemberController {
 		return data;
 	}
 
-	//비밀번호 찾기
+	// 비밀번호 찾기
 	@RequestMapping("/findPwd")
 	public void findPwd() {
-		
+
 	}
-	
+
 	@PostMapping("/findPwd")
 	public ModelAndView findPwd(MemberVo m) {
 		ModelAndView mav = new ModelAndView("/changePwd");
 		mav.addObject("m", m);
 		return mav;
+
+//		HashMap data = new HashMap<>();
+//		data.put("m", m);
+//		return data;
 	}
-	
-	//비밀번호 변경 페이지로 보내기
+
+	// 비밀번호 변경 페이지로 보내기
 	@GetMapping("/changePwd")
 	public ModelAndView changePwd() {
 		ModelAndView mav = new ModelAndView();
-		
 		return mav;
 	}
-	
-	//비밀번호 변경을 위한 메소드
+
+	// 비밀번호 변경을 위한 메소드
 	@PostMapping("/changePwd")
-//	public ModelAndView changePwd(MemberVo m) {
-//		ModelAndView mav = new ModelAndView("redirect:/list");
-//		dao.changePwd(m);
-//		return mav;
-//	}
-	//yd end
+	public ModelAndView changePwd(MemberVo m) {
+		ModelAndView mav = new ModelAndView("/login");
+		dao.changePwd(m);
+		return mav;
+	}
+	// yd end
 	
 	//회원가입 페이지로 보내기
 	@GetMapping("/insertMember")

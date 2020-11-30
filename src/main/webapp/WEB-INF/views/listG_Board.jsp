@@ -19,7 +19,9 @@
 	width : 950px;
 	height: 80px;
 	text-align: center;	
-	padding-top: 40px;
+	padding-top: 250px;
+ 	margin-left: 385px;
+ 	padding-bottom: 125px;
 }
 
 .main_input{
@@ -28,18 +30,19 @@
 	
 }
 
-li{
+.g_li{
 	font-size: 11px;
-	margin-left: 350px;
+	margin-left: 420px;
 	
 }
 
-table{
+.listG_Board{
 	border-collapse: collapse;
 	width: 850px;
+	margin-left: 420px;
 }
 
-th{
+.listG_Board th{
 	font-weight: bold;
 	border-bottom: 1.4px solid #747474;
 	padding-bottom: 5px;
@@ -48,7 +51,7 @@ th{
 
 /* w3school 긁어옴 */
 
-td {
+.listG_Board td {
   padding: 8px;
   text-align: center;
   border-bottom: 1px solid #94ccc4;
@@ -88,6 +91,7 @@ td {
 	background-color: #94CCC4;
 	color: #ffffff;
 	font-weight: bold;
+	margin-left: 520px;
 		
 }
 
@@ -105,15 +109,20 @@ a:visited {
 
 }
 
+.pageNum{
+	margin-left: 700px;
+}
 </style>
 </head>
 <body>
 	
+	<jsp:include page="header.jsp"></jsp:include>
+	
 	<div class="main_input_menu">
 		${title }
 	</div>
-		<ul>
-			<li>병원을 이용하시면서 선생님께 감사했던 마음을 전해보세요!
+		<ul class="g_ul">
+			<li class="g_li">병원을 이용하시면서 선생님께 감사했던 마음을 전해보세요!
 따뜻하고 소중한 격려가 됩니다.
 			</li>
 		</ul>
@@ -153,17 +162,18 @@ a:visited {
 	</table>
 		<br>
 		<br>
-		
+		<div class="pageNum">
 		<c:forEach var="i" begin="1" end="${totalPage }">
 			<a href="listG_Board.do?pageNUM=${i }">${i }</a>&nbsp;		
 		</c:forEach>
+		</div>
 		<br>
 		<div id="btn_div">
 			<a href="insertG_Board.do"><button id="btn_insert">새글쓰기</button></a>
 		</div>
 	</div>
 	
-	
+	<jsp:include page="/footer.jsp"></jsp:include>
 
 
 </body>
