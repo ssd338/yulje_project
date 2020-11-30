@@ -43,13 +43,4 @@
   select nvl(max(cli_no),0)+1 from clinic
 </select>
 
-<!-- 진료 등록 -->  
-<insert id="insertClinic">
-	insert into clinic values(#{cli_no},#{cli_date},#{cli_content},#{medi_no},#{regi_no},#{dept_no},#{doc_no},#{member_no})
-</insert>
-
-<!-- 진료번호 자동생성 -->  
-<select id="getNextCliNo" resultType="java.lang.Integer">
-  select nvl(max(cli_no),0)+1 from clinic
-</select>
 </mapper>

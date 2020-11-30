@@ -174,135 +174,6 @@ body {
 
 /*사이드바 end*/
 
-
-/*footer start*/
-#footer .family-site dd li {
-    margin-bottom: 12px;
-}
-
-
-#footer .family-site {
-    float: left;
-    width: 250px;
-    height: 184px;
-    padding: 15px 28px;
-    border-left: 1px solid #4e5157;
-}
-
-#hos_ul > li {
-    list-style: none;
-    display: list-item;
-    text-align: -webkit-match-parent;
-    
-}
-
-.clearfix > li {
-    list-style: none;
-
-}
-
-#hos_ul {
-    list-style-type: disc;
-    display: block;
-    padding: 0px;
-    font-size: 13px;
-    text-align: left;
-}
-
-#footer .btn-home {
-    position: absolute;
-   
-    font-size: 11px;
-    text-align: center;
-    text-decoration:none;
-    display: block;
-    padding-top: 13px;
-
-}
-
-*, *:before, *:after {
-    margin: 0px;
-    padding: 0px;
-    box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -o-box-sizing: border-box;
-}
-.inner > a {
-    color: #333;
-    text-decoration: none;
-    font-family: "NotoSans-Regular";
-    vertical-align: middle;
-}
-
-
-.inner > a:-webkit-any-link {
-    color: -webkit-link;
-    cursor: pointer;
-    text-decoration: underline;
-}
-
-#footer {
-    padding: 35px 0 88px 0;
-   /* background: #7A9AA0;*/
-    font-size: 16px;
-    color: #5D5D5D;
-    text-align: center;
-}
-
-#footer .info {
-    float: left;
-    width: 700px;
-    height: 184px;
-    padding-top: 15px;
-}
-
-#footer .tel-num {
-    float: left;
-    width: 295px;
-    height: 184px;
-    padding-top: 15px;
-    border-left: 1px solid #4e5157;
-    text-align: center;
-}
-
-#footer .family-site {
-    float: left;
-    width: 305px;
-    height: 184px;
-    padding: 15px 28px;
-    border-left: 1px solid #4e5157;
-}
-
-#footer a{
-	text-decoration:none;
-	color: #5D5D5D;
-	text-align:center;
-}
-
-.inner {
-    max-width: 1300px;
-    margin: 0 auto;
-    position: relative;
-}
-
-
-
-footer{
-    display: block\9;
-    margin: 0\9;
-    padding: 0\9;
-    display: block;
-}
-
-.btn-top{
-	border: 1px solid #ccc;
-}
-
-/*footer end*/
-
-
-
 </style>
 <title>건강TV</title>
 </head>
@@ -433,10 +304,8 @@ footer{
 				<a href="" class="btn-home">HOME</a>
 				<button type="button" class="btn-top">TOP</button>
 			</div>
-		</div>
-		<!--// footer_menu -->
-	</footer>
-	
-	<!-- //footer -->
+		<!-- footer -->
+   <jsp:include page="/footer.jsp"></jsp:include>
+   <!-- //footer -->
 </body>
 </html>

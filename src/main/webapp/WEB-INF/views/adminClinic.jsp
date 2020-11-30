@@ -309,7 +309,6 @@ $(function(){
                   formatdate = getFormatDate(formatdate)  
                   var regi_no = $("<span class='regi_no'></span>").html(item.regi_no)
           		 
-          		  
                   var patients_name = $("<span class='patients_name'></span>").html(item.member.name);
                   hidden = $("<input type='hidden'>").attr("value",item.member.member_no).addClass("memberno")
           		  patients_name.append(hidden)
