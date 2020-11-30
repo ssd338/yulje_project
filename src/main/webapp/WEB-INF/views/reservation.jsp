@@ -66,6 +66,7 @@ $(function(){
 	
 	//진료과 선택
 	$(document).on("click",".res_dept",function(){
+
 		$("#cal_btn").empty();
 		$("#calendarDiv").empty();
 		ampm = null;
@@ -128,6 +129,7 @@ $(function(){
 
 	//의사 선택
 	$(document).on("click",".r_btn",function(){
+
 		$("#cal_btn").empty();
 		ampm = null;
 		show();
@@ -288,6 +290,8 @@ $(function(){
 
 	//예약확정버튼
 	$(document).on("click","#confirm_btn2",function(){
+
+		
 		if (ampm == null){
 			alert("예약일을 정해주세요.");
 			return false;

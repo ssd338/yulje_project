@@ -4,6 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta id="_csrf" name="_csrf" content="${_csrf.token}" />
+<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
 <title>회원 가입</title>
 <link rel="stylesheet" href="./css/temp.css">
 <link rel="stylesheet" href="./css/join/joinMember.css">
@@ -44,6 +46,15 @@ var checkP = true;
 	}
 	
 $(function(){
+	
+  	$(document).ready(function(){
+	    var token = $("meta[name='_csrf']").attr("content");
+	    var header = $("meta[name='_csrf_header']").attr("content");
+	    $(document).ajaxSend(function(e, xhr, options) {
+	        xhr.setRequestHeader(header, token);
+	    });
+	});
+	
 	var id1;
 	//아이디 중복확인을 했는지 알기위한 변수
 	var checkId = true;

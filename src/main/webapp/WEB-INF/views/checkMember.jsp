@@ -4,6 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta id="_csrf" name="_csrf" content="${_csrf.token}" />
+<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
 <link rel="stylesheet" href="./css/join/checkMember.css">
 <title>회원 인증</title>
 
@@ -13,6 +15,14 @@
 	var checkRR = true;
 $(function(){
 
+  	$(document).ready(function(){
+	    var token = $("meta[name='_csrf']").attr("content");
+	    var header = $("meta[name='_csrf_header']").attr("content");
+	    $(document).ajaxSend(function(e, xhr, options) {
+	        xhr.setRequestHeader(header, token);
+	    });
+	});
+	
 	$("#btnSubmit").click(function(){
 		var tel1 = $("#tel1").val();
 		var tel2 = $("#tel2").val();
