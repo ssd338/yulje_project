@@ -846,8 +846,8 @@ $(function(){
 				var table_menu_th1 = $("<th></th>").html("글번호").attr("id","td_no");
 				var table_menu_th2 = $("<th></th>").html("진료과").attr("id","td_dept");
 				var table_menu_th3 = $("<th></th>").html("글제목").attr("id","td_title");
-				var table_menu_th5 = $("<th></th>").html("작성자").attr("id","td_writer");
-				var table_menu_th4 = $("<th></th>").html("등록일").attr("id","td_regdate");
+				var table_menu_th4 = $("<th></th>").html("작성자").attr("id","td_writer");
+				var table_menu_th5 = $("<th></th>").html("등록일").attr("id","td_regdate");
 
 				$(table_menu_tr).append(table_menu_th1,table_menu_th2,table_menu_th3,table_menu_th4,table_menu_th5);
 				$(table_menu_thead).append(table_menu_tr);

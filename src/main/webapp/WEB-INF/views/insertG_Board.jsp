@@ -54,7 +54,8 @@
 
 .main_button{
 	text-align: center;
-	width : 950px
+	width : 950px;
+	padding-left: 450px;
 }
 
 .g_li{

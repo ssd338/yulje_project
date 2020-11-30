@@ -167,11 +167,11 @@ select {
 									</c:if></td>
 							</tr>
 							<tr>
-								<td>작성자 :</td>
+								<td>작성자 </td>
 								<td><input type="hidden" name="writer"
 									class="board_input_info" value="${gb.writer }"
 									readonly="readonly">${gb.writer }</td>
-								<td>비밀번호 :</td>
+								<td>비밀번호 </td>
 								<td><input type="password" name="pwd"
 									class="board_input_info"></td>
 

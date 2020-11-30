@@ -328,8 +328,8 @@ select {
 									</tr>
 									<tr>
 										<td>작성자 </td>
-										<td>${ab.writer }<input type="hidden" name="writer"
-											class="board_input_info" value="${ab.writer }" readonly="readonly"></td>
+										<td><input type="hidden" name="writer"
+											class="board_input_info" value="${ab.writer }" readonly="readonly">${ab.writer }</td>
 										<td>비밀번호 </td>
 										<td><input type="password" name="pwd"
 											class="board_input_info"></td>
@@ -370,7 +370,7 @@ select {
 			<br>
 
 			<div class="main_button">
-				<button id="btn_insert">등록</button>
+				<button id="btn_insert">수정</button>
 				<a href="listA_Board.do"><button id="btn_list" type="button">목록</button></a>
 
 			</div>
