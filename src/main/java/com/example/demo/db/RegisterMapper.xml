@@ -42,5 +42,4 @@
 <select id="getNextCliNo" resultType="java.lang.Integer">
   select nvl(max(cli_no),0)+1 from clinic
 </select>
-
 </mapper>
