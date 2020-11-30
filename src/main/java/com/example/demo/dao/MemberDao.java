@@ -11,6 +11,7 @@ import com.example.demo.vo.MemberVo;
 
 @Repository
 public class MemberDao {
+
 	//yd
 	public MemberVo findId(HashMap map) {
 		return MemberManager.findId(map);
@@ -19,7 +20,7 @@ public class MemberDao {
 	public MemberVo findPwd(HashMap map) {
 		return MemberManager.findPwd(map);
 	}
-	
+
 	//비밀번호 변경
 	public int changePwd(MemberVo m) {
 		return MemberManager.changePwd(m);

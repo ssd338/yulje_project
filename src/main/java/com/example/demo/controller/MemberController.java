@@ -30,7 +30,7 @@ public class MemberController {
 
 	@Autowired
 	private MemberDao dao;
-	
+
 	// yd
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public void main() {
@@ -45,11 +45,11 @@ public class MemberController {
 	}
 	 // 로그인 페이지
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
+
 	public void login() {	
 		System.out.println("로그인 컨트롤러 동작함!");
 	}
 	
-
 
 	// 로그인 결과 페이지
 	@GetMapping("/loginSuccess")
@@ -87,6 +87,7 @@ public class MemberController {
 	public void findId() {
 
 	}
+
 
 	@PostMapping("/findId")
 	@ResponseBody
@@ -131,6 +132,7 @@ public class MemberController {
 		return mav;
 	}
 	// yd end
+
 	
 	//회원가입 페이지로 보내기
 	@GetMapping("/insertMember")

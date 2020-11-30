@@ -28,6 +28,7 @@ public class MemberManager {
 			System.out.println("manager:"+e.getMessage());
 		}
 	}
+
 	//yd
 	//로그인
 	public static MemberVo selectMember(String username) {

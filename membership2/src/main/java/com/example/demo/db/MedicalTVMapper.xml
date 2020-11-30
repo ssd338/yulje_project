@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="medicalTV">
+<!-- 모든 영상 목록 -->
+  <select id="selectAll" resultType="medicalTVVo">
+    select tv_no,tv_title,tv_img,tv_url from (select rownum n,tv_no,tv_title,tv_img,tv_url from 
+    (select * from MedicalTV  where tv_title like '${search}' order by tv_no desc)) where n between #{start} and #{end}
+  </select>
+  
+  <!-- 검색어에 따른 영상의 수 -->
+  <select id="getTotalRecord" resultType="java.lang.Integer">
+  	select count(*) from MedicalTV where tv_title like '%${search}%'
+  </select>
+  <!--  where medi_name like '%${search}%' -->
+ 
+  <!-- 영상 번호를 통한 영상 정보 조회 -->
+  <select id="selectByNo" resultType="medicalTVVo">
+  	select * from MedicalTV where tv_no=#{tv_no}
+  </select>
+		
+  
+  <!-- (관리자) 영상 추가, 수정, 삭제 -->
+   <insert id="insert">
+  	insert into MedicalTV values(#{tv_no},#{tv_title},#{tv_img},#{tv_url})
+  </insert>
+  <select id="getNextNo" resultType="java.lang.Integer">
+  	select nvl(max(tv_no),0)+1 from MedicalTV
+  </select>
+</mapper>

@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="newfooter.css">
+<link rel="stylesheet" href="header.css">
+
 <title>Insert title here</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
@@ -44,7 +46,9 @@
       margin: 10px; 
       text-align: center;
       padding-top: 30px;
+
       border-top-color: #94CCC4;;
+
    	  border-top-width: 5px;
    }
    
@@ -55,7 +59,9 @@
       margin: 10px; 
       text-align: center;
       padding-top: 30px;
+
       border-top-color: #94CCC4;;
+
   	  border-top-width: 5px;
    }
    
@@ -66,6 +72,7 @@
       margin: 10px; 
       text-align: center;
       padding-top: 30px;
+
       border-top-color: #94CCC4;
    	  border-top-width: 5px;
           
@@ -96,7 +103,9 @@
 #tab-1:checked ~ .tab label:nth-child(1),
 #tab-2:checked ~ .tab label:nth-child(2)
 {
+
   background-color: #94CCC4;
+
   box-shadow: none;
 }
 
@@ -110,6 +119,7 @@
 #tab-2:checked ~ .content div:nth-child(2) {
    display: block;
    border: 1px solid #ccc;
+
    border-top-color: #94CCC4;
    border-top-width: 5px;
 }
@@ -155,13 +165,17 @@
 /* 로그인 윗 박스 로그인버튼 */     
    #login_btn_1 {
       display: block;
+
       border: 1px solid #94CCC4;
+
       width: 200px;
       height: 35px;
       cursor: pointer;
       margin-right: 5px;
       margin: 0 auto;
+
       background-color: #94CCC4;
+
       color: white;
       font-weight: bold; 
    }
@@ -201,13 +215,17 @@
    #sign_up_btn {
       display: block;
       border-radius: 10px;
+
       border: 1px solid #94CCC4;
+
       width: 110px;
       height: 35px;
       cursor: pointer;
       margin-right: 5px;
       margin: 0 auto;
+
       background-color: #94CCC4;
+
 
    }
    
@@ -219,13 +237,17 @@
    #find_id_btn {
       display: block;
       border-radius: 10px;
+
       border: 1px solid #94CCC4;
+
       width: 110px;
       height: 35px;
       cursor: pointer;
       margin-right: 5px;
       margin: 0 auto;
+
       background-color: #94CCC4;
+
 
    }
    
@@ -237,13 +259,17 @@
    #find_pwd_btn {
       display: block;
       border-radius: 10px;
+
       border: 1px solid #94CCC4;
+
       width: 110px;
       height: 35px;
       cursor: pointer;
       margin-right: 5px;
       margin: 0 auto;
+
       background-color: #94CCC4;
+
 
    }
 
@@ -437,6 +463,7 @@ a{
 <body>
 
  <!-- Header Start -->
+
      <jsp:include page="header.jsp"></jsp:include>
 <!-- 	Header End -->
    
@@ -511,7 +538,18 @@ a{
       </div>  <!-- 메인 닫기-->
 
  <!-- footer -->
+전화번호안내</a></li>
+					<li><a href="">오시는길</a></li>
+				</ul>
+				<a href="" class="btn-home">HOME</a>
+				<button type="button" class="btn-top">TOP</button>
+			</div>
+		</div>
+		<!--// footer_menu -->
+	</footer>
+
    <jsp:include page="/footer.jsp"></jsp:include>
+
 	
 	<!-- //footer -->
   

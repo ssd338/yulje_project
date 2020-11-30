@@ -19,6 +19,8 @@ import lombok.AllArgsConstructor;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		// TODO Auto-generated method stub
@@ -53,6 +55,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 		.mvcMatchers("/","/all/**").permitAll()
 		.mvcMatchers("/","/**").permitAll()
+
 		//.mvcMatchers("/admin/**").hasRole("ADMIN")
 		//설정중엔 모든 요청 수락가능
 		//.anyRequest().authenticated();
@@ -68,12 +71,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 		.logoutSuccessUrl("/login")
 		.invalidateHttpSession(true);
-		
 		http.httpBasic();		
 	}
+
 }
-
-
-
-
 

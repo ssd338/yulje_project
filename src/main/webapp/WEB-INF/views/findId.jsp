@@ -209,6 +209,7 @@
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
+
 $(function(){
 
   	$(document).ready(function(){
@@ -272,6 +273,7 @@ $(function(){
 			alert("잘못된 주민등록번호입니다. 주민등록번호를 확인해주세요.");
 			return false;
 		}
+
  	/* 	if(checkAlready){
 			alert("이미 가입된 주민등록번호입니다.");
 			return false;
@@ -286,7 +288,6 @@ $(function(){
 		var tel2 = $("#tel2").val();
 		var tel3 = $("#tel3").val();
 		var tel = tel1+tel2+tel3;
-		
 
 		$.ajax({
 		    url: "/checkTel",
@@ -328,7 +329,9 @@ $(function(){
 		  		</div>
 		  	<div class="mypage_detail_under">
 		  			<h3>회원님의 개인정보보호와 더욱 안정된 서비스를 위해 최선을 다하겠습니다.</h3>
+
 				<form action="/findId" method="post">
+
 		  		<div id="mypage_title_sub">
 		  			<div class="tr">
 		  			<strong>이름</strong>
