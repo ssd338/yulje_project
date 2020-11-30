@@ -37,13 +37,12 @@ public class ClinicController {
    @RequestMapping("/listClinic")
    public ModelAndView list(HttpSession session) {
       ModelAndView mav = new ModelAndView();
-      int member_no = -1;
-      if(session.getAttribute("member_no") != null) {
-         member_no = (int)session.getAttribute("member_no");
-      }
-      MemberVo m = memberDao.getMember(member_no);
+      MemberVo m = new MemberVo();
+	  if(session.getAttribute("m") != null) {
+	     m = (MemberVo)session.getAttribute("m");
+	  }
       mav.addObject("name", m.getName());
-     int cnt = clinicDao.cntByClinic(member_no);   // 총 진료횟수
+     int cnt = clinicDao.cntByClinic(m.getMember_no());   // 총 진료횟수
      mav.addObject("cnt", cnt);   
       return mav;
       
@@ -56,10 +55,10 @@ public class ClinicController {
    @RequestMapping("/allListClinic.ajax")
    @ResponseBody
    public ArrayList allListAjax(HttpSession session,@RequestParam HashMap map) {
-      int member_no = -1;
-      if(session.getAttribute("member_no") != null) {
-         member_no = (int)session.getAttribute("member_no");
-      }
+	   int member_no = -1;
+		if(session.getAttribute("m") != null) {
+			member_no = ((MemberVo)session.getAttribute("m")).getMember_no();
+		}
       //(totalData,dataPerPage,currentPage)   //매개변수로 총데이터의 수, 한페이지에 나타낼데이터 수, 현재 선택된 페이지
       // 회원번호를 통해서 진료기록을 가져온다
       List<ClinicVo> list = clinicDao.findByNoMem(member_no);

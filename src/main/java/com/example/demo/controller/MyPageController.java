@@ -46,8 +46,8 @@ public class MyPageController {
 	@RequestMapping("/myPage_1")					//나의 차트 페이지/ 최근 예약건수와 진료내역을 보여줌
 	public ModelAndView myPage_1(HttpSession session) {
 		int member_no = -1;
-		if(session.getAttribute("member_no") != null) {
-			member_no = (int)session.getAttribute("member_no");
+		if(session.getAttribute("m") != null) {
+			member_no = ((MemberVo)session.getAttribute("m")).getMember_no();
 		}
 		int cnt = reservationDao.cntByNo(member_no);	//나의 예약현황횟수
 		ModelAndView mav = new ModelAndView();		
@@ -57,15 +57,15 @@ public class MyPageController {
 	
 //	<<   회원정보 수정 -  비밀번호 확인    >>
 	@RequestMapping(value="/myPage_2",method = RequestMethod.GET )
-	public ModelAndView get_myPage_2(HttpSession session) {
-		int member_no = -1;								//로그인한 회원의 회원정보를 가져옴
-		if(session.getAttribute("member_no") != null) {
-			member_no = (int)session.getAttribute("member_no");
+	public ModelAndView get_myPage_2(HttpSession session) {		//로그인한 회원의 회원정보를 가져옴
+		MemberVo m = new MemberVo();
+		if(session.getAttribute("m") != null) {
+			m = (MemberVo)session.getAttribute("m");
 		}
 	
 		//비밀번호 확인 페이지로 memberVo를 보내준다.
 		ModelAndView mav = new ModelAndView();	
-		mav.addObject("m", memberDao.getMember(member_no));
+		mav.addObject("m", m);
 		return mav;
 	}
 	
@@ -81,12 +81,12 @@ public class MyPageController {
 	//개인정보수정페이지Get - 회원의 기존 정보를 가져와서 수정창에 보여준다.
 	@RequestMapping(value = "/myPage_7", method = RequestMethod.GET)
 	public ModelAndView get_myPage_7(HttpSession session) {
-	   int member_no = -1;
-	   if(session.getAttribute("member_no") != null) {
-	         member_no = (int)session.getAttribute("member_no");
+	   MemberVo m = new MemberVo();
+	   if(session.getAttribute("m") != null) {
+	         m = (MemberVo)session.getAttribute("m");
 	      }
 	      ModelAndView mav = new ModelAndView();
-	      mav.addObject("m",memberDao.getMember(member_no));		//memberVo를 보내준다.
+	      mav.addObject("m",m);		//memberVo를 보내준다.
 	      return mav;
 	   }
 	   
@@ -108,11 +108,11 @@ public class MyPageController {
 	      @RequestMapping(value = "/myPage_3", method = RequestMethod.GET)
 	      public ModelAndView get_myPage_3(HttpSession session) {
 	         ModelAndView mav = new ModelAndView();
-	         int member_no = -1;
-	         if(session.getAttribute("member_no") != null) {
-	            member_no = (int)session.getAttribute("member_no");
-	         }
-	         mav.addObject("m",memberDao.getMember(member_no));		//memberVo를 보내준다.
+	         MemberVo m = new MemberVo();
+	  	   	 if(session.getAttribute("m") != null) {
+	  	         m = (MemberVo)session.getAttribute("m");
+	  	      }
+	         mav.addObject("m",m);		//memberVo를 보내준다.
 	         return mav;
 	         
 	      }
@@ -152,8 +152,8 @@ public class MyPageController {
 		@RequestMapping(value="/myPage_4", method = RequestMethod.POST)
 		public ModelAndView post_myPage_4(HttpSession session, String name, int reser_no) {
 			int member_no = -1;
-			if(session.getAttribute("member_no") != null) {
-				member_no = (int)session.getAttribute("member_no");
+			if(session.getAttribute("m") != null) {
+				member_no = ((MemberVo)session.getAttribute("m")).getMember_no();
 			}
 			ModelAndView mav = new ModelAndView();	
 			HashMap map = new HashMap<>();		//멤버번호의 해당하는 이름과 예약번호가 맞았는 지 확인
@@ -179,8 +179,8 @@ public class MyPageController {
 	@ResponseBody
 	public List<Advice_BoardVo> myPage_5_1(HttpSession session) {
 		int member_no = -1;
-		if(session.getAttribute("member_no") != null) {
-			member_no = (int)session.getAttribute("member_no");
+		if(session.getAttribute("m") != null) {
+			member_no = ((MemberVo)session.getAttribute("m")).getMember_no();
 		}
 		List<Advice_BoardVo> list = memberDao.myAdvice(member_no);	//나의 상담 내역을 리스트로 반환
 		int endlist = 6;	//최근 6개의 상담내역을 보여주기 위해서
@@ -202,11 +202,10 @@ public class MyPageController {
 	//강좌 페이지 Get
 	@RequestMapping(value = "/myPage_6", method = RequestMethod.GET)
 	public ModelAndView get_myPage_6(HttpSession session) {
-		int member_no = -1;
-		if(session.getAttribute("member_no") != null) {
-			member_no = (int)session.getAttribute("member_no");
-		}
-		MemberVo m = memberDao.getMember(member_no);
+		MemberVo m = new MemberVo();
+ 	   	 if(session.getAttribute("m") != null) {
+ 	         m = (MemberVo)session.getAttribute("m");
+ 	      }
 		ModelAndView mav = new ModelAndView();		
 		mav.addObject("name", m.getName());
 		return mav;
@@ -216,11 +215,10 @@ public class MyPageController {
 	@RequestMapping(value="/findMyInfo.ajax",method = RequestMethod.GET )
 	@ResponseBody
 	public MemberVo documentOnline(HttpSession session) {	
-		int member_no = -1;
-		if(session.getAttribute("member_no") != null) {
-			member_no = (int)session.getAttribute("member_no");
-		}
-		MemberVo m = memberDao.getMember(member_no);
+		MemberVo m = new MemberVo();
+ 	   	 if(session.getAttribute("m") != null) {
+ 	         m = (MemberVo)session.getAttribute("m");
+ 	      }
 		return m;
 	}
 	
