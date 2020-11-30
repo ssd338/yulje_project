@@ -598,8 +598,8 @@ $(function(){
 		  			</div>
 		  		</div>
 		  		<div id="mypage_certificate">
-		  			<button id="btn_mypage_certificate_1"><a href="/myPage_2">개인정보수정</a></button>
-		  			<button id="btn_mypage_certificate_2">인터넷증명서 발급</button>
+		  			<a href="/myPage_2"><button id="btn_mypage_certificate_1">개인정보수정</button></a>
+		  			<a href="/document"><button id="btn_mypage_certificate_2">인터넷증명서 발급</button></a>
 		  		</div>
 		  		</div>		  	
 		  	</div>

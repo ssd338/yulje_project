@@ -460,7 +460,7 @@ $(function(){
 		  			</ul>
 		  		</div>
 		  		<div class="mypage_answer">
-		  		<a href="/listClinic.jsp"><button id="nextClinic_btn">더 보기</button></a>
+		  		<a href="/listClinic"><button id="nextClinic_btn">더 보기</button></a>
 		  			<div>답변중 : 0개</div>
 		  			<div id="mypage_box_empty"></div>
 		  			<div>답변완료 : 0개</div>
