@@ -109,6 +109,7 @@ public class MemberController {
 	@PostMapping("/findPwd")
 	public ModelAndView findPwd(MemberVo m) {
 		ModelAndView mav = new ModelAndView("/changePwd");
+		System.out.println(m);
 		mav.addObject("m", m);
 		return mav;
 

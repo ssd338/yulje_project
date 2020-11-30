@@ -164,7 +164,7 @@ $(function(){
 						</li>
 					
 						<li>
-							<a href="/checkMember"><img src="./menu/insertMember.png"></a>
+							<a href="/join-allow"><img src="./menu/insertMember.png"></a>
 						</li>
 						
 					</c:if>		
