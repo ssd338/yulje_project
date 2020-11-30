@@ -63,30 +63,32 @@ public class ClinicController {
       // 회원번호를 통해서 진료기록을 가져온다
       List<ClinicVo> list = clinicDao.findByNoMem(member_no);
       ArrayList list2 = new ArrayList();
-      int currentPage =Integer.parseInt((String)map.get("currentPage"));   // 현재 페이지               7
-      int dataPerPage = Integer.parseInt((String)map.get("dataPerPage"));   // 한페이지에 보여질 데이터의 수      5
-      int totalData = Integer.parseInt((String)map.get("totalData"));      // 총 데이터의 수            31
-       
-        int end =currentPage * dataPerPage;      //현재 페이지의 끝레코드      현재페이지 * 한페이지에서 보여줄 레코드의 수      35
-        
-        int start = end - (dataPerPage);   //현재 페이지의 시작시코드      35-5 30
-        if(start<0) {
-           start=0;
-        }
-        if(end >totalData) {                  //35>31   => 31   //5   //10
-             end = totalData;
-          }
-
-      //리스트 돌면서 맵에 진료 기록(의사이름등)을 담음
-      for(int i=start; i<end; i++) {   
-         HashMap map2 = new HashMap();
-         int cli_no = list.get(i).getCli_no();
-         map2.put("cli_no", cli_no);                        //진료번호
-         map2.put("cli_date", list.get(i).getCli_date());         //진료일
-         map2.put("cli_content", list.get(i).getCli_content());   //진단내역
-         map2.put("dept_name", clinicDao.selectDeptName(cli_no));      //진료과
-         map2.put("doc_name", clinicDao.selectDocName(cli_no));         //담당의
-         list2.add(map2);
+      if(list.size() >=1) {
+	      int currentPage =Integer.parseInt((String)map.get("currentPage"));   // 현재 페이지               7
+	      int dataPerPage = Integer.parseInt((String)map.get("dataPerPage"));   // 한페이지에 보여질 데이터의 수      5
+	      int totalData = Integer.parseInt((String)map.get("totalData"));      // 총 데이터의 수            31
+	       
+	        int end =currentPage * dataPerPage;      //현재 페이지의 끝레코드      현재페이지 * 한페이지에서 보여줄 레코드의 수      35
+	        
+	        int start = end - (dataPerPage);   //현재 페이지의 시작시코드      35-5 30
+	        if(start<0) {
+	           start=0;
+	        }
+	        if(end >totalData) {                  //35>31   => 31   //5   //10
+	             end = totalData;
+	          }
+	
+	      //리스트 돌면서 맵에 진료 기록(의사이름등)을 담음
+	      for(int i=start; i<end; i++) {   
+	         HashMap map2 = new HashMap();
+	         int cli_no = list.get(i).getCli_no();
+	         map2.put("cli_no", cli_no);                        //진료번호
+	         map2.put("cli_date", list.get(i).getCli_date());         //진료일
+	         map2.put("cli_content", list.get(i).getCli_content());   //진단내역
+	         map2.put("dept_name", clinicDao.selectDeptName(cli_no));      //진료과
+	         map2.put("doc_name", clinicDao.selectDocName(cli_no));         //담당의
+	         list2.add(map2);
+	      }
       }
         return list2;
   }
