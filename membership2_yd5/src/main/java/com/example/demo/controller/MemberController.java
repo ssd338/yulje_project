@@ -52,13 +52,15 @@ public class MemberController {
 
 	// 로그인 결과 페이지
 	@GetMapping("/loginSuccess")
-	public void dispLoginResult(HttpSession session) {		
+	public String dispLoginResult(HttpSession session) {		
 		  Authentication authentication =
 		  SecurityContextHolder.getContext().getAuthentication();
 		  
-		  User user = (User) authentication.getPrincipal(); String id =
-		  user.getUsername(); MemberVo m = MemberManager.selectMember(id);
-		  session.setAttribute("m", m); 	 
+		  User user = (User) authentication.getPrincipal(); 
+		  String id = user.getUsername(); 
+		  MemberVo m = MemberManager.selectMember(id);
+		  session.setAttribute("m", m); 
+		  return "/main";
 	}
 	
 	//전체 페이지로 세션 유지해서 뿌려줌
@@ -108,6 +110,10 @@ public class MemberController {
 		ModelAndView mav = new ModelAndView("/changePwd");
 		mav.addObject("m", m);
 		return mav;
+
+//		HashMap data = new HashMap<>();
+//		data.put("m", m);
+//		return data;
 	}
 
 	// 비밀번호 변경 페이지로 보내기
@@ -120,7 +126,7 @@ public class MemberController {
 	// 비밀번호 변경을 위한 메소드
 	@PostMapping("/changePwd")
 	public ModelAndView changePwd(MemberVo m) {
-		ModelAndView mav = new ModelAndView("redirect:/list");
+		ModelAndView mav = new ModelAndView("/login");
 		dao.changePwd(m);
 		return mav;
 	}

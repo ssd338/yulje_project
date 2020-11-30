@@ -20,8 +20,9 @@
 
 }
 .insert_main{
-	width : 800px;
+	width :2000px;
 	margin: auto;
+	margin-left: 430px;
 	
 	
 }
@@ -44,18 +45,21 @@
 
 .main_input_menu{
 	font-size: 25px;
-	width : 950px;
+	width : 1300px;
 	height: 80px;
 	text-align: center;	
-	padding-top: 40px;
+	padding-top: 230px;
+ 	padding-left: 470px;
+ 	padding-bottom: 120px;
 }
 
 .main_button{
 	text-align: center;
-	width : 950px
+	width : 950px;
+	padding-left: 650px;
 }
 
-li{
+.f_ul{
 	font-size: 13px;
 }
 
@@ -63,6 +67,7 @@ li{
 	border-top: 2px solid #747474;
 	padding-top: 20px;
 	font-size: 13px;
+	width: 600px;
 	
 }
 
@@ -106,20 +111,20 @@ li{
 		
 	}
 
-textarea{
+.textarea{
 
 	border: 1px solid #D5D5D5;
 	width: 500px;
 
 }
 
-tr, td{
+.main_input_form tr, td{
 	padding: 3px;
 }
 
 /*select box*/
 
-select {
+.main_input_form select {
 
     width: 157px; /* 원하는 너비설정 */
     padding: .4em .4em; /* 여백으로 높이 설정 */
@@ -133,12 +138,20 @@ select {
 
 }
 
+.textarea1 {
+	border: 1px solid #D5D5D5;
+	width: 475px;
+	resize: none;
+}
+
 
 
 
 </style>
 </head>
 <body>
+
+<jsp:include page="header.jsp"></jsp:include>
 	<div class="main_Board">
 	<div class="main_input_menu">FAQ 등록
 	
@@ -157,7 +170,7 @@ select {
 	<form action="insertFaq.do" method="post" enctype="multipart/form-data">
 		
 		<ul>
-		<li>FAQ 입니다.</li>
+		<li class="f_ul">FAQ 입니다.</li>
 		</ul>
 		<div id="main_input_form">
 		<input type="hidden" name="no" value="${no }">
@@ -179,7 +192,7 @@ select {
 				
 		<tr>
 			<td>내용 </td>
-			<td colspan="3"><textarea rows="10" cols="60" name="content" placeholder="메세지를 남겨주세요."></textarea></td>
+			<td colspan="3"><textarea class="textarea1" rows="10" cols="60" name="content" placeholder="메세지를 남겨주세요."></textarea></td>
 		
 		</tr>
 		
@@ -204,6 +217,7 @@ select {
 	</div>
 	</form>
 	</div>
+	<jsp:include page="/footer.jsp"></jsp:include>
 	
 	
 	

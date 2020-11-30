@@ -45,15 +45,7 @@ body {
   display: table;
   clear: both;
 }
-/* Style the footer */
-/*
 
-.footer {
-  background-color: #f1f1f1;
-  padding: 10px;
-  text-align: center;
-}
-*/
 
 /* 위에는 w3school 긁어온것 */
 
@@ -158,138 +150,6 @@ body {
      letter-spacing: -.8px;
      line-height: 1.5;
 	}
-
-
-
-
-/*footer start*/
-#footer .family-site dd li {
-    margin-bottom: 12px;
-}
-
-
-#footer .family-site {
-    float: left;
-    width: 250px;
-    height: 184px;
-    padding: 15px 28px;
-    border-left: 1px solid #4e5157;
-}
-
-#hos_ul > li {
-    list-style: none;
-    display: list-item;
-    text-align: -webkit-match-parent;
-    
-}
-
-.clearfix > li {
-    list-style: none;
-
-}
-
-#hos_ul {
-    list-style-type: disc;
-    display: block;
-    padding: 0px;
-    font-size: 13px;
-    text-align: left;
-}
-
-#footer .btn-home {
-    position: absolute;
-   
-    font-size: 11px;
-    text-align: center;
-    text-decoration:none;
-    display: block;
-    padding-top: 13px;
-
-}
-
-*, *:before, *:after {
-    margin: 0px;
-    padding: 0px;
-    box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -o-box-sizing: border-box;
-}
-.inner > a {
-    color: #333;
-    text-decoration: none;
-    font-family: "NotoSans-Regular";
-    vertical-align: middle;
-}
-
-
-.inner > a:-webkit-any-link {
-    color: -webkit-link;
-    cursor: pointer;
-    text-decoration: underline;
-}
-
-#footer {
-    padding: 35px 0 88px 0;
-   /* background: #7A9AA0;*/
-    font-size: 16px;
-    color: #5D5D5D;
-    text-align: center;
-}
-
-#footer .info {
-    float: left;
-    width: 700px;
-    height: 184px;
-    padding-top: 15px;
-}
-
-#footer .tel-num {
-    float: left;
-    width: 295px;
-    height: 184px;
-    padding-top: 15px;
-    border-left: 1px solid #4e5157;
-    text-align: center;
-}
-
-#footer .family-site {
-    float: left;
-    width: 305px;
-    height: 184px;
-    padding: 15px 28px;
-    border-left: 1px solid #4e5157;
-}
-
-#footer a{
-	text-decoration:none;
-	color: #5D5D5D;
-	text-align:center;
-}
-
-.inner {
-    max-width: 1300px;
-    margin: 0 auto;
-    position: relative;
-}
-
-
-
-footer{
-    display: block\9;
-    margin: 0\9;
-    padding: 0\9;
-    display: block;
-}
-
-.btn-top{
-	border: 1px solid #ccc;
-}
-
-/*footer end*/
-
-
-
 
 
 /*사이드바 start*/
@@ -471,8 +331,8 @@ $(function(){
 </head>
 <body>
   <!-- Header Start -->
-     <jsp:include page="/header.jsp"></jsp:include>
-<!-- 	Header End -->
+      <jsp:include page="/header.jsp"></jsp:include>
+<!--    Header End -->
 
 <div class="row">
 	<!-- 양쪽 빈공간중에 왼쪽. 메뉴바 들어옴. -->
@@ -528,69 +388,8 @@ $(function(){
   <div class="column side"></div>
 </div>
 
-<!-- footer -->
-   <footer id="footer">
-		<div class="inner">
-			<div class="info">
-				<ul class="footer-link">
-					<li><a href="#" onclick="ajaxPopup('.ajaxPopup', '', '/ilsan/etc/privacy_policy.asp', this, '.popup-privacyList'); return false;"><span class="white fs14">개인정보처리방침</span></a></li>
-					<li class="link-policy"><a href="#popupVideoPolicy" onclick="ajaxPopup('.ajaxPopup', '', '/ilsan/etc/video_policy.asp', this,'.popup-videoPolicy'); return false;">영상정보처리기기운영방침</a></li>
-					<li><a href="" onclick="ajaxPopup('.ajaxPopup', '', this.href, this,'.popup-popRights'); return false;">환자권리장전</a></li>
-					<!--<li><a href="#">사이트맵</a></li>-->
-				</ul>
-				<div class="copyright">
-					<address>04108 서울 마포구 백범로 23 구프라자 3층</address>
-					<span>HELLJAVA COPYRIGHT (C)2018 YULJE UNIVERSITY HOSPITAL.ALL RIGHTS RESERVED.</span>
-				</div>
-				<div class="etc">
-					<i class="ico ico-certify">보건복지부 인증 의료기관</i>
-					<div class="sns-link">
-						<a href="" target="_blank" title="새창"><i class="">facebook</i></a>
-						<a href="" target="_blank" title="새창"><i class="">blog</i></a>
-                        <a href="" target="_blank" title="새창"><i class="">YouTube</i></a>
-					</div>
-				</div>
-			</div>
-			<div class="tel-num">
-				<dl>
-					<dt>대표전화(안내)</dt>
-					<dd>02-707-1480</dd>
-				</dl>
-			</div>
-			<div class="family-site">
-				<dl>
-					<dt><em>FAMILY SITE</em></dt>
-					<dd>
-						<ul id="hos_ul">
-							<li><a href="">율제중앙의료원</a></li>
-							<li><a href="">서울대병원</a></li>
-							<li><a href="">일산백병원</a></li>
-							<li><a href="" target="_blank" title="새창열림">율제대학교</a></li>
-						</ul>
-					</dd>
-				</dl>
-
-			</div>
-		</div>
-		<!-- footer_menu -->
-		<div class="footer-menu">
-			<div class="inner">
-				<ul class="clearfix">
-					<li><a href="">예약/조회/발급</a></li>
-					<li><a href="" onclick="open(this.href, '_swin_', 'width=1120,height=800,scrollbars,resizable');return false;"></i>의료진/의료과</a></li>
-					<li><a href="">이용안내</a></li>
-					<li><a href="">건강정보</a></li>
-					<li><a href="">병원소개</a></li>
-					<li><a href="">전화번호안내</a></li>
-					<li><a href="">오시는길</a></li>
-				</ul>
-				<a href="" class="btn-home">HOME</a>
-				<button type="button" class="btn-top">TOP</button>
-			</div>
-		</div>
-		<!--// footer_menu -->
-	</footer>
-	
-	<!-- //footer -->
+ <!-- footer -->
+   <jsp:include page="/footer.jsp"></jsp:include>
+   <!-- //footer -->
 </body>
 </html>

@@ -6,7 +6,7 @@
 
 <!-- 접수 등록 -->
   <insert id="insertRegister">
-  	insert into register values(#{regi_no},#{reser_no},sysdate)
+     insert into register values(#{regi_no},#{reser_no},sysdate)
   </insert>
 
 <!-- 접수번호 자동생성 -->  
@@ -16,10 +16,40 @@
 
 <!-- 진료 등록되지 않은 모든 예약 목록 --> 
   <select id="selectAllReservation" resultType="reservationVo">
-  	select * from reservation rs where rs.reser_no not in(select rg.reser_no from register rg)
+     select * from reservation rs where rs.reser_no not in(select rg.reser_no from register rg)
   </select>
 <!-- 진료 등록되지 않은 모든 예약 횟수를 조회 -->
   <select id="countAllReservation" resultType="java.lang.Integer">
-  	select count(*) from reservation rs where rs.reser_no not in(select rg.reser_no from register rg)
+     select count(*) from reservation rs where rs.reser_no not in(select rg.reser_no from register rg)
   </select>
+  
+<!-- 진료기록(clinc)에 등록되지 않은 모든 진료접수(register)의 수를 조회 -->
+ <select id="countAllRegister" resultType="java.lang.Integer">
+   select count(*) from register rg where rg.regi_no not in(select c.regi_no from clinic c)      
+ </select>
+ 
+<!-- 진료기록(clinc)에 등록되지 않은 모든 진료접수(register)를 조회 -->
+<select id="selectAllRegister" resultType="registerVo">
+   select * from register rg where rg.regi_no not in(select c.regi_no from clinic c)
+</select>
+
+<!-- 진료 등록 -->  
+<insert id="insertClinic">
+   insert into clinic values(#{cli_no},#{cli_date},#{cli_content},#{medi_no},#{regi_no},#{dept_no},#{doc_no},#{member_no})
+</insert>
+
+<!-- 진료번호 자동생성 -->  
+<select id="getNextCliNo" resultType="java.lang.Integer">
+  select nvl(max(cli_no),0)+1 from clinic
+</select>
+
+<!-- 진료 등록 -->  
+<insert id="insertClinic">
+	insert into clinic values(#{cli_no},#{cli_date},#{cli_content},#{medi_no},#{regi_no},#{dept_no},#{doc_no},#{member_no})
+</insert>
+
+<!-- 진료번호 자동생성 -->  
+<select id="getNextCliNo" resultType="java.lang.Integer">
+  select nvl(max(cli_no),0)+1 from clinic
+</select>
 </mapper>
