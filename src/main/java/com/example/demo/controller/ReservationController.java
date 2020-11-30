@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.dao.DepartmentDao;
+import com.example.demo.dao.DoctorDao;
 import com.example.demo.dao.MemberDao;
 import com.example.demo.dao.ReservationDao;
 import com.example.demo.vo.DepartmentVo;
@@ -28,7 +30,13 @@ public class ReservationController {
 	private ReservationDao reservationDao;
 	@Autowired
 	private MemberDao memberDao;
+	@Autowired
+	private DoctorDao doctorDao;
+	@Autowired
+	private DepartmentDao deptDao;
 	
+	
+//	kkk
 	@GetMapping("/reservation")
 	public void resForm() {
 		
@@ -56,9 +64,56 @@ public class ReservationController {
 		List<Doc_ScheduleVo> list = reservationDao.findByNoSche(map);
 		return list;
 	}
+
+	@PostMapping("/insertRes")
+	@ResponseBody
+	public HashMap insertRes(@RequestParam HashMap map, HttpSession session) {
+		System.out.println(map);
+		int re = -1;
+		HashMap data = new HashMap<>();
+		int no = reservationDao.cntRes(map);
+		if(no<4) {
+			if (session.getAttribute("m") != null) {
+				MemberVo m = (MemberVo)session.getAttribute("m");
+				int member_no = m.getMember_no();
+				map.put("member_no", member_no);
+				re = reservationDao.insertRes(map);
+			}
+		}
+		data.put("no", no);
+		data.put("re", re);
+		return data;
+	}
 	
+	@GetMapping("/resOk")
+	public ModelAndView findRes(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		int member_no = -1;
+		if(session.getAttribute("m") != null) {
+			MemberVo m = (MemberVo)session.getAttribute("m");
+			member_no = m.getMember_no();
+		}
+		System.out.println("!!!"+member_no);
+		List<ReservationVo> list = reservationDao.findRes(member_no);
+		System.out.println(list);
+		ReservationVo rv = list.get(0);
+		int dept_no = rv.getDept_no();
+		System.out.println(dept_no);
+		int doc_no = rv.getDoc_no();
+		System.out.println(doc_no);
+		String dept_name = deptDao.findByNo(dept_no).getDept_name();
+		String doc_name = doctorDao.findByNo(doc_no).getDoc_name();
+		mav.addObject("dept_name", dept_name);
+		mav.addObject("doc_name", doc_name);
+		mav.addObject("rv", rv);
+		return mav;
+	}
+	
+//	kkk end
+
 	//해당예약번호의 예약상세내역 보여주기
 		@GetMapping("/reserconfirm")
+		
 		public ModelAndView reserconfirm(HttpSession session, int reser_no) {
 			ModelAndView mav = new ModelAndView();
 			int member_no = -1;
@@ -66,7 +121,7 @@ public class ReservationController {
 				member_no = (int)session.getAttribute("member_no");
 			}
 			
-		    String doc_name = reservationDao.findByDoc_name(reser_no);	//예약번호로 의사이름 찾아오기
+		    String doc_name = reservationDao.findByDoc_name(reser_no);		//예약번호로 의사이름 찾아오기
 		    String dept_name = reservationDao.findByDept_name(reser_no);	//예약번호로 진료과 찾아오기
 		    MemberVo m = memberDao.getMember(member_no);
 		    ReservationVo r = reservationDao.findByNo_Date_time(reser_no);	//예약번호로 예약관련내용 찾아오기
@@ -74,6 +129,7 @@ public class ReservationController {
 		    if(m.getRoles().equals("USER")) {	//회원일 시에 회원 뜨게 하기
 		    	roles="회원";	
 		    }
+		    
 		    mav.addObject("name", m.getName());
 		    mav.addObject("roles", roles);
 		    mav.addObject("tel", m.getTel());
@@ -84,4 +140,5 @@ public class ReservationController {
 			mav.addObject("reser_time", r.getReser_time());
 			return mav;
 		}
+		
 }

@@ -46,6 +46,10 @@ public class GoodDao {
 		return GoodManager.getTotalCount();
 	}
 	
+	public int updateHit(int no) {
+		return GoodManager.updateHit(no);
+	}
+	
 //	public boolean isMember(String id, String pwd) {
 //		return NoticeManager.isMember(id, pwd);
 //		

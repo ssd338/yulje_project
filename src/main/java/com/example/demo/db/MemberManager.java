@@ -28,7 +28,48 @@ public class MemberManager {
 			System.out.println("manager:"+e.getMessage());
 		}
 	}
+	//yd
+	//로그인
+	public static MemberVo selectMember(String username) {
+		MemberVo m = null;
+		SqlSession session = sqlSessionFactory.openSession();
+		m = session.selectOne("member.selectMember",username);
+		session.close();
+		System.out.println(m);
+		return m;
+	}
 	
+
+	//아이디 찾기
+	public static MemberVo findId(HashMap map) {
+		MemberVo findId = null;
+		SqlSession session = sqlSessionFactory.openSession();
+		findId = session.selectOne("member.findId", map);
+		session.close();
+		return findId;
+	}
+	
+	//비밀번호 찾기
+	public static MemberVo findPwd(HashMap map) {
+		MemberVo findPwd = null;
+		SqlSession session = sqlSessionFactory.openSession();
+		findPwd = session.selectOne("member.findPwd", map);
+		session.close();
+		return findPwd;
+	}
+	
+	//비밀번호 변경
+	public static int changePwd(MemberVo m) {
+		int re = -1;
+		SqlSession session = sqlSessionFactory.openSession(true);
+		re = session.update("member.changePwd", m);
+		session.close();
+		return re;
+	}
+	//yd end
+	
+	
+//	kkk
 	//회원가입
 	public static int insert(MemberVo m) {
 		int re = -1;
@@ -39,10 +80,10 @@ public class MemberManager {
 	}
 	
 	//비회원가입
-	public static int insertGuest(MemberVo m) {
+	public static int insertGuest(HashMap map) {
 		int re = -1;
 		SqlSession session = sqlSessionFactory.openSession(true);
-		re = session.insert("member.insertGuest", m);
+		re = session.insert("member.insertGuest", map);
 		session.close();
 		return re;
 	}
@@ -59,9 +100,10 @@ public class MemberManager {
 	//주민번호 중복확인
 	public static int checkRR(HashMap map) {
 		int n = -1;
-//		System.out.println(map);
+		System.out.println(map);
 		SqlSession session = sqlSessionFactory.openSession();
 		n = session.selectOne("member.checkRR", map);
+		System.out.println(n);
 		session.close();
 		return n;
 	}
@@ -74,6 +116,28 @@ public class MemberManager {
 		session.close();
 		return m;
 	}
+	
+	//비회원 정보를 가져오기
+	public static MemberVo getGuest(HashMap map) {
+		MemberVo m = null;
+		SqlSession session = sqlSessionFactory.openSession();
+		m = session.selectOne("member.selectByRRGuest", map);
+		session.close();
+		return m;
+	}
+	
+	//비회원 회원전환
+	public static int updateGuest(MemberVo m) {
+		// TODO Auto-generated method stub
+		int re = -1;
+		SqlSession session = sqlSessionFactory.openSession(true);
+		re = session.insert("member.updateGuest", m);
+		session.close();
+		return re;
+	}
+	
+	
+//	kkk end
 	
 	//회원번호를 통해 아이디 찾기
     public static MemberVo findById(int member_no) {

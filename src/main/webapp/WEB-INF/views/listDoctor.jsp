@@ -21,9 +21,17 @@
 	padding-right: 10%;
 }
 
+   .row{
+   width:1600px;
+   margin:0 auto;
+   padding-top: 30px;
+   position: relative;
+   }
+
 .face {
 	width: 150px;
 	height: 200px;
+	margin-right: 100px;
 }
 
 .info li {
@@ -47,7 +55,6 @@
 	color: white;
 	background-color: #94CCC4;
 	border-radius: 3px;
-	
  	border: none;
  	text-align: center;
   	text-decoration: none;
@@ -62,7 +69,6 @@
   color: #94CCC4;
 }
 .info div {
-	border-bottom: solid 1px #CBE2B8;
 	margin-bottom: 10px;
 }
 
@@ -70,6 +76,7 @@
 	border-bottom: solid 2px #94CCC4;
 	padding: 5px;
 	padding-bottom: 50px;
+	padding-top: 50px;
 	text-align: center;
 	margin-bottom: 0px;
 	color: #5d5d5d;
@@ -91,7 +98,7 @@
 	color: white;
 	background-color: #CBE2B8;
 	border-radius: 3px;
-	
+	height : 40px;
  	border: none;
  	justify-content: center;
 	display: flex;
@@ -119,22 +126,29 @@
 	color: #94CCC4;
 }
 
-.deptbtn{
+
+#buttons > button {
 	margin: 5px;
-	color: #94CCC4;
-	background-color: white;
+	color: white;
+	background-color: #94CCC4;
 	border-radius: 3px;
-	
- 	border: solid 1px #94CCC4;
- 	text-align: center;
+ 	border: none;
+ 	justify-content: center;
+ 	text-align : center;
+	display: flex;
   	text-decoration: none;
   	display: inline-block;
-  	font-size: 18px;
+  	font-size: 19px;
   	transition-duration: 0.4s;
-  	
-  	padding: 10px;
-  	
   	cursor: pointer;
+  	padding: 10px;
+}
+
+#searchbar {
+    margin-top : 10px;
+ 	height: 40px;
+ 	font-size: 18px;
+
 }
 
 </style>
@@ -394,8 +408,8 @@ function list(num){
   	<!-- //sidebar -->
   
 </div>
-  <div class="column middle">
- 
+  <div class="row">
+ 	<div class="column middle">
   	<div id="ajaxtest">
   		<div id="buttons">
   		<button id="ajaxtest_btn1" class="deptbtn">호흡기내과</button>
@@ -429,14 +443,13 @@ function list(num){
   		 
   		<div id="ajaxtest_output">
   		
-  		</div>
+  			</div>
+  		</div> 
   	</div>
-  	<div>
-  		<a href="/listDept8"><button class="deptbtn">진료과목록</button></a>
   	</div>
+
   <div class="column side"></div>
 </div>
-
-<%-- <jsp:include page="/footer.jsp"></jsp:include> --%>
+ 	<jsp:include page="/footer.jsp"></jsp:include> 
 </body>
 </html>

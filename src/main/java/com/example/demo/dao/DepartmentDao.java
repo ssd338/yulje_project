@@ -30,6 +30,10 @@ public class DepartmentDao {
 	public List<DepartmentVo> findAll(){
 		return DepartmentManager.findAll();
 	}
+	//전체목록
+	public List<DepartmentVo> findAll2(String search){
+		return DepartmentManager.findAll2(search);
+	}
 	
 	//가나다순 정렬
 	public List<DepartmentVo> findAllSort(){

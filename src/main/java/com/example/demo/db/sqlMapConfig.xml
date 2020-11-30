@@ -19,6 +19,7 @@
 		<typeAlias type="com.example.demo.vo.Faq_BoardVo" alias="faq_boardVo"/>
 		<typeAlias type="com.example.demo.vo.Good_BoardVo" alias="good_boardVo"/>
 		<typeAlias type="com.example.demo.vo.Notice_BoardVo" alias="notice_boardVo"/>
+		<typeAlias type="com.example.demo.vo.RegisterVo" alias="registerVo"/>
 	</typeAliases>
   <environments default="development">
     <environment id="development">
@@ -46,5 +47,6 @@
     <mapper resource="com/example/demo/db/FaqMapper.xml"/>
     <mapper resource="com/example/demo/db/GoodMapper.xml"/>
     <mapper resource="com/example/demo/db/NoticeMapper.xml"/>
+    <mapper resource="com/example/demo/db/RegisterMapper.xml"/>
   </mappers>
 </configuration>
