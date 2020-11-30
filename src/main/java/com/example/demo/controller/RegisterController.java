@@ -3,12 +3,10 @@ package com.example.demo.controller;
 
 
 import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -190,10 +188,14 @@ public class RegisterController {
       int docno =Integer.parseInt((String)map.get("docno"));
       int deptno =Integer.parseInt((String)map.get("deptno"));
 
-      
-      msg="등록에 성공하였습니다.";
-         
-      
+      ClinicVo c = new ClinicVo();
+      c.setCli_no(registerDao.getNextCliNo());
+      int a = registerDao.insertClinic(c);
+      if(a == 1) {
+         msg = "진료기록등록 하였습니다.";
+      }else {
+         msg="진료기록등록에 오류가 있습니다. 다시 접수 바랍니다.";   
+      }
       return msg;
    } 
    
