@@ -214,15 +214,6 @@
   clear: both;
 }
 
-/* Style the footer */
-.footer {
-  background-color: #f1f1f1;
-  padding: 10px;
-  text-align: center;
-  height: 20%;
-}
-   
-
    #column_side_left {
    /*width: 160px;
    padding: 20px;

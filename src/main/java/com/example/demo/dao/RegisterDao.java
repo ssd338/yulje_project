@@ -4,11 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.db.ClinicManager;
-import com.example.demo.db.MemberManager;
 import com.example.demo.db.RegisterManager;
 import com.example.demo.vo.ClinicVo;
-import com.example.demo.vo.MemberVo;
 import com.example.demo.vo.RegisterVo;
 import com.example.demo.vo.ReservationVo;
 
@@ -34,13 +31,23 @@ public class RegisterDao {
 	public int countAllReservation() {
 		return RegisterManager.countAllReservation();
 	}
-	//진료기록(clinc)에 등록되지 않은 모든 진료접수(register)의 수를 조회
+	//진료기록(clinic)에 등록되지 않은 모든 진료접수(register)의 수를 조회
 	public int countAllRegister() {
 		return RegisterManager.countAllRegister();
 	}
 	
-	//진료기록 등록 - 진료기록(clinc)에 등록되지 않은 모든 진료접수(register)를 조회
-	public List<RegisterVo> selectAllRegister(){
+	//진료기록 등록 - 진료기록(clinic)에 등록되지 않은 모든 진료접수(register)를 조회
+	public List<RegisterVo> listRegister(){
 		return RegisterManager.selectAllRegister();
+	}
+	
+	//진료등록
+	public int insertClinic(ClinicVo c) {
+		return RegisterManager.insertClinic(c);
+	}
+	
+	//진료번호 자동생성
+	public int getNextCliNo() {
+		return RegisterManager.getNextCliNo();
 	}
 }

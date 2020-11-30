@@ -11,6 +11,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import com.example.demo.vo.Advice_BoardVo;
+import com.example.demo.vo.ClinicVo;
 import com.example.demo.vo.MemberVo;
 import com.example.demo.vo.RegisterVo;
 import com.example.demo.vo.ReservationVo;
@@ -83,5 +84,23 @@ public class RegisterManager {
 		list = session.selectList("register.selectAllRegister");
 		session.close();
 		return list;
+	}
+	
+	//진료등록
+	public static int insertClinic(ClinicVo c) {
+		int re = -1;
+		SqlSession session = sqlSessionFactory.openSession(true);
+		re = session.insert("register.insertClinic", c);
+		session.close();
+		return re;
+	}
+
+	//진료번호 자동생성
+	public static int getNextCliNo() {
+		int n = -1;
+		SqlSession session = sqlSessionFactory.openSession();
+		n = session.selectOne("register.getNextCliNo");
+		session.close();
+		return n;
 	}
 }
