@@ -20,11 +20,10 @@
 .side_ul{
   float: right;
   list-style-type: none;
-  margin: 0px;
+  margin: 100px 50px 0 0;
   padding: 0px;
   padding-top: 20px;
   width: 200px;
-  margin-right: 50px;
   color: #5D5D5D;
 }
 
@@ -353,11 +352,11 @@ $(function(){
 			 $(this).addClass("main_hover");
 			 var no = $(this).attr("dept_no");
 			 $(this).append("<span><h3>"+deptname[no]+"</h3></span>");
-			 $(this).append("<span><a href='listDoctor'><img src='./image/doc22.jpg' class='icon2'></a></span>");
-			 $(this).append("<span><a href='#'><img src='./image/r.jpg' class='icon2'></a></span>");
-			 $(this).append("<span id='test'><h4><a class='texta' href='listDoctor'>의료진</a></h4></span>");
+			 $(this).append("<span><a href='/listDoctor'><img src='./image/doc22.jpg' class='icon2'></a></span>");
+			 $(this).append("<span><a href='/reservation'><img src='./image/r.jpg' class='icon2'></a></span>");
+			 $(this).append("<span id='test'><h4><a class='texta' href='/listDoctor'>의료진</a></h4></span>");
 			 $(this).append("<input type='hidden' class='deptname' value='"+deptname[no]+"'>");
-			 $(this).append("<span><a class='texta' href='#'><h4>예약</h4></a></span>");
+			 $(this).append("<span><a class='texta' href='/reservation'><h4>예약</h4></a></span>");
 			
 		});
 	
