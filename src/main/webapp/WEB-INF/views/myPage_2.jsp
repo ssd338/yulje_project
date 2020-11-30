@@ -455,7 +455,7 @@ $(function(){
 		  			<input type="hidden" id="id" name="id" value="${m.id }">
 		  			<span id="mypage_title_sub_span2"> ${m.id } </span><br><br>
 		  			<span id="mypage_title_sub_span3">비밀번호</span>
-		  			<span><input type="text" class="pw_input" id="pwd" name="pwd"></span>
+		  			<span><input type="password" class="pw_input" id="pwd" name="pwd"></span>
 		  		</div>
 		  		<div id="mypage_title_btn">
 		  			<input type="submit" id="mypage_title_btn1" value="확인">

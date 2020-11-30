@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!-- 건강티비 페이지 -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -156,9 +155,9 @@ background-color: #EAEAEA;
 	display: inline-block;
 	border: 1px solid;
 	border-radius: 2px;
-	width: 400px;
+	width: 380px;
 	height:57px;
-	margin-right: 20px;
+	margin:0 20px 0 70px;
 	cursor: pointer;
 	
 }
@@ -179,7 +178,7 @@ background-color: #EAEAEA;
 	text-align:center;
 }
 #guidList{
-	width:820px;
+	width:900px;
 	height:50px;
 	margin-bottom: 15px;
 	display: inline-block;
@@ -187,6 +186,7 @@ background-color: #EAEAEA;
 #listTitle{
 	font-size: 25px;
 	margin-bottom: 20px;
+	margin-left:20px;
 	float: left;
 }
 .file1 span{
