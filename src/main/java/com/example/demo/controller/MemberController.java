@@ -83,7 +83,6 @@ public class MemberController {
 	}
 
 
-	// 아이디찾기
 	@GetMapping("/findId")
 	public void findId() {
 

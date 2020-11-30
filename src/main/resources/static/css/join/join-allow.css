@@ -1,0 +1,86 @@
+@charset "UTF-8";
+
+
+/* 타이틀 */
+#title {
+	text-align: center;
+	border-bottom: 2px solid #94CCC4;
+}
+
+/* 메인 */
+#main {
+	color: #5d5d5d;
+	justify-content: center;
+ 	width: 100%; 
+ 	padding-right: 10%;
+ 	padding-left: 10%;
+}
+
+.maintitle {
+	margin-bottom: 20px;
+}
+
+.mtitle {
+	margin-top: 30px;
+	border-left: 5px solid #94CCC4;
+	padding-left: 10px;
+}
+.ptitle {
+	color: #94CCC4;
+	margin-top: 30px;
+/* 	border-bottom: solid 1px #CBE2B8; */
+	padding-bottom: 10px;
+}
+
+
+.choice {
+	margin-top: 30px;
+	padding-top: 30px;
+	justify-content: center;
+	display: block;
+}
+
+
+/* 버튼 */
+.btn {
+	margin-left: 10px;
+	height: 30px;
+	background-color: #94CCC4;
+	
+	  border: none;
+	  color: white;
+	  text-align: center;
+	  text-decoration: none;
+	  display: inline-block;
+	  transition-duration: 0.4s;
+	  cursor: pointer;
+	  width: 100px;
+}
+
+.btn:hover {
+  background-color: white;
+  color: #94CCC4;
+}
+
+#bot {
+	margin-top: 50px;
+	padding-top: 30px;
+	justify-content: center;
+	display: flex;
+	margin-bottom: 50px;
+}
+
+.choice textarea { 
+	width: 100%;
+	border: 1px solid #EAEAEA;
+	font-family: 맑은 고딕;
+}
+
+.choice span {
+	margin-top: 10px;
+	float: right;
+}
+
+textarea {
+	resize: none;
+}
