@@ -109,10 +109,10 @@
      width: 150px;
   } 
   .content{
-     width: 250px;
+     width: 230px;
   }
   .dept_name{
-     width: 130px;
+     width: 150px;
   }
   .doc_name{
      width: 130px;

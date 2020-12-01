@@ -11,11 +11,14 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
 $(function(){
-
+	
   	$('.reser_board').mouseenter(function(){
  		$('.menu_drop_area').addClass('on');
 		$('.menu_drop_wrap').addClass('on');
 		$('.menu_drop_list_area1').addClass('on');
+		$('.menu_drop_list_area2').addClass('close');
+		$('.menu_drop_list_area3').addClass('close');
+		$('.menu_drop_list_area4').addClass('close');
 		$('.drop_board_list1').addClass('on');
 		$('.menu_drop_list_wrap').addClass('on');
 		
@@ -31,6 +34,9 @@ $(function(){
  		$('.menu_drop_area').addClass('on');
 		$('.menu_drop_wrap').addClass('on');
 		$('.menu_drop_list_area2').addClass('on');
+		$('.menu_drop_list_area1').addClass('close');
+		$('.menu_drop_list_area3').addClass('close');
+		$('.menu_drop_list_area4').addClass('close');
 		$('.drop_board_list2').addClass('on');
 		$('.menu_drop_list_wrap').addClass('on');
 		
@@ -45,6 +51,9 @@ $(function(){
  		$('.menu_drop_area').addClass('on');
 		$('.menu_drop_wrap').addClass('on');
 		$('.menu_drop_list_area3').addClass('on');
+		$('.menu_drop_list_area2').addClass('close');
+		$('.menu_drop_list_area1').addClass('close');
+		$('.menu_drop_list_area4').addClass('close');
 		$('.drop_board_list3').addClass('on');
 		$('.menu_drop_list_wrap').addClass('on');
 		
@@ -60,6 +69,9 @@ $(function(){
  		$('.menu_drop_area').addClass('on');
 		$('.menu_drop_wrap').addClass('on');
 		$('.menu_drop_list_area4').addClass('on');
+		$('.menu_drop_list_area2').addClass('close');
+		$('.menu_drop_list_area3').addClass('close');
+		$('.menu_drop_list_area1').addClass('close');
 		$('.drop_board_list4').addClass('on');
 		$('.menu_drop_list_wrap').addClass('on');
 		
@@ -164,7 +176,7 @@ $(function(){
 						</li>
 					
 						<li>
-							<a href="/join-allow"><img src="./menu/insertMember.png"></a>
+							<a href="/checkMember"><img src="./menu/insertMember.png"></a>
 						</li>
 						
 					</c:if>		
@@ -220,8 +232,8 @@ $(function(){
 											<!-- <li><a href="#">예약안내</a></li> -->
 											<li><a href="/reservation">온라인예약</a></li>
 											<li><a href="#">예약조회/취소</a></li>
-											<li><a href="#">1:1전문의 상담</a></li>
-											<li><a href="#">진료과별 상담</a></li>
+											<li><a href="/listA_Board.do">1:1전문의 상담</a></li>
+											<li><a href="/listA_Board.do">진료과별 상담</a></li>
 										</ul>
 									</div>
 								</div>
@@ -251,7 +263,7 @@ $(function(){
 											<li><a href="map.jsp">찾아오시는 길 안내</a></li>
 											<li><a href="/listNotice">공지사항</a></li>
 											<li><a href="/listG_Board.do">칭찬합시다</a></li>
-											<li><a href="#">상담 게시판</a></li>
+											<li><a href="/listA_Board.do">상담 게시판</a></li>
 											<li><a href="/listFaq">자주묻는 질문</a></li>											
 											<li><a href="hosInfo.jsp">병원소개</a></li>
 										</ul>
@@ -270,7 +282,6 @@ $(function(){
 											<!-- <li><a href="#">증명서 발급 안내</a></li> -->
 											<li><a href="/document">증명서 발급</a></li>
 											<li><a href="/listFaq">자주묻는질문</a></li>
-											<li><a href="#">건강 정보</a></li>
 											<li><a href="/listMedicalTV">건강TV</a></li>
 											<li><a href="/listMedicine">약정보</a></li>
 											<li><a href="course.jsp">이달의 강좌</a></li>

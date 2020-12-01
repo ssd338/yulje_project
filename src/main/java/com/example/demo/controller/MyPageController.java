@@ -178,11 +178,13 @@ public class MyPageController {
 			)
 	@ResponseBody
 	public List<Advice_BoardVo> myPage_5_1(HttpSession session) {
+		
 		int member_no = -1;
 		if(session.getAttribute("m") != null) {
 			member_no = ((MemberVo)session.getAttribute("m")).getMember_no();
 		}
 		List<Advice_BoardVo> list = memberDao.myAdvice(member_no);	//나의 상담 내역을 리스트로 반환
+		System.out.println("listsize:"+list.size());
 		int endlist = 6;	//최근 6개의 상담내역을 보여주기 위해서
 		if(endlist>list.size()) {
 			endlist = list.size();
