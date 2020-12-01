@@ -611,7 +611,7 @@ $(function() {
 <body>
 
    
-   <jsp:include page="header.jsp"></jsp:include>
+   <jsp:include page="/header.jsp"></jsp:include>
    
 
    <div class="column-side-left" style="background-color:#aaa;">Column</div>

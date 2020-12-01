@@ -460,7 +460,7 @@ $(function(){
 		  			</ul>
 		  		</div>
 		  		<div class="mypage_answer">
-		  		<a href="/listClinic"><button id="nextClinic_btn">더 보기</button></a>
+		  		<a href="/listA_Board.do"><button id="nextClinic_btn">더 보기</button></a>
 		  			<div>답변중 : 0개</div>
 		  			<div id="mypage_box_empty"></div>
 		  			<div>답변완료 : 0개</div>
@@ -469,7 +469,7 @@ $(function(){
 		  			
 		  		</div>
 		  		<div id="mypage_qna_notice_btn">
-		  			<button id="mypage_qna_notice_btn1">전문의 상담하기</button>
+		  			<a href="/listA_Board.do"><button id="mypage_qna_notice_btn1">전문의 상담하기</button></a>
 		  		</div>
 		  		  	
 		  	</div>

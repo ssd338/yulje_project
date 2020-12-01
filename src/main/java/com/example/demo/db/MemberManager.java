@@ -196,6 +196,7 @@ public class MemberManager {
 		List<Advice_BoardVo> list = new ArrayList<Advice_BoardVo>();
 		SqlSession session = sqlSessionFactory.openSession(true);
 		list = session.selectList("member.getAdvice", member_no);
+		System.out.println(list.size());
 		session.close();
 		return list;
 	}

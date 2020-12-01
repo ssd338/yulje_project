@@ -232,8 +232,8 @@ $(function(){
 											<!-- <li><a href="#">예약안내</a></li> -->
 											<li><a href="/reservation">온라인예약</a></li>
 											<li><a href="#">예약조회/취소</a></li>
-											<li><a href="#">1:1전문의 상담</a></li>
-											<li><a href="#">진료과별 상담</a></li>
+											<li><a href="/listA_Board.do">1:1전문의 상담</a></li>
+											<li><a href="/listA_Board.do">진료과별 상담</a></li>
 										</ul>
 									</div>
 								</div>
@@ -263,7 +263,7 @@ $(function(){
 											<li><a href="map.jsp">찾아오시는 길 안내</a></li>
 											<li><a href="/listNotice">공지사항</a></li>
 											<li><a href="/listG_Board.do">칭찬합시다</a></li>
-											<li><a href="#">상담 게시판</a></li>
+											<li><a href="/listA_Board.do">상담 게시판</a></li>
 											<li><a href="/listFaq">자주묻는 질문</a></li>											
 											<li><a href="hosInfo.jsp">병원소개</a></li>
 										</ul>
@@ -282,7 +282,6 @@ $(function(){
 											<!-- <li><a href="#">증명서 발급 안내</a></li> -->
 											<li><a href="/document">증명서 발급</a></li>
 											<li><a href="/listFaq">자주묻는질문</a></li>
-											<li><a href="#">건강 정보</a></li>
 											<li><a href="/listMedicalTV">건강TV</a></li>
 											<li><a href="/listMedicine">약정보</a></li>
 											<li><a href="course.jsp">이달의 강좌</a></li>
