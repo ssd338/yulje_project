@@ -17,5 +17,5 @@
     - 추승연 : 진료과페이지, 마이페이지, 진료기록 조회, 진료접수, 서류발급, 건강tv, 약품조회
  
 ##### 사용 기술
-    JAVA, Spring, jQuery, Ajax, MyBaties,MVC, Oracle,CSS
+    JAVA, Spring, jQuery, Ajax, MyBaties, Oracle, CSS
 
